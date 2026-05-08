@@ -1,0 +1,19 @@
+/* Import Monokai Pro-style Bold Modern Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* Smooth scroll behavior for all anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+  /* font-family: "Poppins", sans-serif; */
+}
+
+/* h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+} */
+
