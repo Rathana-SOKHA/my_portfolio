@@ -1,5 +1,10 @@
 import '../styles/Projects.css';
-import projectImage from '../assets/project/image.png';
+import projectImage from '../assets/projects/music.png';
+import foodImage from '../assets/projects/food.png';
+import cleanImage from '../assets/projects/clean.png';
+import pncImage from '../assets/projects/pnc_life.png';
+import folioImage from '../assets/projects/folio.png';
+import folioNowImage from '../assets/projects/folio_now.png';
 
 const Projects = () => {
   const projects = [
@@ -8,55 +13,55 @@ const Projects = () => {
       title: 'Cleaning Service App',
       description: 'A full-featured e-commerce platform with product catalog, shopping cart, and checkout functionality. Built with modern React patterns and optimized for performance.',
       tech: ['React', 'Node', 'CSS3', 'REST API', 'MySQL', 'JWT Authentication', 'Maps API'],
-      link: '#',
+      link: 'https://somaet.website/',
       github: '#',
-      image: projectImage
+      image: cleanImage
 
     },
     {
       id: 2,
       title: 'Music Player App',
       description: 'A collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features for enhanced productivity.',
-      tech: ['React', 'Firebase', 'Vite', 'Tailwind CSS'],
-      link: '#',
+      tech: ['HTML', 'CSS', 'JavaScript', 'localStorage'],
+      link: 'https://music-player-mauve-six.vercel.app/',
       github: '#',
       image: projectImage
     },
     {
       id: 3,
-      title: 'Weather Dashboard',
+      title: 'Food Delivery App',
       description: 'A responsive weather application featuring real-time weather data, forecasts, and interactive maps. Beautiful UI with smooth animations and intuitive navigation.',
-      tech: ['React', 'API Integration', 'Maps API', 'localStorage'],
-      link: '#',
+      tech: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
+      link: 'https://food-webiste-seven.vercel.app/',
       github: '#',
-      image: projectImage
+      image: foodImage
     },
     {
       id: 4,
-      title: 'Portfolio Website',
+      title: 'PNC Life Style',
       description: 'A modern, fully responsive portfolio website showcasing projects and skills. Features smooth scrolling, animations, and SEO optimization for maximum visibility.',
-      tech: ['React', 'Vite', 'CSS3', 'Responsive Design'],
-      link: '#',
+      tech: ['HTML', 'CSS',],
+      link: 'https://pnc-student-life.vercel.app/',
       github: '#',
-      image: projectImage
+      image: pncImage
     },
     {
       id: 5,
-      title: 'Social Media Dashboard',
+      title: 'Portfolio Website',
       description: 'A comprehensive dashboard for managing multiple social media accounts. Track analytics, schedule posts, and monitor engagement across platforms.',
-      tech: ['React', 'Chart.js', 'Node.js', 'MongoDB'],
-      link: '#',
+      tech: ['HTML', 'CSS'],
+      link: 'https://www.rathana.site/',
       github: '#',
-      image: projectImage
+      image: folioImage
     },
     {
       id: 6,
       title: 'Streaming App UI',
       description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
-      tech: ['React', 'Video.js', 'JavaScript', 'CSS Animations'],
+      tech: ['HTML', 'CSS','React.js'],
       link: '#',
       github: '#',
-      image: projectImage
+      image: folioNowImage
     }
   ];
 
