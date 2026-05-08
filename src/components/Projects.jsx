@@ -38,7 +38,7 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: 'PNC Life Style',
+      title: 'PNC Student Life',
       description: 'A modern, fully responsive portfolio website showcasing projects and skills. Features smooth scrolling, animations, and SEO optimization for maximum visibility.',
       tech: ['HTML', 'CSS',],
       link: 'https://pnc-student-life.vercel.app/',

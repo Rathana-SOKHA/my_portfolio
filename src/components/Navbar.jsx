@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className="navbar-logo">
           <a href="#home">
             {/* <span className="logo-circle">SR</span> */}
-            <span className="logo-text">Sokha Rathana</span>
+            <span className="logo-text">Rathana.Dev</span>
           </a>
         </div>
 
