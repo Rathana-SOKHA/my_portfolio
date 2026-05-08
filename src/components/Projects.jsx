@@ -59,8 +59,8 @@ const Projects = () => {
       title: 'Streaming App UI',
       description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
       tech: ['HTML', 'CSS','React.js'],
-      link: '#',
-      github: '#',
+      link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
+      github: 'https://github.com/Rathana-SOKHA/my_portfolio',
       image: folioNowImage
     }
   ];
