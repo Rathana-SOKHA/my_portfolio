@@ -42,9 +42,9 @@ const Contact = () => {
   ];
 
   const contactInfo = [
-    { icon: '📧', title: 'Email', value: 'your.email@example.com', link: 'mailto:your.email@example.com' },
+    { icon: '📧', title: 'Email', value: 'rathana.sokha@student.passerellesnumeriques.org', link: 'mailto:your.email@example.com' },
     { icon: '📱', title: 'Phone', value: '+1 (555) 123-4567', link: 'tel:+15551234567' },
-    { icon: '📍', title: 'Location', value: 'City, Country', link: '#' }
+    { icon: '📍', title: 'Location', value: '', link: '#' }
   ];
 
   return (
@@ -53,8 +53,8 @@ const Contact = () => {
         {/* Section Header */}
         <div className="contact-header">
           <h2>Get In Touch</h2>
-          <span className="header-underline"></span>
-          <p className="section-subtitle">Let's discuss your project or just say hello!</p>
+          {/* <span className="header-underline"></span>
+          <p className="section-subtitle">Let's discuss your project or just say hello!</p> */}
         </div>
 
         <div className="contact-content">

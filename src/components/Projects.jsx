@@ -56,7 +56,7 @@ const Projects = () => {
     },
     {
       id: 6,
-      title: 'Streaming App UI',
+      title: 'Personal Portfolio',
       description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
       tech: ['HTML', 'CSS','React.js'],
       link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
@@ -72,7 +72,7 @@ const Projects = () => {
         <div className="projects-header">
           <h2>Featured Projects</h2>
           <span className="header-underline"></span>
-          <p className="section-subtitle">Explore some of my latest work and side projects</p>
+          {/* <p className="section-subtitle">Explore some of my latest work and side projects</p> */}
         </div>
 
         {/* Projects Grid */}

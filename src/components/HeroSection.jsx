@@ -43,7 +43,7 @@ export default function HeroSection() {
               <i className="fab fa-facebook"></i>
             </a>
             <a
-              href="https://t.me/Rathanacoding"
+              href="https://t.me/rathana_dev"
               className="social-link telegram"
               title="Telegram"
             >

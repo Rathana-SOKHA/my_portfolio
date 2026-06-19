@@ -43,8 +43,8 @@ const Education = () => {
         {/* Section Header */}
         <div className="education-header">
           <h2>Education & Certifications</h2>
-          <span className="header-underline"></span>
-          <p className="section-subtitle">My academic journey and professional certifications</p>
+          {/* <span className="header-underline"></span>
+          <p className="section-subtitle">My academic journey and professional certifications</p> */}
         </div>
 
         <div className="education-content">
