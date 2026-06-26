@@ -5,7 +5,7 @@ const Education = () => {
     {
       id: 1,
       school: 'Passerelles Numériques Cambodia',
-      degree: 'Associate Degree in Web Development',
+      degree: 'Associate Degree in Web Programming',
       year: '2025 - Present',
       grade: '3.8/4.0 GPA',
       details: 'Specialized in Web Development and Software Engineering. Completed honors program with distinction.',

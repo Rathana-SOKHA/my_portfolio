@@ -1,7 +1,7 @@
 import '../styles/Footer.css';
 import { useState, useEffect } from 'react';
 
-const Footer = () => {
+const Footer = ({ theme, toggleTheme }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {

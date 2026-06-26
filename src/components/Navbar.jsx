@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ theme, toggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -54,16 +54,6 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Hamburger Menu */}
-        <div
-          className={`hamburger ${isOpen ? "active" : ""}`}
-          onClick={toggleMenu}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
         {/* Navigation Links */}
         <ul className={`nav-menu ${isOpen ? "active" : ""}`}>
           <li className="nav-item">
@@ -99,6 +89,25 @@ export default function Navbar() {
             </a>
           </li>
         </ul>
+
+        {/* Theme Toggle Button */}
+        <button
+          className="theme-toggle-nav"
+          onClick={toggleTheme}
+          title="Toggle theme"
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+
+        {/* Hamburger Menu */}
+        <div
+          className={`hamburger ${isOpen ? "active" : ""}`}
+          onClick={toggleMenu}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
         {/* Contact Button */}
         <a href="#contact" className="contact-btn" onClick={handleNavClick}>

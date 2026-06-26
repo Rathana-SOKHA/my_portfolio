@@ -2,8 +2,8 @@
 .about-section {
   width: 100%;
   padding: 100px 20px;
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-  color: #e0e0e0;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: var(--text-color);
 }
 
 /* About Container */
@@ -40,13 +40,13 @@
   position: absolute;
   width: 380px;
   height: 380px;
-  background: linear-gradient(135deg, #ff6b00 0%, #ffa500 100%);
+  background: linear-gradient(135deg, #14b8a6 0%, #5eead4 100%);
   border-radius: 50%;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-  box-shadow: 0 30px 60px rgba(255, 107, 0, 0.3);
+  box-shadow: 0 30px 60px rgba(20, 184, 166, 0.3);
 }
 
 /* Decorative Circle - Top Left */
@@ -55,12 +55,12 @@
   position: absolute;
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, #ff6b00 0%, #ffa500 100%);
+  background: linear-gradient(135deg, #14b8a6 0%, #5eead4 100%);
   border-radius: 50%;
   top: -20px;
   left: 40px;
   z-index: 3;
-  box-shadow: 0 10px 25px rgba(255, 107, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(20, 184, 166, 0.4);
 }
 
 .image-placeholder {
@@ -72,7 +72,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 40px 80px rgba(255, 107, 0, 0.25);
+  box-shadow: 0 40px 80px rgba(20, 184, 166, 0.25);
   position: relative;
   z-index: 2;
   overflow: hidden;
@@ -96,10 +96,10 @@
 .decorative-circle-bottom {
   width: 120px;
   height: 120px;
-  background: linear-gradient(135deg, #ffa500 0%, #ffcc00 100%);
+  background: linear-gradient(135deg, #14b8a6 0%, #5eead4 100%);
   bottom: 30px;
   right: 20px;
-  box-shadow: 0 10px 25px rgba(255, 165, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(20, 184, 166, 0.4);
 }
 
 /* Bio Content - Right Column */
@@ -111,7 +111,7 @@
   font-size: 3rem;
   font-weight: 800;
   /* margin-bottom: 25px; */
-  color: white;
+  color: var(--text-color);
   font-family: "Poppins", sans-serif;
   line-height: 1.2;
 }
@@ -120,7 +120,7 @@
   display: block;
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #ff6b00 0%, #ffa500 100%);
+  background: linear-gradient(90deg, #14b8a6 0%, #5eead4 100%);
   margin-bottom: 25px;;
   border-radius: 2px;
 }
@@ -128,14 +128,14 @@
 .bio-description {
   font-size: 1.1rem;
   line-height: 1.9;
-  color: #b0b0b0;
+  color: var(--text-color);
   margin-bottom: 20px;
 }
 
 .bio-highlight {
   font-size: 1rem;
   line-height: 1.8;
-  color: #ff6b00;
+  color: #14b8a6;
   font-weight: 600;
   margin-bottom: 40px;
 }
@@ -163,24 +163,24 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ff6b00 0%, #ffa500 100%);
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
   color: white;
-  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(255, 107, 0, 0.6);
+  box-shadow: 0 12px 35px rgba(20, 184, 166, 0.6);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #ff6b00;
-  border: 2px solid #ff6b00;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 107, 0, 0.1);
+  background: rgba(20, 184, 166, 0.1);
   transform: translateY(-3px);
 }
 
@@ -197,14 +197,14 @@
 
 .stat h3 {
   font-size: 2.5rem;
-  color: #ff6b00;
+  color: #14b8a6;
   margin-bottom: 8px;
   font-weight: 800;
 }
 
 .stat p {
   font-size: 0.95rem;
-  color: #b0b0b0;
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -216,7 +216,7 @@
 
 .philosophy-section h2 {
   font-size: 2.8rem;
-  color: #ff6b00;
+  color: var(--accent-color);
   margin-bottom: 60px;
   text-align: center;
   font-family: "Poppins", sans-serif;
@@ -231,8 +231,8 @@
 
 .philosophy-card {
   padding: 40px 35px;
-  background: rgba(255, 107, 0, 0.08);
-  border: 2px solid rgba(255, 107, 0, 0.2);
+  background: rgba(20, 184, 166, 0.08);
+  border: 2px solid rgba(20, 184, 166, 0.2);
   border-radius: 20px;
   text-align: center;
   backdrop-filter: blur(10px);
@@ -240,10 +240,10 @@
 }
 
 .philosophy-card:hover {
-  background: rgba(255, 107, 0, 0.15);
-  border-color: rgba(255, 107, 0, 0.5);
+  background: rgba(20, 184, 166, 0.15);
+  border-color: rgba(20, 184, 166, 0.5);
   transform: translateY(-12px);
-  box-shadow: 0 20px 50px rgba(255, 107, 0, 0.25);
+  box-shadow: 0 20px 50px rgba(20, 184, 166, 0.25);
 }
 
 .card-icon {
@@ -254,13 +254,13 @@
 
 .philosophy-card h3 {
   font-size: 1.4rem;
-  color: #ff6b00;
+  color: var(--accent-color);
   margin-bottom: 15px;
   font-weight: 700;
 }
 
 .philosophy-card p {
-  color: #b0b0b0;
+  color: var(--text-dark);
   font-size: 0.95rem;
   line-height: 1.7;
 }

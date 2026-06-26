@@ -46,14 +46,28 @@
 
 /* Modern Navbar Styles - Professional Purple/Blue Theme */
 :root {
-  --primary-color: #1E1F2B;
-  --primary-dark: #1f2048;
+  --primary-color: #0f172a;
+  --primary-dark: #1e293b;
   --text-color: #ffffff;
-  --text-dark: #333333;
-  --accent-color: #ff6b00;
-  --bg-hover: #3a3b7f;
+  --text-dark: #cbd5e1;
+  --accent-color: #14b8a6;
+  --accent-light: #5eead4;
+  --bg-hover: #1e293b;
   --transition: all 0.3s ease;
   --monokai-font: "Poppins", sans-serif;
+}
+
+/* Dark mode styles */
+:root[data-theme="dark"] {
+  --primary-color: #0f172a;
+  --primary-dark: #1e293b;
+  --text-color: #f8fafc;
+  --text-dark: #cbd5e1;
+  --accent-color: #14b8a6;
+  --accent-light: #5eead4;
+  --bg-hover: #1e293b;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -99,13 +113,41 @@
   background: linear-gradient(
     90deg,
     var(--accent-color) 0%,
-    #60a5fa 25%,
+    #38bdf8 25%,
     var(--accent-color) 50%,
-    #60a5fa 75%,
+    #38bdf8 75%,
     var(--accent-color) 100%
   );
   background-size: 300% 100%;
   animation: borderTravel 6s linear infinite;
+}
+
+/* Theme Toggle Button in Navbar */
+.theme-toggle-nav {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+  flex-shrink: 0;
+}
+
+.theme-toggle-nav:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.5);
+}
+
+.theme-toggle-nav:focus {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
 }
 
 .navbar::after {
@@ -267,11 +309,9 @@
 
 /* Contact Button */
 .contact-btn {
-  /* background-color: #ffffff; */
-  /* color: var(--primary-color); */
-  background: linear-gradient(135deg, #ff6b00 0%, #ffa500 100%);
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
   color: white;
-  box-shadow: 0 5px 20px rgba(255, 107, 0, 0.3);
+  box-shadow: 0 5px 20px rgba(20, 184, 166, 0.3);
   padding: 0.6rem 1.5rem;
   border-radius: 25px;
   text-decoration: none;
@@ -286,9 +326,8 @@
 }
 
 .contact-btn:hover {
-  background-color: #f0f0f0;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(20, 184, 166, 0.4);
 }
 
 /* Hamburger Menu */
