@@ -49,6 +49,74 @@
   line-height: 1.8;
 }
 
+/* ===== Filter Tabs ===== */
+.skills-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.skills-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skills-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.skills-tab:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.skills-tab.active {
+  border-color: var(--accent-color);
+  color: #ffffff;
+}
+
+.skills-tab.active .tab-icon {
+  color: #ffffff;
+}
+
+.skills-tab.active::before {
+  opacity: 1;
+}
+
+.skills-tab .tab-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.skills-tab span:not(.tab-icon),
+.skills-tab {
+  position: relative;
+  z-index: 1;
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
