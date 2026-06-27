@@ -103,6 +103,38 @@
   background-clip: text;
 }
 
+/* Role text typewriter container */
+.hero-title-role {
+  font-size: 1.8rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.role-text {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Blinking Cursor */
+.cursor-blink {
+  display: inline-block;
+  margin-left: 3px;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #14b8a6;
+  animation: cursorPulse 0.8s ease-in-out infinite;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+@keyframes cursorPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .hero-description {
   font-size: 1.1rem;
   color: var(--text-dark);
@@ -160,7 +192,7 @@
   transform: translateY(-3px);
 }
 
-/* Right Illustration Section */
+/* ===== Right Illustration Section ===== */
 .hero-illustration {
   display: flex;
   align-items: center;
@@ -176,13 +208,48 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  --orbit-radius: 240px;
 }
 
-/* Character Avatar */
+/* ===== Orbit Container ===== */
+.orbit-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Decorative Orbit Ring */
+.orbit-ring {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border: 2px dashed rgba(20, 184, 166, 0.15);
+  border-radius: 50%;
+  animation: spinRing 30s linear infinite;
+  pointer-events: none;
+}
+
+.orbit-ring-inner {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border: 1px solid rgba(20, 184, 166, 0.08);
+  border-radius: 50%;
+  animation: spinRing 40s linear infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Character Avatar ===== */
 .character-avatar {
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
   background: linear-gradient(135deg, #14b8a6 0%, #5eead4 100%);
   border-radius: 50%;
   display: flex;
@@ -195,6 +262,8 @@
   animation: float 3s ease-in-out infinite;
   overflow: hidden;
   padding: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .profile-img {
@@ -207,116 +276,162 @@
 
 /* Floating Animation */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
 }
 
-/* Skill Icons Orbit Animation */
-@keyframes orbit {
-  from {
-    transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
-  }
-}
-
-/* Skill Icons */
+/* ===== Orbiting Skill Icons ===== */
 .skill-icons {
   position: absolute;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 .skill-icon {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.2rem;
-  /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); */
-  animation: orbit 15s linear infinite;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.1);
+  animation: orbit 20s linear infinite;
   top: 50%;
   left: 50%;
-  margin-top: -35px;
-  margin-left: -35px;
+  margin-top: -28px;
+  margin-left: -28px;
   transform-origin: 0 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  backdrop-filter: blur(4px);
+}
+
+.skill-icon:hover {
+  animation-play-state: paused;
+  transform: scale(1.25) !important;
+  z-index: 10;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
 .skill-icon img,
 .skill-icon .skill-logo {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
-.skill-icon.icon-hi {
-  /* background: linear-gradient(360deg, #e34c26 0%, #ff6b4a 100%); */
-  /* color: white; */
-  animation-delay: 0s;
+.skill-icon .skill-text {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.skill-icon.icon-ai {
-  /* background: linear-gradient(360deg, #1572b6 0%, #33a9dc 100%); */
-  /* color: white; */
-  animation-delay: -1.5s;
+/* ===== Orbit Animation ===== */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(230px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(230px) rotate(-360deg);
+  }
 }
 
-.skill-icon.icon-design {
-  background: linear-gradient(360deg, #f7df1e 0%, #ffc600 100%);
-  /* color: #333; */
-  animation-delay: -3s;
-}
-
-.skill-icon.icon-code {
-  background: linear-gradient(360deg, #61dafb 0%, #61dafb 100%);
-  color: #333;
-  animation-delay: -4.5s;
-}
-
-.skill-icon.icon-pr {
-  background: linear-gradient(360deg, #68a063 0%, #7cb342 100%);
+/* ===== Brand Colors for Each Icon ===== */
+.skill-icon.icon-html {
+  background: linear-gradient(135deg, #e34c26, #f06529);
   color: white;
+  animation-delay: 0s;
+  box-shadow: 0 4px 16px rgba(227, 76, 38, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.skill-icon.icon-css {
+  background: linear-gradient(135deg, #1572b6, #33a9dc);
+  color: white;
+  animation-delay: -2s;
+  box-shadow: 0 4px 16px rgba(21, 114, 182, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.skill-icon.icon-js {
+  background: linear-gradient(135deg, #f7df1e, #ffc600);
+  color: #333;
+  animation-delay: -4s;
+  box-shadow: 0 4px 16px rgba(247, 223, 30, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.skill-icon.icon-react {
+  background: linear-gradient(135deg, #61dafb, #00bcd4);
+  color: #333;
   animation-delay: -6s;
+  box-shadow: 0 4px 16px rgba(97, 218, 251, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.skill-icon.icon-node {
+  background: linear-gradient(135deg, #68a063, #8bc34a);
+  color: white;
+  animation-delay: -8s;
+  box-shadow: 0 4px 16px rgba(104, 160, 99, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .skill-icon.icon-python {
-  background: linear-gradient(360deg, #3776ab 0%, #0099cc 100%);
+  background: linear-gradient(135deg, #3776ab, #0099cc);
   color: white;
-  animation-delay: -7.5s;
+  animation-delay: -10s;
+  box-shadow: 0 4px 16px rgba(55, 118, 171, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .skill-icon.icon-ts {
-  background: linear-gradient(360deg, #3178c6 0%, #2a5fa3 100%);
+  background: linear-gradient(135deg, #3178c6, #2b6cb0);
   color: white;
-  animation-delay: -9s;
+  animation-delay: -12s;
+  box-shadow: 0 4px 16px rgba(49, 120, 198, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .skill-icon.icon-java {
-  background: linear-gradient(360deg, #007396 0%, #ff6b4a 100%);
+  background: linear-gradient(135deg, #ed8b00, #f89820);
   color: white;
-  animation-delay: -10.5s;
+  animation-delay: -14s;
+  box-shadow: 0 4px 16px rgba(237, 139, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .skill-icon.icon-php {
-  background: linear-gradient(360deg, #777bb4 0%, #5e5fa6 100%);
+  background: linear-gradient(135deg, #777bb4, #5e5fa6);
   color: white;
-  animation-delay: -12s;
+  animation-delay: -16s;
+  box-shadow: 0 4px 16px rgba(119, 123, 180, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .skill-icon.icon-vue {
-  background: linear-gradient(360deg, #4fc08d 0%, #2c5f4f 100%);
+  background: linear-gradient(135deg, #4fc08d, #2c5f4f);
   color: white;
-  animation-delay: -13.5s;
+  animation-delay: -18s;
+  box-shadow: 0 4px 16px rgba(79, 192, 141, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
+
+/* Subtle Glow Pulse Animation */
+@keyframes glowPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+.skill-icon.icon-html { animation-name: orbit, glowPulse; animation-duration: 20s, 3s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-css { animation-name: orbit, glowPulse; animation-duration: 20s, 3.2s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-js { animation-name: orbit, glowPulse; animation-duration: 20s, 2.8s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-react { animation-name: orbit, glowPulse; animation-duration: 20s, 3.5s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-node { animation-name: orbit, glowPulse; animation-duration: 20s, 2.9s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-python { animation-name: orbit, glowPulse; animation-duration: 20s, 3.1s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-ts { animation-name: orbit, glowPulse; animation-duration: 20s, 3.3s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-java { animation-name: orbit, glowPulse; animation-duration: 20s, 2.7s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-php { animation-name: orbit, glowPulse; animation-duration: 20s, 3.4s; animation-iteration-count: infinite, infinite; }
+.skill-icon.icon-vue { animation-name: orbit, glowPulse; animation-duration: 20s, 3.0s; animation-iteration-count: infinite, infinite; }
 
 /* Animations */
 @keyframes slideInLeft {
@@ -341,7 +456,29 @@
   }
 }
 
-/* Responsive Design */
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+  .orbit-container {
+    width: 420px;
+    height: 420px;
+  }
+
+  .orbit-ring {
+    width: 400px;
+    height: 400px;
+  }
+
+  .orbit-ring-inner {
+    width: 300px;
+    height: 300px;
+  }
+
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(195px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(195px) rotate(-360deg); }
+  }
+}
+
 @media (max-width: 1024px) {
   .hero {
     padding: 60px 20px;
@@ -356,19 +493,43 @@
   }
 
   .character-avatar {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     font-size: 60px;
   }
 
-  .illustration-placeholder {
-    --orbit-radius: 190px;
+  .orbit-container {
+    width: 360px;
+    height: 360px;
+  }
+
+  .orbit-ring {
+    width: 340px;
+    height: 340px;
+  }
+
+  .orbit-ring-inner {
+    width: 260px;
+    height: 260px;
   }
 
   .skill-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 1.1rem;
+    width: 50px;
+    height: 50px;
+    font-size: 0.8rem;
+    margin-top: -25px;
+    margin-left: -25px;
+  }
+
+  .skill-icon img,
+  .skill-icon .skill-logo {
+    width: 26px;
+    height: 26px;
+  }
+
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(165px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(165px) rotate(-360deg); }
   }
 }
 
@@ -401,46 +562,44 @@
     justify-content: center;
   }
 
-  .illustration-placeholder {
-    height: 350px;
-    --orbit-radius: 160px;
-  }
-
   .character-avatar {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     font-size: 50px;
   }
 
+  .orbit-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .orbit-ring {
+    width: 280px;
+    height: 280px;
+  }
+
+  .orbit-ring-inner {
+    width: 210px;
+    height: 210px;
+  }
+
   .skill-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1rem;
+    width: 44px;
+    height: 44px;
+    font-size: 0.7rem;
+    margin-top: -22px;
+    margin-left: -22px;
   }
 
-  .skill-icon.icon-hi {
-    top: 10px;
-    right: 10px;
+  .skill-icon img,
+  .skill-icon .skill-logo {
+    width: 22px;
+    height: 22px;
   }
 
-  .skill-icon.icon-ai {
-    top: 70px;
-    right: -15px;
-  }
-
-  .skill-icon.icon-design {
-    top: 180px;
-    left: -30px;
-  }
-
-  .skill-icon.icon-code {
-    bottom: 70px;
-    right: 30px;
-  }
-
-  .skill-icon.icon-pr {
-    bottom: 10px;
-    right: 90px;
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
   }
 }
 
@@ -451,6 +610,11 @@
 
   .hero-title {
     font-size: 1.5rem;
+  }
+
+  .hero-title-role {
+    font-size: 1.2rem;
+    min-height: 36px;
   }
 
   .hero-description {
@@ -472,20 +636,43 @@
     font-size: 0.9rem;
   }
 
-  .illustration-placeholder {
-    height: 250px;
-    --orbit-radius: 130px;
-  }
-
   .character-avatar {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     font-size: 40px;
   }
 
+  .orbit-container {
+    width: 240px;
+    height: 240px;
+  }
+
+  .orbit-ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .orbit-ring-inner {
+    width: 165px;
+    height: 165px;
+  }
+
   .skill-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 0.9rem;
+    width: 38px;
+    height: 38px;
+    font-size: 0.6rem;
+    margin-top: -19px;
+    margin-left: -19px;
+  }
+
+  .skill-icon img,
+  .skill-icon .skill-logo {
+    width: 18px;
+    height: 18px;
+  }
+
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(110px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(110px) rotate(-360deg); }
   }
 }

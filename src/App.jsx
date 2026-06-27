@@ -7,6 +7,7 @@ import Projects from "./components/Projects";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer"
+import ScrollReveal from "./components/ScrollReveal"
 
 function App() {
   // Lazy initializer: reads from localStorage synchronously to avoid flicker
@@ -30,11 +31,25 @@ function App() {
     <div className="App">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <HeroSection />
-      <About />
-      <Skills />
-      <Projects />
+      
+      <ScrollReveal animation="fade-up" delay={100} duration={800}>
+        <About />
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fade-up" delay={150} duration={800}>
+        <Skills />
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fade-up" delay={100} duration={800}>
+        <Projects />
+      </ScrollReveal>
+      
       <Education />
-      <Contact />
+      
+      <ScrollReveal animation="fade-up" delay={100} duration={800}>
+        <Contact />
+      </ScrollReveal>
+      
       <Footer theme={theme} toggleTheme={toggleTheme} />
     </div>
   ) 
