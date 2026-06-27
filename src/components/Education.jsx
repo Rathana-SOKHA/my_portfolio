@@ -64,7 +64,7 @@ const Education = () => {
                 <div className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                   {/* Timeline Content */}
                   <div className="timeline-content">
-                    <div className="timeline-marker-dot"></div>
+                    
                     
                     {/* Card Top Accent */}
                     <div className="card-accent" style={{ background: `linear-gradient(135deg, ${edu.color}, #5eead4)` }}></div>

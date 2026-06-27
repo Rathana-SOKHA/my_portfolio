@@ -44,41 +44,125 @@
 /* Social Media Icons */
 .social-icons {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
   margin-bottom: 10px;
 }
 
 .social-link {
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   text-decoration: none;
-  transition: all 0.3s ease;
   cursor: pointer;
   color: white;
   font-weight: 600;
+  overflow: visible;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, background 0.3s ease;
+  z-index: 1;
 }
 
+/* Base brand colors */
 .social-link.facebook {
-  background: #1877f2;
+  background: linear-gradient(135deg, #1877f2, #0d5ab9);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.25);
 }
 
 .social-link.telegram {
-  background: #0088cc;
+  background: linear-gradient(135deg, #0088cc, #006699);
+  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.25);
 }
 
 .social-link.github {
-  background: #333333;
+  background: linear-gradient(135deg, #3b3b3b, #1a1a1a);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.social-link:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+/* Glass reflection overlay */
+.social-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Shine sweep effect */
+.social-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+/* --- Facebook Hover --- */
+.social-link.facebook:hover {
+  background: linear-gradient(135deg, #1a7bf5, #0d5ab9);
+  box-shadow: 0 8px 28px rgba(24, 119, 242, 0.45), 0 0 0 3px rgba(24, 119, 242, 0.3);
+  transform: translateY(-6px) scale(1.08);
+}
+.social-link.facebook:hover::after {
+  left: 150%;
+  transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.social-link.facebook:hover::before {
+  opacity: 0.5;
+  animation: facebookPulse 1.8s ease-in-out infinite;
+}
+@keyframes facebookPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.35); }
+  50% { box-shadow: 0 0 0 12px rgba(24, 119, 242, 0); }
+}
+
+/* --- Telegram Hover --- */
+.social-link.telegram:hover {
+  background: linear-gradient(135deg, #0099dd, #0077b3);
+  box-shadow: 0 8px 28px rgba(0, 136, 204, 0.45), 0 0 0 3px rgba(0, 136, 204, 0.3);
+  transform: translateY(-6px) scale(1.08);
+}
+.social-link.telegram:hover::after {
+  left: 150%;
+  transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.social-link.telegram:hover::before {
+  opacity: 0.5;
+  animation: telegramPulse 1.8s ease-in-out infinite;
+}
+@keyframes telegramPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.35); }
+  50% { box-shadow: 0 0 0 12px rgba(0, 136, 204, 0); }
+}
+
+/* --- GitHub Hover --- */
+.social-link.github:hover {
+  background: linear-gradient(135deg, #555, #1a1a1a);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 0 3px rgba(255, 255, 255, 0.15);
+  transform: translateY(-6px) scale(1.08);
+}
+.social-link.github:hover::after {
+  left: 150%;
+  transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.social-link.github:hover::before {
+  opacity: 0.5;
+  animation: githubPulse 1.8s ease-in-out infinite;
+}
+@keyframes githubPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); }
+  50% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
 }
 
 /* Hero Text Content */
