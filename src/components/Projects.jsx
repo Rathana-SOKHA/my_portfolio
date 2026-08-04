@@ -1,4 +1,5 @@
 import '../styles/Projects.css';
+import ScrollReveal from './ScrollReveal';
 import projectImage from '../assets/projects/music.png';
 import foodImage from '../assets/projects/food.png';
 import cleanImage from '../assets/projects/clean.png';
@@ -16,7 +17,6 @@ const Projects = () => {
       link: 'https://somaet.website/',
       github: '#',
       image: cleanImage
-
     },
     {
       id: 2,
@@ -40,7 +40,7 @@ const Projects = () => {
       id: 4,
       title: 'PNC Student Life',
       description: 'A modern, fully responsive portfolio website showcasing projects and skills. Features smooth scrolling, animations, and SEO optimization for maximum visibility.',
-      tech: ['HTML', 'CSS',],
+      tech: ['HTML', 'CSS'],
       link: 'https://pnc-student-life.vercel.app/',
       github: '#',
       image: pncImage
@@ -58,12 +58,14 @@ const Projects = () => {
       id: 6,
       title: 'Personal Portfolio',
       description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
-      tech: ['HTML', 'CSS','React.js'],
+      tech: ['HTML', 'CSS', 'React.js'],
       link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
       github: 'https://github.com/Rathana-SOKHA/my_portfolio',
       image: folioNowImage
     }
   ];
+
+  const accentColor = '#14b8a6';
 
   return (
     <section className="projects-section" id="projects">
@@ -71,51 +73,58 @@ const Projects = () => {
         {/* Section Header */}
         <div className="projects-header">
           <h2>Featured Projects</h2>
-          <span className="header-underline"></span>
-          {/* <p className="section-subtitle">Explore some of my latest work and side projects</p> */}
         </div>
 
         {/* Projects Grid */}
         <div className="projects-grid">
-          {projects.map((project) => (
-            <div key={project.id} className="project-card">
-              {/* Project Image */}
-              <div className="project-image">
-                {project.image ? (
-                  <img src={project.image} alt={project.title} />
-                ) : (
-                  <div className="image-placeholder">No Image</div>
-                )}
-              </div>
+          {projects.map((project, index) => (
+            <ScrollReveal
+              key={project.id}
+              animation="fade-up"
+              delay={index * 100}
+              threshold={0.1}
+            >
+              <div className="project-card">
+                {/* Glow overlay */}
+                <div className="project-card-glow" style={{ background: `radial-gradient(ellipse at 50% 0%, ${accentColor}18, transparent 60%)` }}></div>
 
-              {/* Project Content */}
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
+                {/* Project Image */}
+                <div className="project-image-wrap">
+                  {project.image ? (
+                    <img src={project.image} alt={project.title} />
+                  ) : (
+                    <div className="image-placeholder">No Image</div>
+                  )}
+                </div>
 
-                {/* Tech Stack */}
-                <div className="project-tech">
-                  {project.tech.map((tech, index) => (
-                    <span key={index} className="tech-badge">{tech}</span>
-                  ))}
+                {/* Card Body */}
+                <div className="project-body">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+
+                  {/* Tech Stack */}
+                  <div className="project-tech">
+                    {project.tech.map((tech, idx) => (
+                      <span key={idx} className="project-tech-badge">
+                    {tech}
+                  </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Project Links */}
+                <div className="project-footer">
+                  <a href={project.link} className="project-btn project-btn-primary">
+                    <span>View Live</span>
+                    <span className="btn-arrow">→</span>
+                  </a>
+                  <a href={project.github} className="project-btn project-btn-secondary">
+                    <span>GitHub</span>
+                    <span className="btn-arrow">→</span>
+                  </a>
                 </div>
               </div>
-
-              {/* Project Links */}
-              <div className="project-links">
-                <a href={project.link} className="project-link live-link">
-                  <span>View Live</span>
-                  <span className="arrow">→</span>
-                </a>
-                <a href={project.github} className="project-link github-link">
-                  <span>GitHub</span>
-                  <span className="arrow">→</span>
-                </a>
-              </div>
-
-              {/* Hover Decorative Element */}
-              <div className="card-shine"></div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -28,8 +28,7 @@ const About = () => {
             <div className="decorative-circle decorative-circle-bottom"></div>
           </div>
           <div className="bio-content">
-            <h1>About Me</h1>
-            <span id="line"></span>
+            <h2 className="bio-heading">About Me</h2>
             <p className="bio-description">
               Hello, I'm SOKHA Rathana, an aspiring <b>Web Developer</b> and
               second-year student at <b>Passerelles Numériques Cambodia</b>. I have

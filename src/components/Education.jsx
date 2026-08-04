@@ -30,9 +30,7 @@ const Education = () => {
       <div className="education-container">
         {/* Section Header */}
         <div className="education-header">
-          <h2>
-            <span className="header-icon">🎓</span> Education
-          </h2>
+          <h2>Education</h2>
         </div>
 
         <div className="education-content">

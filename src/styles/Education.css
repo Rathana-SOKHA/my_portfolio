@@ -61,11 +61,6 @@
   margin: 0;
 }
 
-.header-icon {
-  font-size: 2.2rem;
-  display: inline-block;
-}
-
 /* ===== Timeline Layout ===== */
 .timeline {
   position: relative;
@@ -91,16 +86,20 @@
   transform: translateX(-50%);
   border-radius: 3px;
   box-shadow: 0 0 12px rgba(20, 184, 166, 0.1);
-  animation: timelineGlow 4s ease-in-out infinite;
 }
 
-@keyframes timelineGlow {
-  0%, 100% {
-    box-shadow: 0 0 12px rgba(20, 184, 166, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(20, 184, 166, 0.2), 0 0 40px rgba(20, 184, 166, 0.05);
-  }
+.timeline-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.15), 0 0 40px rgba(20, 184, 166, 0.05);
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.timeline-line:hover::after {
+  opacity: 1;
 }
 
 /* Timeline item row */
@@ -381,10 +380,6 @@
 
   .education-header h2 {
     font-size: 1.8rem;
-  }
-
-  .header-icon {
-    font-size: 1.6rem;
   }
 
   .timeline {

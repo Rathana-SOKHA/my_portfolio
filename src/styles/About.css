@@ -4,6 +4,7 @@
   padding: 100px 20px;
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: var(--text-color);
+  scroll-margin-top: 110px;
 }
 
 /* About Container */
@@ -107,22 +108,16 @@
   animation: slideInRight 0.8s ease-out;
 }
 
-.bio-content h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  /* margin-bottom: 25px; */
-  color: var(--text-color);
+.bio-content .bio-heading {
+  font-size: 2.8rem;
+  color: #14b8a6;
   font-family: "Poppins", sans-serif;
-  line-height: 1.2;
-}
-
-.bio-content #line {
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #14b8a6 0%, #5eead4 100%);
-  margin-bottom: 25px;;
-  border-radius: 2px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  margin: 0 0 25px;
 }
 
 .bio-description {
@@ -296,6 +291,28 @@
 }
 
 /* Responsive Design */
+
+/* Stack bio into one column on tablets & phones */
+@media (max-width: 900px) {
+  .bio-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .bio-image {
+    height: 380px;
+  }
+
+  .bio-content {
+    text-align: center;
+  }
+
+  .bio-stats {
+    width: 100%;
+  }
+}
+
 @media (max-width: 1024px) {
   .about-section {
     padding: 80px 20px;
@@ -305,8 +322,8 @@
     gap: 50px;
   }
 
-  .bio-content h1 {
-    font-size: 2.8rem;
+  .bio-content .bio-heading {
+    font-size: 2.4rem;
   }
 
   .bio-image::before {
@@ -362,7 +379,7 @@
     max-width: 100%;
   }
 
-  .bio-content h1 {
+  .bio-content .bio-heading {
     font-size: 2.2rem;
   }
 
@@ -447,7 +464,7 @@
     right: 5px;
   }
 
-  .bio-content h1 {
+  .bio-content .bio-heading {
     font-size: 1.8rem;
     margin-bottom: 15px;
   }

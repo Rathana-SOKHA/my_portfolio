@@ -397,7 +397,8 @@
 
   .navbar-container {
     padding: 0 1rem;
-    flex-wrap: wrap;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
   }
 
   .hamburger {
@@ -405,24 +406,52 @@
     z-index: 10;
   }
 
+  .theme-toggle-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.05rem;
+  }
+
   .nav-menu {
     position: fixed;
-    top: 80px;
-    left: -100%;
+    top: 96px;
+    left: 0;
+    right: 0;
+    width: 95%;
+    margin: 0 auto;
+    transform: translateX(-110%);
     flex-direction: column;
     background: var(--primary-color);
-    width: 100%;
     text-align: center;
-    transition: left 0.3s ease;
-    padding: 2rem 0;
-    gap: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 1.5rem 1.5rem 2.5rem;
+    gap: 0.75rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
     justify-content: flex-start;
     z-index: 9;
+    border-radius: 0 0 24px 24px;
+    border-top: 2px solid rgba(20, 184, 166, 0.25);
+    border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-menu.active {
-    left: 0;
+    transform: translateX(0);
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-item a {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
   }
 
   .nav-link {
@@ -431,6 +460,10 @@
 
   .nav-link::after {
     display: none;
+  }
+
+  .nav-item a:hover {
+    background: rgba(20, 184, 166, 0.1);
   }
 
   .nav-link:hover {
@@ -474,10 +507,18 @@
 
   .navbar-logo {
     flex: 1;
+    min-width: 0;
+  }
+
+  .navbar-logo a {
+    gap: 0.4rem;
   }
 
   .logo-text {
     font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .logo-circle {
@@ -486,8 +527,15 @@
     font-size: 1rem;
   }
 
+  .theme-toggle-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
   .hamburger {
-    order: 2;
+    order: 3;
+    gap: 0.35rem;
   }
 
   .hamburger span {
@@ -496,18 +544,20 @@
   }
 
   .nav-menu {
-    top: 60px;
-    gap: 1rem;
-    padding: 1.5rem 0;
+    top: 90px;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem 2rem;
+    border-radius: 0 0 18px 18px;
   }
 
   .nav-menu.active {
-    left: 0;
+    transform: translateX(0);
     padding-bottom: 5rem;
   }
 
   .nav-item {
-    padding: 0.5rem 0;
+    padding: 0.1rem 0;
   }
 
   .nav-link {
@@ -515,18 +565,18 @@
   }
 
   .contact-btn {
-    position: absolute;
-    bottom: auto;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
+    order: 4;
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
     white-space: nowrap;
   }
 
   .contact-btn:hover {
-    transform: translateY(-50%);
+    transform: none;
   }
 }
 

@@ -20,7 +20,7 @@ export default function Navbar({ theme, toggleTheme }) {
       setIsScrolled(window.scrollY > 10);
 
       // Detect which section is in view
-      const sections = ["home", "about", "skills", "projects", "education", "contact", "philosophy"];
+      const sections = ["home", "about", "skills", "projects", "education", "contact"];
       
       for (let section of sections) {
         const element = document.getElementById(section);
@@ -80,12 +80,6 @@ export default function Navbar({ theme, toggleTheme }) {
           <li className="nav-item">
             <a href="#education" className={`nav-link ${activeSection === "education" ? "active" : ""}`} onClick={handleNavClick}>
               Education
-            </a>
-          </li>
-          
-          <li className="nav-item">
-            <a href="#philosophy" className={`nav-link ${activeSection === "philosophy" ? "active" : ""}`} onClick={handleNavClick}>
-              Philosophy
             </a>
           </li>
         </ul>

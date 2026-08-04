@@ -376,9 +376,14 @@
     gap: 8px;
   }
 
-  .newsletter-input,
+  .newsletter-input {
+    /* Keep >= 16px so iOS Safari doesn't zoom on focus */
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+
   .newsletter-button {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     padding: 10px 12px;
   }
 
