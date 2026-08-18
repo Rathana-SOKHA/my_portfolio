@@ -151,12 +151,21 @@ const Projects = () => {
                 {/* Project Links */}
                 <div className="project-footer">
                   <a href={project.link} className="project-btn project-btn-primary" target="_blank" rel="noopener noreferrer">
-                    <span>View Live</span>
-                    <span className="btn-arrow">→</span>
+                    <span className="project-btn-content">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 17L17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                      <span>Live Demo</span>
+                    </span>
                   </a>
                   <a href={project.github} className="project-btn project-btn-secondary" target="_blank" rel="noopener noreferrer">
-                    <span>GitHub</span>
-                    <span className="btn-arrow">→</span>
+                    <span className="project-btn-content">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 18c-4.5 1.5-4.5-2.5-6-3m12 5v-3.5a3.5 3.5 0 0 0-1-2.7c3.3-.4 6.7-1.6 6.7-7.3A5.6 5.6 0 0 0 20 5.1 5.2 5.2 0 0 0 19.8 1S18.7.7 16.5 2.2a14.6 14.6 0 0 0-7.7 0C6.6.7 5.5 1 5.5 1A5.2 5.2 0 0 0 5.3 5.1 5.6 5.6 0 0 0 4.1 9c0 5.7 3.4 6.9 6.7 7.3a3.5 3.5 0 0 0-1 2.7V21" />
+                      </svg>
+                      <span>Code</span>
+                    </span>
                   </a>
                 </div>
               </div>

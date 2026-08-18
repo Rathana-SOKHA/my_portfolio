@@ -19,6 +19,14 @@
   --card-bg: rgba(17, 24, 39, 0.95);
   --card-border: rgba(20, 184, 166, 0.12);
   --shadow-color: rgba(20, 184, 166, 0.3);
+
+  --project-btn-bg: rgba(15, 23, 42, 0.28);
+  --project-btn-border: rgba(125, 211, 252, 0.8);
+  --project-btn-text: #dbeafe;
+  --project-btn-hover-bg: rgba(125, 211, 252, 0.1);
+  --project-btn-secondary-bg: rgba(15, 23, 42, 0.22);
+  --project-btn-secondary-border: rgba(94, 234, 212, 0.7);
+  --project-btn-secondary-text: #dcfef7;
 }
 
 /* Light Mode */
@@ -32,6 +40,14 @@
   --card-bg: rgba(255, 255, 255, 0.95);
   --card-border: rgba(20, 184, 166, 0.2);
   --shadow-color: rgba(20, 184, 166, 0.2);
+
+  --project-btn-bg: rgba(15, 23, 42, 0.04);
+  --project-btn-border: rgba(20, 184, 166, 0.8);
+  --project-btn-text: #0f172a;
+  --project-btn-hover-bg: rgba(20, 184, 166, 0.08);
+  --project-btn-secondary-bg: rgba(20, 184, 166, 0.05);
+  --project-btn-secondary-border: rgba(13, 148, 136, 0.8);
+  --project-btn-secondary-text: #0f172a;
 }
 
 /* Smooth scroll behavior for all anchor links */
