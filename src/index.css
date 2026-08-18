@@ -1,6 +1,39 @@
 /* Import Monokai Pro-style Bold Modern Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
 
+/* CSS Variables for Theme Colors */
+:root {
+  /* Teal Color Palette */
+  --primary-teal: #14b8a6;
+  --secondary-teal: #0d9488;
+  --light-teal: #2dd4bf;
+  --teal-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  
+  /* Dark Mode (Default) */
+  --bg-primary: #0f0f1e;
+  --bg-secondary: #1a1a2e;
+  --bg-gradient: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #94a9c9;
+  --card-bg: rgba(17, 24, 39, 0.95);
+  --card-border: rgba(20, 184, 166, 0.12);
+  --shadow-color: rgba(20, 184, 166, 0.3);
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(20, 184, 166, 0.2);
+  --shadow-color: rgba(20, 184, 166, 0.2);
+}
+
 /* Smooth scroll behavior for all anchor links */
 html {
   scroll-behavior: smooth;
@@ -16,8 +49,8 @@ body {
 }
 
 body {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  color: var(--text-color);
+  background: var(--bg-gradient);
+  color: var(--text-primary);
   transition: background 0.3s ease, color 0.3s ease;
   /* font-family: "Poppins", sans-serif; */
   -webkit-tap-highlight-color: transparent;

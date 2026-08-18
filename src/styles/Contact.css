@@ -2,8 +2,8 @@
 .contact-section {
   width: 100%;
   padding: 100px 20px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  color: var(--text-color);
+  background: var(--bg-gradient);
+  color: var(--text-primary);
   position: relative;
   overflow: hidden;
   scroll-margin-top: 110px;

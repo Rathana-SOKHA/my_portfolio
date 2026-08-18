@@ -2,8 +2,8 @@
 .education-section {
   width: 100%;
   padding: 100px 20px;
-  background: var(--primary-color);
-  color: var(--text-color);
+  background: var(--bg-gradient);
+  color: var(--text-primary);
   position: relative;
   overflow: hidden;
   scroll-margin-top: 120px;

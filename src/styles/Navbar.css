@@ -78,7 +78,7 @@
 }
 
 .navbar {
-  background-color: var(--primary-color);
+  background-color: var(--bg-secondary);
   padding: 1rem 0;
   position: sticky;
   top: 20px;
@@ -124,29 +124,30 @@
 
 /* Theme Toggle Button in Navbar */
 .theme-toggle-nav {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
-  color: white;
-  border: none;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--card-border);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
   flex-shrink: 0;
 }
 
 .theme-toggle-nav:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.5);
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+  transform: scale(1.05);
 }
 
 .theme-toggle-nav:focus {
-  outline: 2px solid var(--accent-light);
+  outline: 2px solid var(--primary-teal);
   outline-offset: 2px;
 }
 
@@ -157,7 +158,7 @@
   left: 2px;
   right: 2px;
   bottom: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--bg-secondary);
   border-radius: 54px;
   z-index: -1;
 }
@@ -284,7 +285,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: var(--accent-color);
+  background-color: var(--primary-teal);
   transition: width 0.3s ease;
 }
 
@@ -293,23 +294,22 @@
 }
 
 .nav-link.active {
-  color: var(--accent-color);
+  color: var(--primary-teal);
   font-weight: 600;
 }
 
 .nav-link.active::after {
-  content: '';
   position: absolute;
   bottom: -2px;
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--accent-color);
+  background-color: var(--primary-teal);
 }
 
 /* Contact Button */
 .contact-btn {
-  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+  background: var(--teal-gradient);
   color: white;
   box-shadow: 0 5px 20px rgba(20, 184, 166, 0.3);
   padding: 0.6rem 1.5rem;
@@ -342,7 +342,7 @@
 .hamburger span {
   width: 25px;
   height: 3px;
-  background-color: var(--text-color);
+  background-color: var(--text-primary);
   border-radius: 2px;
   transition: var(--transition);
 }
@@ -421,7 +421,7 @@
     margin: 0 auto;
     transform: translateX(-110%);
     flex-direction: column;
-    background: var(--primary-color);
+    background: var(--bg-secondary);
     text-align: center;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     padding: 1.5rem 1.5rem 2.5rem;

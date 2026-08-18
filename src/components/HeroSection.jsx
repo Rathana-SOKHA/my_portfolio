@@ -96,6 +96,8 @@ export default function HeroSection() {
               href="https://t.me/rathana_dev"
               className="social-link telegram"
               title="Telegram"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <i className="fab fa-telegram"></i>
             </a>
@@ -103,6 +105,8 @@ export default function HeroSection() {
               href="https://github.com/Rathana-SOKHA"
               className="social-link github"
               title="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <i className="fab fa-github"></i>
             </a>
