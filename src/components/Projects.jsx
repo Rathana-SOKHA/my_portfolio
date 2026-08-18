@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import '../styles/Projects.css';
 import ScrollReveal from './ScrollReveal';
 import projectImage from '../assets/projects/music.png';
@@ -6,23 +7,24 @@ import cleanImage from '../assets/projects/clean.png';
 import pncImage from '../assets/projects/pnc_life.png';
 import folioImage from '../assets/projects/folio.png';
 import folioNowImage from '../assets/projects/folio_now.png';
+import pncSelectionImage from "../assets/projects/pncSelection.png"
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Cleaning Service App',
-      description: 'A full-featured e-commerce platform with product catalog, shopping cart, and checkout functionality. Built with modern React patterns and optimized for performance.',
-      tech: ['React', 'Node', 'CSS3', 'REST API', 'MySQL', 'JWT Authentication', 'Maps API'],
+      title: 'PNC Student Selection Management System',
+      description: 'A full-stack web application designed to help manage and streamline the student selection process for Passerelles Numériques Cambodia (PNC).',
+      tech: ['Laravel', 'Vue.js', 'MySQL', 'Tailwind CSS'],
       link: 'https://somaet.website/',
-      github: '#',
-      image: cleanImage
+      github: 'https://github.com/Rathana-SOKHA/pnc-selection-system',
+      image: pncSelectionImage
     },
     {
       id: 2,
-      title: 'Music Player App',
+      title: 'E-Commerce Platform',
       description: 'A collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features for enhanced productivity.',
-      tech: ['HTML', 'CSS', 'JavaScript', 'localStorage'],
+      tech: ['Laravel', 'Vue.js', 'MySQL'],
       link: 'https://music-player-mauve-six.vercel.app/',
       github: '#',
       image: projectImage
@@ -30,7 +32,7 @@ const Projects = () => {
     {
       id: 3,
       title: 'Food Delivery App',
-      description: 'A responsive weather application featuring real-time weather data, forecasts, and interactive maps. Beautiful UI with smooth animations and intuitive navigation.',
+      description: 'A responsive food delivery web application where users can explore meals, browse menus, and order their favorite food online with a simple and user-friendly interfact.',
       tech: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
       link: 'https://food-webiste-seven.vercel.app/',
       github: '#',
@@ -56,9 +58,36 @@ const Projects = () => {
     },
     {
       id: 6,
-      title: 'Personal Portfolio',
+      title: 'E_Learning Management System',
       description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
-      tech: ['HTML', 'CSS', 'React.js'],
+      tech: ['Node.js', 'Vue.js', 'MySQL'],
+      link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
+      github: 'https://github.com/Rathana-SOKHA/my_portfolio',
+      image: folioNowImage
+    },
+    {
+      id: 7,
+      title: 'Online Shopping Platform',
+      description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
+      tech: ['Laravel', 'Vue.js', 'Tailwind CSS', 'MySQL'],
+      link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
+      github: 'https://github.com/Rathana-SOKHA/my_portfolio',
+      image: folioNowImage
+    },
+    {
+      id: 8,
+      title: 'Music Player App',
+      description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
+      tech: ['Laravel', 'Vue.js', 'Tailwind CSS', 'MySQL'],
+      link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
+      github: 'https://github.com/Rathana-SOKHA/my_portfolio',
+      image: folioNowImage
+    },
+    {
+      id: 9,
+      title: 'Online Shopping Platform',
+      description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
+      tech: ['Laravel', 'Vue.js', 'Tailwind CSS', 'MySQL'],
       link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
       github: 'https://github.com/Rathana-SOKHA/my_portfolio',
       image: folioNowImage
@@ -66,6 +95,13 @@ const Projects = () => {
   ];
 
   const accentColor = '#14b8a6';
+
+  // Pagination
+  const projectsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const startIndex = (currentPage - 1) * projectsPerPage;
+  const currentProjects = projects.slice(startIndex, startIndex + projectsPerPage);
 
   return (
     <section className="projects-section" id="projects">
@@ -77,7 +113,7 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <div className="projects-grid">
-          {projects.map((project, index) => (
+          {currentProjects.map((project, index) => (
             <ScrollReveal
               key={project.id}
               animation="fade-up"
@@ -114,11 +150,11 @@ const Projects = () => {
 
                 {/* Project Links */}
                 <div className="project-footer">
-                  <a href={project.link} className="project-btn project-btn-primary">
+                  <a href={project.link} className="project-btn project-btn-primary" target="_blank" rel="noopener noreferrer">
                     <span>View Live</span>
                     <span className="btn-arrow">→</span>
                   </a>
-                  <a href={project.github} className="project-btn project-btn-secondary">
+                  <a href={project.github} className="project-btn project-btn-secondary" target="_blank" rel="noopener noreferrer">
                     <span>GitHub</span>
                     <span className="btn-arrow">→</span>
                   </a>
@@ -127,6 +163,39 @@ const Projects = () => {
             </ScrollReveal>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="projects-pagination">
+            <button
+              className={`pagination-btn${currentPage === 1 ? ' pagination-disabled' : ''}`}
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+            >
+              <span className="pagination-chevron">‹</span>
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`pagination-btn pagination-number${currentPage === page ? ' pagination-active' : ''}`}
+                onClick={() => setCurrentPage(page)}
+                aria-label={`Go to page ${page}`}
+                aria-current={currentPage === page ? 'page' : undefined}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              className={`pagination-btn${currentPage === totalPages ? ' pagination-disabled' : ''}`}
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Next page"
+            >
+              <span className="pagination-chevron">›</span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
