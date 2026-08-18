@@ -25,10 +25,9 @@ const Footer = ({ theme, toggleTheme }) => {
   ];
 
   const socialLinks = [
-    { icon: '💼', label: 'LinkedIn', url: '#', color: '#0077b5' },
-    { icon: '🐙', label: 'GitHub', url: '#', color: '#333' },
-    { icon: '𝕏', label: 'Twitter', url: '#', color: '#1DA1F2' },
-    { icon: '💌', label: 'Email', url: 'mailto:your@email.com', color: '#ff6b00' },
+    { icon: 'fab fa-facebook', label: 'Facebook', url: 'https://www.facebook.com/Rathanacoding', color: '#1877f2' },
+    { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_dev', color: '#0088cc' },
+    { icon: 'fab fa-github', label: 'GitHub', url: 'https://github.com/Rathana-SOKHA', color: '#333333' }
   ];
 
   const resources = [
@@ -53,12 +52,12 @@ const Footer = ({ theme, toggleTheme }) => {
                 <a
                   key={index}
                   href={social.url}
-                  className="footer-social-link"
+                  className={`footer-social-link ${social.label.toLowerCase()}`}
                   title={social.label}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {social.icon}
+                  <i className={social.icon}></i>
                 </a>
               ))}
             </div>

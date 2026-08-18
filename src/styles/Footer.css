@@ -1,4 +1,6 @@
 /* Footer Styles */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
 .footer {
   width: 100%;
   background: var(--bg-gradient);
@@ -81,24 +83,52 @@
 }
 
 .footer-social-link {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(94, 234, 212, 0.15));
-  border: 1px solid rgba(20, 184, 166, 0.3);
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
+  font-size: 22px;
   text-decoration: none;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  z-index: 1;
 }
 
-.footer-social-link:hover {
-  transform: translateY(-5px) scale(1.1);
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.3), rgba(94, 234, 212, 0.3));
-  border-color: rgba(20, 184, 166, 0.5);
-  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.2);
+/* Base brand colors */
+.footer-social-link.facebook {
+  background: #1877f2;
+}
+
+.footer-social-link.telegram {
+  background: #0088cc;
+}
+
+.footer-social-link.github {
+  background: #333333;
+}
+
+/* Simple hover effects */
+.footer-social-link.facebook:hover {
+  background: #1a7bf5;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
+}
+
+.footer-social-link.telegram:hover {
+  background: #0099dd;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3);
+}
+
+.footer-social-link.github:hover {
+  background: #555;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Footer Section */

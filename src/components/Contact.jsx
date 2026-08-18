@@ -33,12 +33,9 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: '💼', label: 'LinkedIn', url: '#', color: '#0077b5' },
-    { icon: '🐙', label: 'GitHub', url: '#', color: '#333' },
-    { icon: '𝕏', label: 'Twitter', url: '#', color: '#1DA1F2' },
-    { icon: '💌', label: 'Email', url: 'mailto:your@email.com', color: '#ff6b00' },
-    { icon: '📱', label: 'WhatsApp', url: '#', color: '#25D366' },
-    { icon: '💬', label: 'Discord', url: '#', color: '#5865F2' }
+    { icon: 'fab fa-facebook', label: 'Facebook', url: 'https://www.facebook.com/Rathanacoding', color: '#1877f2' },
+    { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_dev', color: '#0088cc' },
+    { icon: 'fab fa-github', label: 'GitHub', url: 'https://github.com/Rathana-SOKHA', color: '#333333' }
   ];
 
   const contactInfo = [
@@ -79,12 +76,12 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.url}
-                    className="social-link"
+                    className={`social-link ${social.label.toLowerCase()}`}
                     title={social.label}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span className="social-icon">{social.icon}</span>
+                    <i className={social.icon}></i>
                   </a>
                 ))}
               </div>

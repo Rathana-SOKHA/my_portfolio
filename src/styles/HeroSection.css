@@ -331,7 +331,6 @@
 
 .skill-icon:hover {
   animation-play-state: paused;
-  transform: scale(1.25) !important;
   z-index: 10;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
