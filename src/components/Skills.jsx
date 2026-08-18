@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../styles/Skills.css";
 import ScrollReveal from "./ScrollReveal";
 
@@ -115,96 +114,60 @@ const svgMap = {
   laravel: laravelImg,
 };
 
-const allSkills = skillCategories.flatMap((cat) => cat.skills);
-
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const displayedSkills =
-    activeCategory === "all"
-      ? allSkills
-      : skillCategories.find((cat) => cat.id === activeCategory)?.skills || [];
-
   return (
     <section className="skills-section" id="skills">
       <div className="skills-container">
-        {/* Section Header */}
         <div className="skills-header">
           <h2>My Skills</h2>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="skills-tabs">
-          <button
-            className={`skills-tab ${activeCategory === "all" ? "active" : ""}`}
-            onClick={() => setActiveCategory("all")}
-          >
-            <span className="tab-label">All</span>
-          </button>
-          {skillCategories.map((cat) => (
-            <button
-              key={cat.id}
-              className={`skills-tab ${activeCategory === cat.id ? "active" : ""}`}
-              onClick={() => setActiveCategory(cat.id)}
-            >
-              <span className="tab-label">{cat.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Skills Grid */}
         <div className="skills-shell">
-          <div className="skills-grid">
-            {displayedSkills.map((skill, index) => (
-              <ScrollReveal
-                key={skill.name}
-                animation="fade-up"
-                delay={index * 80}
-                threshold={0.1}
-              >
-                <article
-                  className="skill-card"
-                  style={{
-                    "--skill-color": skill.color,
-                    "--skill-glow": skill.glow,
-                    "--skill-width": `${skill.proficiency}%`,
-                  }}
-                >
-                  {/* Glow overlay */}
-                  <div
-                    className="skill-card-glow"
-                    style={{
-                      background: `radial-gradient(ellipse at 50% 0%, ${skill.glow.replace("0.35", "0.12")}, transparent 60%)`,
-                    }}
-                  ></div>
+          <div className="skills-columns">
+            {skillCategories.map((category) => (
+              <div key={category.id} className="skill-group">
+                <div className="skill-group-header">
+                  <span>{category.label}</span>
+                </div>
 
-                  <div className="skill-card-top">
-                    <div className="skill-badge">
-                      <img
-                        src={typeof skill.icon === "string" && skill.icon.startsWith("data:") ? skill.icon : svgMap[skill.icon]}
-                        alt={`${skill.name} logo`}
-                      />
-                    </div>
-                    <div className="skill-meta">
-                      <h3>{skill.name}</h3>
-                      <div className="skill-accent-line" />
-                    </div>
-                  </div>
+                <div className="skill-group-grid">
+                  {category.skills.map((skill, index) => (
+                    <ScrollReveal
+                      key={`${category.id}-${skill.name}`}
+                      animation="fade-up"
+                      delay={index * 60}
+                      threshold={0.1}
+                    >
+                      <article
+                        className="skill-row-card"
+                        style={{
+                          "--skill-color": skill.color,
+                          "--skill-glow": skill.glow,
+                          "--skill-width": `${skill.proficiency}%`,
+                        }}
+                      >
+                        <div className="skill-row-top">
+                          <div className="skill-row-meta">
+                            <div className="skill-badge">
+                              <img
+                                src={typeof skill.icon === "string" && skill.icon.startsWith("data:") ? skill.icon : svgMap[skill.icon]}
+                                alt={`${skill.name} logo`}
+                              />
+                            </div>
+                            <span className="skill-name">{skill.name}</span>
+                          </div>
 
-                  <div className="skill-card-bottom">
-                    <div className="skill-proficiency">
-                      <span>Proficiency</span>
-                      <strong>{skill.proficiency}%</strong>
-                    </div>
+                          <span className="skill-score">{skill.proficiency}%</span>
+                        </div>
 
-                    <div className="skill-progress-track">
-                      <span className="skill-progress-fill" />
-                    </div>
-
-                    <div className="skill-progress-base" />
-                  </div>
-                </article>
-              </ScrollReveal>
+                        <div className="skill-progress-track">
+                          <span className="skill-progress-fill" />
+                        </div>
+                      </article>
+                    </ScrollReveal>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>

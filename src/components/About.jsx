@@ -48,7 +48,7 @@ const About = () => {
             </div> */}
             <div className="bio-stats">
               <div className="stat">
-                <h3>50+</h3>
+                <h3>20+</h3>
                 <p>Projects</p>
               </div>
               <div className="stat">
@@ -56,8 +56,8 @@ const About = () => {
                 <p>Study Years</p>
               </div>
               <div className="stat">
-                <h3>4+</h3>
-                <p>Years</p>
+                <h3>100%</h3>
+                <p>Commitment</p>
               </div>
             </div>
           </div>

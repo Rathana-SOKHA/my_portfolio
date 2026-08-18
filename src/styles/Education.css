@@ -148,25 +148,29 @@
   width: 100%;
   max-width: 460px;
   background: var(--card-bg);
-  border: 1px solid rgba(20, 184, 166, 0.1);
-  border-radius: 20px;
+  border: 1.5px solid rgba(20, 184, 166, 0.12);
+  border-radius: 8px;
   overflow: hidden;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 20px rgba(20, 184, 166, 0.03);
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
               border-color 0.4s ease,
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              backdrop-filter 0.4s ease;
 }
 
 .timeline-item:hover .edu-card {
-  border-color: rgba(20, 184, 166, 0.25);
+  border-color: rgba(20, 184, 166, 0.3);
   box-shadow:
-    0 16px 48px rgba(20, 184, 166, 0.12),
-    0 6px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-8px);
+    0 20px 60px rgba(20, 184, 166, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 30px rgba(20, 184, 166, 0.05);
+  transform: translateY(-10px);
 }
 
 /* Card glow overlay */
@@ -175,7 +179,9 @@
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 8px;
+  filter: blur(20px);
 }
 
 .timeline-item:hover .edu-card-glow {
@@ -186,88 +192,119 @@
 .edu-card-inner {
   position: relative;
   z-index: 1;
-  padding: 28px;
-}
-
-/* ===== Card Top: Icon + School/Title ===== */
-.edu-card-top {
+  padding: 32px;
   display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  margin-bottom: 14px;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.edu-icon-circle {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  border: 1.5px solid;
+/* ===== Card Main Content ===== */
+.edu-card-main {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 1.5rem;
-  transition: transform 0.4s ease, border-color 0.4s ease;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 8px;
 }
 
-.timeline-item:hover .edu-icon-circle {
-  transform: scale(1.06) rotate(-5deg);
+/* Degree/Title - Large and Bold */
+.edu-degree-name {
+  font-size: 1.65rem;
+  font-weight: 900;
+  margin: 0 0 12px 0;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--text-color) 0%, var(--text-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
 }
 
-.edu-card-heading {
-  flex: 1;
-  min-width: 0;
-  padding-top: 2px;
+.edu-degree-name::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #5eead4);
+  border-radius: 2px;
+  opacity: 0.8;
 }
 
+.timeline-item:hover .edu-degree-name {
+  letter-spacing: -0.03em;
+}
+
+.timeline-item:hover .edu-degree-name::after {
+  width: 60px;
+  opacity: 1;
+}
+
+/* School Name */
 .edu-school-name {
-  font-size: 1.2rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: var(--text-color);
-  margin: 0 0 4px;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 
-.edu-degree-name {
-  font-size: 0.92rem;
-  font-weight: 600;
+.timeline-item:hover .edu-school-name {
+  letter-spacing: 0.03em;
+  opacity: 1;
+}
+
+/* Subtitle (Program/Specialty) */
+.edu-subtitle {
+  font-size: 0.96rem;
+  font-weight: 650;
+  color: var(--text-color);
   margin: 0;
+  line-height: 1.35;
   opacity: 0.9;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover .edu-subtitle {
+  opacity: 1;
+  letter-spacing: 0.03em;
 }
 
 /* ===== Year Row ===== */
 .edu-year-row {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 14px;
-  padding: 4px 14px;
-  background: rgba(20, 184, 166, 0.06);
-  border: 1px solid rgba(20, 184, 166, 0.1);
-  border-radius: 8px;
-}
-
-.edu-year-icon {
-  font-size: 0.85rem;
-  line-height: 1;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1.5px solid rgba(20, 184, 166, 0.25);
+  margin-top: 10px;
 }
 
 .edu-year-text {
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 800;
   color: var(--text-color);
-  opacity: 0.75;
-  letter-spacing: 0.3px;
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.8), rgba(94, 234, 212, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ===== Description ===== */
 .edu-description {
   font-size: 0.88rem;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--text-dark);
-  opacity: 0.8;
-  margin: 0 0 18px;
+  opacity: 0.75;
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 
 /* ===== Tags ===== */
@@ -275,24 +312,25 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 4px;
 }
 
 .edu-tag {
-  padding: 5px 14px;
-  border-radius: 999px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  border: 1px solid;
-  letter-spacing: 0.2px;
-  transition: all 0.3s ease;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1.2px solid;
+  letter-spacing: 0.3px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: default;
+  text-transform: uppercase;
 }
 
 .edu-tag:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.2);
-  background: rgba(20, 184, 166, 0.2);
-  border-color: rgba(20, 184, 166, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.25);
+  border-color: rgba(20, 184, 166, 0.5);
 }
 
 /* ===== Responsive: Tablet ===== */

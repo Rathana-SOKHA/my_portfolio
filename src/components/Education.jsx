@@ -5,21 +5,20 @@ const Education = () => {
   const educationData = [
     {
       id: 1,
-      school: 'Passerelles Numériques Cambodia',
-      degree: 'Associate Degree in Web Programming',
+      title: 'Pursuing Associate Degree at',
+      school: 'Passerelles Numériques Cambodia (PNC)',
+      subtitle: 'in Web Programming',
       year: '2025 - Present',
-      details: 'Specialized in Web Development and Software Engineering. Completed honors program with distinction.',
-      highlights: ['Web Development', 'Data Structures', 'Software Engineering', 'Database Design'],
       icon: '🎓',
       color: '#14b8a6'
     },
     {
       id: 2,
-      school: 'Graduate',
-      degree: 'Full Stack Developer Certification',
-      year: '2022 - 2023',
-      details: 'Intensive 12-week bootcamp focusing on modern web technologies and best practices in software development.',
-      highlights: ['React.js', 'Node.js', 'MongoDB', 'Full Stack Development'],
+      title: 'Graduated Bacll certificate',
+      school: 'Phnom Kravanh High School',
+      subtitle: 'Diploma with Grade C achievement.',
+      year: '2023 - 2024',
+      details: '',
       icon: '📘',
       color: '#5eead4'
     },
@@ -61,47 +60,15 @@ const Education = () => {
 
                     {/* Card content */}
                     <div className="edu-card-inner">
-                      {/* Top section: icon + school + year */}
-                      <div className="edu-card-top">
-                        <div
-                          className="edu-icon-circle"
-                          style={{
-                            background: `linear-gradient(135deg, ${edu.color}20, #5eead420)`,
-                            borderColor: `${edu.color}30`
-                          }}
-                        >
-                          <span className="edu-icon-symbol">{edu.icon}</span>
-                        </div>
-                        <div className="edu-card-heading">
-                          <h3 className="edu-school-name">{edu.school}</h3>
-                          <p className="edu-degree-name" style={{ color: edu.color }}>{edu.degree}</p>
-                        </div>
+                      <div className="edu-card-main">
+                        <h3 className="edu-degree-name" style={{ color: edu.color }}>{edu.title}</h3>
+                        <p className="edu-school-name">{edu.school}</p>
+                        {edu.subtitle && <p className="edu-subtitle">{edu.subtitle}</p>}
+                        {edu.details && <p className="edu-description">{edu.details}</p>}
                       </div>
 
-                      {/* Year */}
                       <div className="edu-year-row">
-                        <span className="edu-year-icon">📅</span>
                         <span className="edu-year-text">{edu.year}</span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="edu-description">{edu.details}</p>
-
-                      {/* Tags */}
-                      <div className="edu-tags">
-                        {edu.highlights.map((highlight, idx) => (
-                          <span
-                            key={idx}
-                            className="edu-tag"
-                            style={{
-                              background: `${edu.color}12`,
-                              borderColor: `${edu.color}25`,
-                              color: edu.color
-                            }}
-                          >
-                            {highlight}
-                          </span>
-                        ))}
                       </div>
                     </div>
                   </div>

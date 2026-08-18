@@ -228,7 +228,7 @@
   padding: 40px 35px;
   background: rgba(20, 184, 166, 0.08);
   border: 2px solid rgba(20, 184, 166, 0.2);
-  border-radius: 20px;
+  border-radius: 8px;
   text-align: center;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;

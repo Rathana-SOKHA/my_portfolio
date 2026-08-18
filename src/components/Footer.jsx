@@ -109,7 +109,7 @@ const Footer = ({ theme, toggleTheme }) => {
         {/* Footer Bottom */}
         <div className="footer-bottom">
           <p className="footer-copyright">
-            &copy; {currentYear} All rights reserved. Designed & built by <span className="highlight">Your Name</span>
+            &copy; {currentYear} All rights reserved. Designed & built by <span className="highlight">Rathana SOKHA</span>
           </p>
           <div className="footer-bottom-links">
             <a href="#" className="footer-bottom-link">Privacy Policy</a>
