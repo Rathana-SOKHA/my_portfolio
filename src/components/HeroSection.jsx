@@ -68,7 +68,7 @@ export default function HeroSection() {
           {/* Main Text Content */}
           <div className="hero-text">
             <h1 className="hero-title">
-              Hi, I'm <span className="highlight">Rathana SOKHA</span>
+              Hi, I'm <span className="highlight">RATHANA</span>
             </h1>
             <h1 className="hero-title hero-title-role">
               I'm{" "}

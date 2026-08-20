@@ -55,6 +55,20 @@ const vscodeLogo = `data:image/svg+xml,${encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="vs" x1="20.452" y1="7.542" x2="106.118" y2="120.362" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0065A9"/><stop offset="1" stop-color="#007ACC"/></linearGradient></defs><path fill="url(#vs)" d="M95.19 2.188a9.544 9.544 0 00-6.137 1.233L86.9 4.474l1.455 1.08-37.714 30.377L36.643 48.41a8.05 8.05 0 00-3.558 6.256v.007c0 2.28 1.005 4.416 2.734 5.887l5.115 4.326-6.128 4.696a6.12 6.12 0 00-2.686 4.954c0 2.145 1.07 4.104 2.85 5.376l1.19.852-1.243.953c-1.786 1.366-2.856 3.35-2.856 5.502 0 2.192 1.051 4.188 2.787 5.546l11.616 8.74-37.946 30.45 1.455 1.08 2.145-1.536c1.943-1.39 4.362-2.018 6.78-2.018a9.65 9.65 0 016.136 2.018l90.366-67.647c2.474-1.855 3.756-4.8 3.756-7.872V90.336l.003-.294c0-3.106-1.268-6.083-3.74-7.938L49.59 30.506l3.557-2.803 38.647-31.085-2.154-1.592h.002c-1.796-1.266-3.983-1.947-6.206-1.947l.002.002h.002c.296 0 .592.01.887.03"/></svg>`
 )}`;
 
+// ─── Import SVG files ───────────────────────────────────────────────
+import reactImg from "../assets/skills/react.svg";
+import vueImg from "../assets/skills/vue.svg";
+import tailwindImg from "../assets/skills/tailwind.svg";
+import laravelImg from "../assets/skills/laravel.svg";
+import pythonImg from "../assets/skills/python.svg";
+
+// ─── Java Logo (inline) ───────────────────────────────────────────────
+const javaLogo =
+  "data:image/svg+xml," +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="jv1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f89820"/><stop offset="1" stop-color="#ed8b00"/></linearGradient></defs><path fill="url(#jv1)" d="M47.6 19.7L25.2 65.1c5.4 9.5 11.9 17.7 19.6 23.3l22.4-45.4c-2.4-3.9-6.3-6.5-10.8-7.2L47.6 19.7zm-5.3 68.2c8.3 5.8 17.3 10.1 26.8 12.7l7.1-14.5c-6.2-1.7-12.1-4.8-17.2-9.3l-16.7 11.1zm52.5-29.8L76.7 16.5c-1.4-.8-3-.1-3.4 1.4l-1.1 4.8 22.5 19.3-2.2 2.2-22.1-16.3-13.6 27.7 22.5 19.3c-1.3 2.8-2.5 5.6-3.5 8.5l1.7 1.7 24.5-17c3.4-2.4 5.3-6.4 5.3-10.6.1-4.2-1.8-8.2-5.2-10.5z"/><path fill="#5382a1" d="M73.2 31.1L50.8 76.5c5.4 9.5 11.9 17.7 19.6 23.3l22.4-45.4c-2.4-3.9-6.3-6.5-10.8-7.2L73.2 31.1zm-5.3 68.2c8.3 5.8 17.3 10.1 26.8 12.7l7.1-14.5c-6.2-1.7-12.1-4.8-17.2-9.3L67.9 99.3z"/></svg>'
+  );
+
 // ─── Data ───────────────────────────────────────────────────────────
 
 const skillCategories = [
@@ -78,6 +92,8 @@ const skillCategories = [
       { name: "Laravel", icon: "laravel", proficiency: 85, color: "#FF2D20", glow: "rgba(255,45,32,0.35)" },
       { name: "Node.js", icon: nodejsLogo, proficiency: 75, color: "#67BA67", glow: "rgba(103,186,103,0.35)" },
       { name: "OOP (TypeScript)", icon: typescriptLogo, proficiency: 85, color: "#3178C6", glow: "rgba(49,120,198,0.35)" },
+      { name: "Python", icon: pythonImg, proficiency: 50, color: "#3776AB", glow: "rgba(55,118,171,0.35)" },
+      { name: "Java", icon: javaLogo, proficiency: 50, color: "#ED8B00", glow: "rgba(237,139,0,0.35)" },
     ],
   },
   {
@@ -101,17 +117,13 @@ const skillCategories = [
   },
 ];
 
-// For skills that use imported SVGs
-import reactImg from "../assets/skills/react.svg";
-import vueImg from "../assets/skills/vue.svg";
-import tailwindImg from "../assets/skills/tailwind.svg";
-import laravelImg from "../assets/skills/laravel.svg";
-
 const svgMap = {
   react: reactImg,
   vue: vueImg,
   tailwind: tailwindImg,
   laravel: laravelImg,
+  python: pythonImg,
+  java: javaLogo,
 };
 
 const Skills = () => {

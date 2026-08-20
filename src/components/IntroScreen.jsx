@@ -30,7 +30,7 @@ const IntroScreen = ({ onComplete }) => {
     <div className={`intro-screen ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="intro-content">
         <div className={`intro-text ${textVisible ? 'animate' : ''}`}>
-          <h1 className="intro-name">Rathana</h1>
+          <h1 className="intro-name">RATHANA</h1>
           <h1 className="intro-name intro-lastname">SOKHA</h1>
           <div className="intro-line"></div>
           <p className="intro-subtitle">Full Stack Developer</p>

@@ -7,7 +7,10 @@ import cleanImage from '../assets/projects/clean.png';
 import pncImage from '../assets/projects/pnc_life.png';
 import folioImage from '../assets/projects/folio.png';
 import folioNowImage from '../assets/projects/folio_now.png';
-import pncSelectionImage from "../assets/projects/pncSelection.png"
+import pncSelectionImage from "../assets/projects/pncSelection.png";
+import ecommerceImage from "../assets/projects/ecommerce.png";
+import elearningImage from "../assets/projects/elearning.png";
+
 
 const Projects = () => {
   const projects = [
@@ -15,37 +18,37 @@ const Projects = () => {
       id: 1,
       title: 'PNC Student Selection Management System',
       description: 'A full-stack web application designed to help manage and streamline the student selection process for Passerelles Numériques Cambodia (PNC).',
-      tech: ['Laravel', 'Vue.js', 'MySQL', 'Tailwind CSS'],
+      tech: ['Laravel', 'Vue.js', 'MySQL', 'TypeScript'],
       link: 'https://somaet.website/',
       github: 'https://github.com/Rathana-SOKHA/pnc-selection-system',
       image: pncSelectionImage
     },
     {
       id: 2,
-      title: 'E-Commerce Platform',
-      description: 'A collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features for enhanced productivity.',
-      tech: ['Laravel', 'Vue.js', 'MySQL'],
-      link: 'https://music-player-mauve-six.vercel.app/',
+      title: 'E-Commerce Website',
+      description: 'A full-stack e-commerce website with product browsing, wishlist, cart, checkout, and admin management panel. Supports QR Code & Cash on Delivery, with Telegram Bot order notifications.',
+      tech: ['Laravel', 'Vue.js', 'MySQL', 'OAuth'],
+      link: '#',
       github: '#',
-      image: projectImage
+      image: ecommerceImage                
     },
     {
       id: 3,
-      title: 'Food Delivery App',
+      title: 'E-Learning Management System',
+      description: 'A full-stack e-learning platform for managing courses, students, lessons, and learning activities with secure authentication and role-based access.',
+      tech: ['Node.js', 'Vue.js', 'MySQL', 'TypeScript'],
+      link: '',
+      github: '#',
+      image: elearningImage
+    },
+    {
+      id: 4,
+      title: 'Food Delivery Website              ',
       description: 'A responsive food delivery web application where users can explore meals, browse menus, and order their favorite food online with a simple and user-friendly interfact.',
       tech: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
       link: 'https://food-webiste-seven.vercel.app/',
       github: '#',
       image: foodImage
-    },
-    {
-      id: 4,
-      title: 'PNC Student Life',
-      description: 'A modern, fully responsive portfolio website showcasing projects and skills. Features smooth scrolling, animations, and SEO optimization for maximum visibility.',
-      tech: ['HTML', 'CSS'],
-      link: 'https://pnc-student-life.vercel.app/',
-      github: '#',
-      image: pncImage
     },
     {
       id: 5,
@@ -58,10 +61,10 @@ const Projects = () => {
     },
     {
       id: 6,
-      title: 'E_Learning Management System',
+      title: 'PNC Student Life',
       description: 'A sleek streaming application interface with video player, recommendations engine, and user-friendly navigation. Optimized for all device sizes.',
       tech: ['Node.js', 'Vue.js', 'MySQL'],
-      link: 'https://my-portfolio-sooty-sigma-90.vercel.app/',
+      link: 'https://pnc-student-life.vercel.app/',
       github: 'https://github.com/Rathana-SOKHA/my_portfolio',
       image: folioNowImage
     },
