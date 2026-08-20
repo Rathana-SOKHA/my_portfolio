@@ -39,9 +39,9 @@ const Contact = () => {
   ];
 
   const contactInfo = [
-    { icon: '📧', title: 'Email', value: 'rathana.sokha@student.passerellesnumeriques.org', link: 'mailto:your.email@example.com' },
-    { icon: '📱', title: 'Phone', value: '+1 (555) 123-4567', link: 'tel:+15551234567' },
-    { icon: '📍', title: 'Location', value: '', link: '#' }
+    { icon: 'fas fa-envelope', title: 'Email', value: 'rathanasokha26@gmail.com', link: 'mailto:rathanasokha26@gmail.com' },
+    { icon: 'fas fa-phone', title: 'Phone', value: '0889920309', link: 'tel:+855889920309' },
+    { icon: 'fas fa-location-dot', title: 'Location', value: 'Street371, Phum Tropeang Chhuk, Sangkat Tek Thla, Khan Sen Sok, Phnom Penh', link: '#' }
   ];
 
   return (
@@ -61,7 +61,7 @@ const Contact = () => {
             <div className="contact-info-grid">
               {contactInfo.map((info, index) => (
                 <a key={index} href={info.link} className="contact-info-card">
-                  <div className="info-icon">{info.icon}</div>
+                  <div className="info-icon"><i className={info.icon}></i></div>
                   <h4 className="info-title-small">{info.title}</h4>
                   <p className="info-value">{info.value}</p>
                 </a>
