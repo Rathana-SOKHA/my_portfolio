@@ -55,7 +55,9 @@ function App() {
           <Projects />
         </ScrollReveal>
         
-        <Education />
+        <ScrollReveal animation="fade-up" delay={100} duration={800}>
+          <Education />
+        </ScrollReveal>
         
         <ScrollReveal animation="fade-up" delay={100} duration={800}>
           <Contact />

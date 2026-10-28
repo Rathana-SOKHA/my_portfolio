@@ -17,6 +17,7 @@ const projects = [
     id: 1,
     code: "PROJ_01",
     type: "FULL_STACK",
+    category: "FULL_STACK",
     title: 'PNC Student Selection Management System',
     description: 'A full-stack web application designed to help manage and streamline the student selection process for Passerelles Numériques Cambodia (PNC).',
     tech: ['Laravel', 'Vue.js', 'MySQL', 'TypeScript'],
@@ -31,6 +32,7 @@ const projects = [
     id: 2,
     code: "PROJ_02",
     type: "E-COMMERCE",
+    category: "FULL_STACK",
     title: 'E-Commerce Platform & Order System',
     description: 'A full-stack e-commerce solution with product browsing, wishlist, cart, checkout, admin management panel, QR Code payment, and Telegram Bot order notifications.',
     tech: ['Laravel', 'Vue.js', 'MySQL', 'OAuth'],
@@ -45,6 +47,7 @@ const projects = [
     id: 3,
     code: "PROJ_03",
     type: "EDTECH",
+    category: "FULL_STACK",
     title: 'E-Learning Management System',
     description: 'A full-stack e-learning platform for managing courses, students, lessons, and learning activities with secure authentication and role-based access control.',
     tech: ['Node.js', 'Vue.js', 'MySQL', 'TypeScript'],
@@ -59,6 +62,7 @@ const projects = [
     id: 4,
     code: "PROJ_04",
     type: "WEB_APP",
+    category: "FRONTEND",
     title: 'Food Delivery Web App',
     description: 'A responsive food delivery web application where users can explore meals, browse menus, and order their favorite food online with a simple, fluid interface.',
     tech: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
@@ -70,6 +74,7 @@ const projects = [
     id: 5,
     code: "PROJ_05",
     type: "MULTIMEDIA",
+    category: "FRONTEND",
     title: 'Music Player Web Application',
     description: 'A responsive music player web app with smooth playback, track navigation, volume control, playlist history, and clean audio visual controls.',
     tech: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
@@ -81,6 +86,7 @@ const projects = [
     id: 6,
     code: "PROJ_06",
     type: "COMMUNITY",
+    category: "FRONTEND",
     title: 'PNC Student Life Portal',
     description: 'A student community website showcasing PNC Cambodia’s student life, activities, events, and campus experience through a clean, responsive interface.',
     tech: ['HTML', 'CSS', 'SASS'],
@@ -92,13 +98,41 @@ const projects = [
 
 export default function Projects() {
   const hasValidLink = (link) => link && link !== '#' && link.trim() !== '';
+  const projectFilters = [
+    { id: 'ALL', label: 'ALL PROJECTS' },
+    { id: 'FULL_STACK', label: 'FULL STACK' },
+    { id: 'FRONTEND', label: 'WEB APPS' },
+  ];
 
   // Pagination
   const projectsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const [activeFilter, setActiveFilter] = useState('ALL');
+  const [searchQuery, setSearchQuery] = useState('');
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filteredProjects = projects.filter((project) => {
+    const matchesCategory = activeFilter === 'ALL' || project.category === activeFilter;
+    const searchableText = [
+      project.title,
+      project.description,
+      project.type,
+      ...project.tech,
+    ].join(' ').toLowerCase();
+    return matchesCategory && searchableText.includes(normalizedQuery);
+  });
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const startIndex = (currentPage - 1) * projectsPerPage;
-  const currentProjects = projects.slice(startIndex, startIndex + projectsPerPage);
+  const currentProjects = filteredProjects.slice(startIndex, startIndex + projectsPerPage);
+
+  const selectFilter = (filter) => {
+    setActiveFilter(filter);
+    setCurrentPage(1);
+  };
+
+  const updateSearchQuery = (event) => {
+    setSearchQuery(event.target.value);
+    setCurrentPage(1);
+  };
 
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
@@ -158,8 +192,49 @@ export default function Projects() {
           FEATURED <span className="title-orange">PROJECTS</span>
         </h2>
 
+        <div className="projects-controls">
+          <div className="projects-filter-list" role="group" aria-label="Filter projects by category">
+            {projectFilters.map((filter) => {
+              const count = filter.id === 'ALL'
+                ? projects.length
+                : projects.filter((project) => project.category === filter.id).length;
+
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  className={`projects-filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
+                  onClick={() => selectFilter(filter.id)}
+                  aria-pressed={activeFilter === filter.id}
+                >
+                  <span>{filter.label}</span>
+                  <span className="projects-filter-count">{count.toString().padStart(2, '0')}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <label className="projects-search">
+            <svg className="projects-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="10.8" cy="10.8" r="6.8" />
+              <path d="m16 16 4.2 4.2" />
+            </svg>
+            <span className="visually-hidden">Search projects by name or technology</span>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={updateSearchQuery}
+              placeholder="SEARCH PROJECTS..."
+            />
+          </label>
+        </div>
+
+        <p className="projects-results-count" aria-live="polite">
+          SHOWING <span>{currentProjects.length}</span> OF <span>{filteredProjects.length}</span> PROJECTS
+        </p>
+
         {/* Projects Grid */}
-        <div className="projects-grid">
+        <div className="projects-grid" aria-live="polite">
           {currentProjects.map((project, index) => (
             <ScrollReveal
               key={project.id}
@@ -260,6 +335,11 @@ export default function Projects() {
               </article>
             </ScrollReveal>
           ))}
+          {currentProjects.length === 0 && (
+            <p className="projects-empty-state">
+              NO PROJECTS MATCH THAT SEARCH. TRY ANOTHER KEYWORD.
+            </p>
+          )}
         </div>
 
         {/* Cyber Pagination */}

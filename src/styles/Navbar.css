@@ -208,7 +208,6 @@
   font-weight: 400;
   transition: color 0.25s ease;
 }
-}
 
 .nav-item-slash {
   color: var(--accent-color);
@@ -219,12 +218,18 @@
 }
 
 .nav-item-label {
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.25s ease;
 }
 
 /* Hover & Active States */
 .cyber-nav-link:hover {
   color: var(--text-primary);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cyber-nav-link:hover .nav-item-label {
+    transform: translateX(2px);
+  }
 }
 
 .cyber-nav-link:hover .nav-item-num {

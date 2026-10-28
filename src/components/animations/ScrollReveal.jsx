@@ -1,113 +1,48 @@
-import { useEffect, useRef, useState } from 'react';
+import { createElement } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 const ScrollReveal = ({
   children,
-  className = '',
-  animation = 'fade-up',
+  className = "",
+  animation = "fade-up",
   delay = 0,
   duration = 700,
   threshold = 0.15,
   once = true,
-  distance = '60px',
+  distance = "36px",
   style = {},
 }) => {
-  const ref = useRef(null);
-  const [prefersReducedMotion] = useState(
-    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-  const [isVisible, setIsVisible] = useState(
-    () => prefersReducedMotion || !("IntersectionObserver" in window)
-  );
-
-  useEffect(() => {
-    if (prefersReducedMotion || !("IntersectionObserver" in window)) return;
-
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (once) {
-            observer.unobserve(element);
-          }
-        } else if (!once) {
-          setIsVisible(false);
-        }
-      },
-      { threshold }
-    );
-
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [threshold, once, prefersReducedMotion]);
-
-  const animationStyles = {
-    opacity: isVisible || prefersReducedMotion ? 1 : 0,
-    transform: prefersReducedMotion ? 'none' : 'translateY(0)',
-    transition: prefersReducedMotion
-      ? 'none'
-      : `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1), transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`,
-    transitionDelay: `${delay}ms`,
-    ...style,
+  const shouldReduceMotion = useReducedMotion();
+  const initial = {
+    opacity: 0,
+    x: 0,
+    y: 0,
+    scale: 1,
   };
 
-  if (prefersReducedMotion) {
-    animationStyles.opacity = 1;
-    animationStyles.transform = 'none';
-  } else if (isVisible) {
-    animationStyles.opacity = 1;
-    switch (animation) {
-      case 'fade-up':
-        animationStyles.transform = 'translateY(0)';
-        break;
-      case 'fade-down':
-        animationStyles.transform = 'translateY(0)';
-        break;
-      case 'fade-left':
-        animationStyles.transform = 'translateX(0)';
-        break;
-      case 'fade-right':
-        animationStyles.transform = 'translateX(0)';
-        break;
-      case 'zoom-in':
-        animationStyles.transform = 'scale(1)';
-        break;
-      default:
-        animationStyles.transform = 'translateY(0)';
-    }
-  } else {
-    switch (animation) {
-      case 'fade-up':
-        animationStyles.transform = `translateY(${distance})`;
-        break;
-      case 'fade-down':
-        animationStyles.transform = `translateY(-${distance})`;
-        break;
-      case 'fade-left':
-        animationStyles.transform = `translateX(${distance})`;
-        break;
-      case 'fade-right':
-        animationStyles.transform = `translateX(-${distance})`;
-        break;
-      case 'zoom-in':
-        animationStyles.transform = 'scale(0.85)';
-        break;
-      default:
-        animationStyles.transform = `translateY(${distance})`;
-    }
-  }
+  if (animation === "fade-up") initial.y = distance;
+  else if (animation === "fade-down") initial.y = `-${distance}`;
+  else if (animation === "fade-left") initial.x = distance;
+  else if (animation === "fade-right") initial.x = `-${distance}`;
+  else if (animation === "zoom-in") initial.scale = 0.85;
 
-  return (
-    <div
-      ref={ref}
-      className={`scroll-reveal ${className} ${isVisible ? 'scroll-reveal-visible' : ''}`}
-      style={animationStyles}
-    >
-      {children}
-    </div>
+  return createElement(
+    motion.div,
+    {
+      className: `scroll-reveal ${className}`,
+      initial: shouldReduceMotion ? false : initial,
+      whileInView: shouldReduceMotion
+        ? undefined
+        : { opacity: 1, x: 0, y: 0, scale: 1 },
+      viewport: { once, amount: threshold },
+      transition: {
+        duration: duration / 1000,
+        delay: delay / 1000,
+        ease: [0.22, 1, 0.36, 1],
+      },
+      style,
+    },
+    children
   );
 };
 

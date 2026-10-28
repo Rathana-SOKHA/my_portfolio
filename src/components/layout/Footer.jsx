@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/Footer.css';
+import ScrollReveal from '../animations/ScrollReveal';
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -34,7 +35,8 @@ export default function Footer() {
     <footer className="cyber-footer">
       <div className="footer-top-line" aria-hidden="true" />
 
-      <div className="cyber-footer-container">
+      <ScrollReveal animation="fade-up" duration={800} threshold={0.1}>
+        <div className="cyber-footer-container">
         {/* Main Footer Row */}
         <div className="footer-hud-grid">
           {/* Brand Col */}
@@ -49,7 +51,7 @@ export default function Footer() {
             <p className="footer-tagline">
               BUILDING DIGITAL SOLUTIONS THAT MAKE AN IMPACT. CLEAN CODE. SMART DESIGN. BETTER EXPERIENCES.
             </p>
-          </div>
+            </div>
 
           {/* Quick Links */}
           <div className="footer-nav-col">
@@ -106,6 +108,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      </ScrollReveal>
 
       {/* Cyber Back to Top Button */}
       {showBackToTop && (
