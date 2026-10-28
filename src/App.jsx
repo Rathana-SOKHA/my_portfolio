@@ -39,7 +39,7 @@ function App() {
       <IntroScreen onComplete={handleIntroComplete} />
       <div style={{ opacity: showIntro ? 0 : 1, transition: 'opacity 0.5s ease' }}>
         <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <HeroSection />
+        <HeroSection isActive={!showIntro} />
         
         <ScrollReveal animation="fade-up" delay={100} duration={800}>
           <About />

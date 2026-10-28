@@ -1,15 +1,87 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/HeroSection.css";
 import profileCutout from "../assets/profile-cutout.png";
 
-const roleText = "FULL-STACK  ---  DEVELOPER";
+const roleWords = ["FULL-STACK​​  -","-  DEVELOPER"];
 
-export default function HeroSection() {
+export default function HeroSection({ isActive = true }) {
   const cvFilePath = "/CV & CL Rathana SOKHA.pdf";
   const [activeDot, setActiveDot] = useState(0);
+  const [isRoleVisible, setIsRoleVisible] = useState(false);
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    if (!isActive) return;
+
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    if (!("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsRoleVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [isActive]);
+
+  useEffect(() => {
+    if (!isRoleVisible) return;
+
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    const updateScrollProgress = () => {
+      const { top, height } = hero.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -top / (height * 0.75)));
+      hero.style.setProperty("--first-word-offset", `${-progress * 80}px`);
+      hero.style.setProperty("--second-word-offset", `${progress * 80}px`);
+      hero.style.setProperty("--portrait-scale", `${1 + progress * 0.08}`);
+      hero.style.setProperty("--portrait-opacity", `${1 - progress}`);
+    };
+
+    updateScrollProgress();
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const updateSpotlight = (event) => {
+      if (event.pointerType !== "mouse") return;
+      const bounds = hero.getBoundingClientRect();
+      hero.style.setProperty(
+        "--spotlight-offset-x",
+        `${event.clientX - bounds.left - bounds.width / 2}px`
+      );
+      hero.style.setProperty(
+        "--spotlight-offset-y",
+        `${event.clientY - bounds.top - bounds.height * 0.45}px`
+      );
+    };
+
+    if (canHover) hero.addEventListener("pointermove", updateSpotlight);
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollProgress);
+      if (canHover) hero.removeEventListener("pointermove", updateSpotlight);
+    };
+  }, [isRoleVisible]);
 
   return (
-    <section className="cyber-hero" id="home">
+    <section
+      className={`cyber-hero${isRoleVisible ? " is-visible" : ""}`}
+      id="home"
+      ref={heroRef}
+    >
       {/* Background Ambience & Cyber Grid */}
       <div className="cyber-bg-atmosphere" />
       <div className="cyber-grid-lines" />
@@ -20,20 +92,42 @@ export default function HeroSection() {
 
       {/* ================= CENTER STAGE: GIANT TYPOGRAPHY + CUTOUT + SIGNATURE ================= */}
       <div className="center-stage">
-        <div className="giant-role-marquee" aria-hidden="true">
+        <div
+          className={`giant-role-marquee${isRoleVisible ? " is-visible" : ""}`}
+          aria-hidden="true"
+        >
           <div className="giant-role-marquee-track">
-            <span>{roleText}</span>
+            <span>
+              {roleWords.map((word, wordIndex) => (
+                <React.Fragment key={word}>
+                  <span className={`role-word role-word--${wordIndex === 0 ? "first" : "second"}`}>
+                    {Array.from(word, (letter, letterIndex) => (
+                      <span
+                        className="role-letter"
+                        key={letterIndex}
+                        style={{ "--letter-index": wordIndex * 11 + letterIndex }}
+                      >
+                        {letter}
+                      </span>
+                    ))}
+                  </span>
+                  {wordIndex === 0 && "\u00a0"}
+                </React.Fragment>
+              ))}
+            </span>
           </div>
         </div>
 
         {/* Portrait of SOKHA Rathana */}
         <div className="portrait-container">
           <div className="portrait-halo" />
-          <img
-            src={profileCutout}
-            alt="SOKHA Rathana - Full Stack Developer"
-            className="portrait-cutout-img"
-          />
+          <div className="portrait-scroll-effect">
+            <img
+              src={profileCutout}
+              alt="SOKHA Rathana - Full Stack Developer"
+              className="portrait-cutout-img"
+            />
+          </div>
 
         </div>
       </div>

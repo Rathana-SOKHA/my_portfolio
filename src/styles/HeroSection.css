@@ -19,6 +19,32 @@
   user-select: none;
 }
 
+.cyber-hero::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 760px;
+  height: 760px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 84, 25, 0.13),
+    transparent 72%
+  );
+  transform: translate(-50%, -50%)
+    translate(var(--spotlight-offset-x, 0px), var(--spotlight-offset-y, 0px));
+  transition: opacity 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cyber-hero.is-visible::before {
+    opacity: 1;
+  }
+}
+
 /* ---------------- Atmospheric Background Layers ---------------- */
 .cyber-bg-atmosphere {
   position: absolute;
@@ -108,7 +134,7 @@
   will-change: auto;
 }
 
-.giant-role-marquee-track span {
+.giant-role-marquee-track > span {
   flex: 0 1 auto;
   max-width: 100%;
   font-family: 'Montserrat', 'Poppins', sans-serif;
@@ -125,6 +151,48 @@
     0 0 100px rgba(255, 255, 255, 0.04);
 }
 
+.role-word {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.role-word--first {
+  transform: translateX(var(--first-word-offset, 0px));
+}
+
+.role-word--second {
+  transform: translateX(var(--second-word-offset, 0px));
+}
+
+.role-letter {
+  display: inline-block;
+  pointer-events: auto;
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cyber-hero.is-visible .role-letter:hover {
+    transform: translateY(-10px);
+    text-shadow: 0 0 12px rgba(255, 84, 25, 0.85);
+  }
+}
+
+.giant-role-marquee.is-visible .role-letter {
+  animation: role-letter-drop 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.75s + var(--letter-index) * 0.075s);
+}
+
+@keyframes role-letter-drop {
+  from {
+    opacity: 0;
+    translate: 0 -0.75em;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
 /* Center Cutout Portrait Container */
 .portrait-container {
   position: relative;
@@ -136,6 +204,29 @@
   max-width: 650px;
   width: 100%;
   pointer-events: auto;
+}
+
+.portrait-scroll-effect {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  transform: scale(var(--portrait-scale, 1));
+  transform-origin: center bottom;
+  opacity: var(--portrait-opacity, 1);
+}
+
+.cyber-hero.is-visible .portrait-container {
+  animation: portrait-float 5s ease-in-out 0.8s infinite;
+}
+
+@keyframes portrait-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* Subtle Backlight Behind Rathana */
@@ -153,10 +244,24 @@
   z-index: -1;
 }
 
+.cyber-hero.is-visible .portrait-halo {
+  animation: portrait-glow-pulse 4s ease-in-out 0.8s infinite;
+}
+
+@keyframes portrait-glow-pulse {
+  0%, 100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* Rathana's High-Res Cutout Image */
 .portrait-cutout-img {
   display: block;
   max-height: 100%;
+  max-width: 100%;
   width: auto;
   object-fit: contain;
   object-position: bottom center;
@@ -166,8 +271,21 @@
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.portrait-cutout-img:hover {
-  transform: scale(1.015);
+.cyber-hero.is-visible .portrait-cutout-img {
+  animation: portrait-entrance 0.8s ease-out both;
+}
+
+@keyframes portrait-entrance {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
 }
 
 /* ==========================================================================
@@ -490,22 +608,31 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 84, 25, 0.25), transparent);
-  transition: left 0.5s ease;
+  transform: translateX(-110%);
+  transition: transform 0.5s ease;
 }
 
-.cyber-btn-primary:hover::before {
-  left: 100%;
+.btn-text,
+.btn-arrow {
+  position: relative;
+  z-index: 1;
 }
 
-.cyber-btn-primary:hover {
-  background: #ff5419;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(255, 84, 25, 0.6);
+@media (hover: hover) and (pointer: fine) {
+  .cyber-hero.is-visible .cyber-btn-primary:hover::before {
+    transform: translateX(110%);
+  }
+
+  .cyber-hero.is-visible .cyber-btn-primary:hover {
+    background: #ff5419;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(255, 84, 25, 0.6);
+  }
 }
 
 .btn-arrow {
@@ -514,9 +641,11 @@
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.cyber-btn-primary:hover .btn-arrow {
-  color: #ffffff;
-  transform: translateX(4px);
+@media (hover: hover) and (pointer: fine) {
+  .cyber-hero.is-visible .cyber-btn-primary:hover .btn-arrow {
+    color: #ffffff;
+    transform: translateX(4px);
+  }
 }
 
 /* Quick Resume & Social Access */
@@ -549,12 +678,6 @@
   flex-shrink: 0;
 }
 
-.quick-cv-link:hover {
-  background: rgba(255, 84, 25, 0.15);
-  border-color: #ff5419;
-  color: #ff8a50;
-}
-
 .quick-social-icons {
   display: flex;
   gap: 8px;
@@ -581,18 +704,27 @@
   transition: transform 0.2s ease;
 }
 
-.quick-social-link:hover {
-  background: #ff5419;
-  border-color: #ff5419;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 84, 25, 0.4);
-}
+@media (hover: hover) and (pointer: fine) {
+  .cyber-hero.is-visible .quick-cv-link:hover {
+    background: rgba(255, 84, 25, 0.15);
+    border-color: #ff5419;
+    color: #ff8a50;
+    transform: translateY(-2px);
+  }
 
-.quick-social-link:hover svg,
-.quick-social-link:hover i {
-  color: #ffffff;
-  transform: scale(1.1);
+  .cyber-hero.is-visible .quick-social-link:hover {
+    background: #ff5419;
+    border-color: #ff5419;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 84, 25, 0.4);
+  }
+
+  .cyber-hero.is-visible .quick-social-link:hover svg,
+  .cyber-hero.is-visible .quick-social-link:hover i {
+    color: #ffffff;
+    transform: scale(1.1);
+  }
 }
 
 /* Radio Indicator Dots */
@@ -810,7 +942,7 @@
     top: 44%;
   }
 
-  .giant-role-marquee-track span {
+  .giant-role-marquee-track > span {
     font-size: clamp(1.25rem, 5vw, 4rem);
   }
 
@@ -939,7 +1071,7 @@
     top: 40%;
   }
 
-  .giant-role-marquee-track span {
+  .giant-role-marquee-track > span {
     font-size: clamp(1.1rem, 5vw, 2.8rem);
   }
 
@@ -985,7 +1117,7 @@
     top: 38%;
   }
 
-  .giant-role-marquee-track span {
+  .giant-role-marquee-track > span {
     font-size: clamp(1rem, 5vw, 2.4rem);
   }
 
@@ -1142,12 +1274,21 @@
 }
 
 /* Keep the role text readable in light mode */
-[data-theme="light"] .giant-role-marquee-track span {
+[data-theme="light"] .giant-role-marquee-track > span {
   color: #050608;
   -webkit-text-stroke: none;
   text-shadow:
     0 15px 40px rgba(0, 0, 0, 0.16),
     0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber-hero *,
+  .cyber-hero *::before,
+  .cyber-hero *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* Cutout backlight & rim light in light mode */
@@ -1214,12 +1355,6 @@
   box-shadow: 0 6px 20px rgba(255, 84, 25, 0.25);
 }
 
-[data-theme="light"] .cyber-btn-primary:hover {
-  background: #ff5419;
-  color: #ffffff;
-  box-shadow: 0 8px 25px rgba(255, 84, 25, 0.5);
-}
-
 /* Quick access links */
 [data-theme="light"] .quick-cv-link {
   background: rgba(255, 255, 255, 0.95);
@@ -1230,12 +1365,6 @@
 
 [data-theme="light"] .quick-cv-link svg,
 [data-theme="light"] .quick-cv-link i {
-  color: #ff5419;
-}
-
-[data-theme="light"] .quick-cv-link:hover {
-  background: rgba(255, 84, 25, 0.1);
-  border-color: #ff5419;
   color: #ff5419;
 }
 
@@ -1251,15 +1380,29 @@
   color: #0f172a;
 }
 
-[data-theme="light"] .quick-social-link:hover {
-  background: #ff5419;
-  border-color: #ff5419;
-  color: #ffffff;
-}
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="light"] .cyber-hero.is-visible .cyber-btn-primary:hover {
+    background: #ff5419;
+    color: #ffffff;
+    box-shadow: 0 8px 25px rgba(255, 84, 25, 0.5);
+  }
 
-[data-theme="light"] .quick-social-link:hover svg,
-[data-theme="light"] .quick-social-link:hover i {
-  color: #ffffff;
+  [data-theme="light"] .cyber-hero.is-visible .quick-cv-link:hover {
+    background: rgba(255, 84, 25, 0.1);
+    border-color: #ff5419;
+    color: #ff5419;
+  }
+
+  [data-theme="light"] .cyber-hero.is-visible .quick-social-link:hover {
+    background: #ff5419;
+    border-color: #ff5419;
+    color: #ffffff;
+  }
+
+  [data-theme="light"] .cyber-hero.is-visible .quick-social-link:hover svg,
+  [data-theme="light"] .cyber-hero.is-visible .quick-social-link:hover i {
+    color: #ffffff;
+  }
 }
 
 [data-theme="light"] .indicator-dot {
