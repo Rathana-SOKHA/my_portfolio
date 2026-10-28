@@ -249,7 +249,7 @@
 }
 
 /* ==========================================================================
-   TOP-LEFT HUD SECTION
+   TOP HUD DETAILS
    ========================================================================== */
 .hud-top-left {
   display: flex;
@@ -295,53 +295,12 @@
   white-space: nowrap;
 }
 
-.hud-role-strip {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.orange-dash {
-  color: #ff5419;
-  font-size: 1.4rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.hud-role-text {
-  font-family: 'Space Mono', 'Poppins', monospace;
-  font-size: clamp(0.85rem, 1.1vw, 1.05rem);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: #ffffff;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-}
-
-.cursor-blink {
-  color: #ff5419;
-  margin-left: 4px;
-  font-weight: 300;
-  animation: cyberCursor 0.9s infinite ease-in-out;
-}
-
-@keyframes cyberCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ==========================================================================
-   TOP-RIGHT HUD SECTION
-   ========================================================================== */
 .hud-top-right {
   display: flex;
   align-items: center;
   gap: 28px;
 }
 
-/* Bracketed Status Badge */
 .hud-status-badge {
   position: relative;
   padding: 9px 18px;
@@ -386,10 +345,7 @@
     transform: scale(0.6);
     opacity: 0.9;
   }
-  70% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
+  70%,
   100% {
     transform: scale(2.2);
     opacity: 0;
@@ -405,7 +361,6 @@
   text-transform: uppercase;
 }
 
-/* 4x3 Dot Matrix */
 .hud-dot-matrix {
   display: flex;
   flex-direction: column;
@@ -809,7 +764,7 @@
     overflow: hidden;
   }
 
-  /* Allow top and bottom HUD rows to flow around center-stage */
+  /* Let HUD rows and the center stage flow on smaller screens */
   .hud-layer {
     display: contents;
   }
@@ -976,15 +931,6 @@
     white-space: normal;
   }
 
-  .hud-role-strip {
-    margin-top: 2px;
-  }
-
-  .hud-role-text {
-    font-size: 0.88rem;
-    letter-spacing: 0.12em;
-  }
-
   .center-stage {
     margin: 20px auto 15px;
   }
@@ -1033,6 +979,14 @@
     width: 40px;
     height: 40px;
     font-size: 0.8rem;
+  }
+
+  .giant-role-marquee {
+    top: 38%;
+  }
+
+  .giant-role-marquee-track span {
+    font-size: clamp(1rem, 5vw, 2.4rem);
   }
 
   .code-features-list {
@@ -1102,17 +1056,7 @@
     font-size: 0.64rem;
   }
 
-  .hud-role-text {
-    font-size: 0.8rem;
-  }
 
-  .giant-role-marquee {
-    top: 38%;
-  }
-
-  .giant-role-marquee-track span {
-    font-size: clamp(1rem, 5vw, 2.4rem);
-  }
 
   .portrait-container {
     height: 300px;
@@ -1197,7 +1141,7 @@
   background: linear-gradient(to right, transparent, rgba(15, 23, 42, 0.1), transparent);
 }
 
-/* Keep the scrolling role text readable in light mode */
+/* Keep the role text readable in light mode */
 [data-theme="light"] .giant-role-marquee-track span {
   color: #050608;
   -webkit-text-stroke: none;
@@ -1221,7 +1165,7 @@
   border-color: rgba(15, 23, 42, 0.25);
 }
 
-/* Top left mission text & role */
+/* Top HUD details */
 [data-theme="light"] .hud-mission-text {
   color: #475569;
 }
@@ -1230,16 +1174,6 @@
   color: rgba(15, 23, 42, 0.25);
 }
 
-[data-theme="light"] .hud-role-strip {
-  background: rgba(255, 84, 25, 0.08);
-  border-color: rgba(255, 84, 25, 0.35);
-}
-
-[data-theme="light"] .hud-role-text {
-  color: #0f172a;
-}
-
-/* Top right status badge */
 [data-theme="light"] .hud-status-badge {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(0, 0, 0, 0.1);

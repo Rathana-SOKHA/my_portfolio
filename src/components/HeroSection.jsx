@@ -20,7 +20,6 @@ export default function HeroSection() {
 
       {/* ================= CENTER STAGE: GIANT TYPOGRAPHY + CUTOUT + SIGNATURE ================= */}
       <div className="center-stage">
-        {/* Hero text in the background */}
         <div className="giant-role-marquee" aria-hidden="true">
           <div className="giant-role-marquee-track">
             <span>{roleText}</span>
@@ -39,11 +38,9 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ================= HUD OVERLAY CORNERS ================= */}
+      {/* ================= HUD OVERLAY ================= */}
       <div className="hud-layer">
-        {/* Top Row: Mission & Status */}
         <div className="hud-top-row">
-          {/* TOP LEFT: MISSION & ROLE */}
           <div className="hud-top-left">
             <div className="hud-cross-row">
               <span className="orange-cross">+</span>
@@ -55,14 +52,8 @@ export default function HeroSection() {
               </div>
               <span className="faint-cross">+</span>
             </div>
-
-            <div className="hud-role-strip">
-              <span className="orange-dash">—</span>
-              <span className="hud-role-text">{roleText}</span>
-            </div>
           </div>
 
-          {/* TOP RIGHT: STATUS & DOT MATRIX */}
           <div className="hud-top-right">
             <div className="hud-status-badge">
               <div className="corner-bracket corner-top-left" />
@@ -78,22 +69,19 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* 4x3 Dot Matrix */}
             <div className="hud-dot-matrix" aria-hidden="true">
-              <div className="dot-matrix-row">
-                <span className="matrix-dot" /><span className="matrix-dot" /><span className="matrix-dot" /><span className="matrix-dot" />
-              </div>
-              <div className="dot-matrix-row">
-                <span className="matrix-dot" /><span className="matrix-dot" /><span className="matrix-dot" /><span className="matrix-dot" />
-              </div>
-              <div className="dot-matrix-row">
-                <span className="matrix-dot" /><span className="matrix-dot" /><span className="matrix-dot" /><span className="matrix-dot" />
-              </div>
+              {[0, 1, 2].map((row) => (
+                <div className="dot-matrix-row" key={row}>
+                  {[0, 1, 2, 3].map((dot) => (
+                    <span className="matrix-dot" key={dot} />
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom Row: Code Features, CTA, and Tech Stack */}
+        {/* Code features, CTA, and tech stack */}
         <div className="hud-bottom-row">
           {/* BOTTOM LEFT: SLICE, CODE HUD, CTA BUTTON */}
           <div className="hud-bottom-left">
