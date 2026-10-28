@@ -1,13 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import '../styles/Footer.css';
-import { useState, useEffect } from 'react';
 
-const Footer = ({ theme, toggleTheme }) => {
+export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show button when scrolled down more than 300px
-      setShowBackToTop(window.scrollY > 300);
+      setShowBackToTop(window.scrollY > 350);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -17,122 +16,109 @@ const Footer = ({ theme, toggleTheme }) => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Home', url: '#home' },
-    { name: 'About', url: '#about' },
-    { name: 'Projects', url: '#projects' },
-    { name: 'Skills', url: '#skills' },
-    { name: 'Contact', url: '#contact' }
+    { name: '01 // Home', url: '#home' },
+    { name: '02 // About', url: '#about' },
+    { name: '03 // Skills', url: '#skills' },
+    { name: '04 // Projects', url: '#projects' },
+    { name: '05 // Education', url: '#education' },
+    { name: '06 // Contact', url: '#contact' }
   ];
 
   const socialLinks = [
-    { icon: 'fab fa-facebook', label: 'Facebook', url: 'https://www.facebook.com/Rathanacoding', color: '#1877f2' },
-    { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_dev', color: '#0088cc' },
-    { icon: 'fab fa-github', label: 'GitHub', url: 'https://github.com/Rathana-SOKHA', color: '#333333' }
-  ];
-
-  const resources = [
-    { name: 'Blog', url: '#' },
-    { name: 'Portfolio', url: '#' },
-    { name: 'Résumé', url: '#' },
-    { name: 'Resources', url: '#' }
+    { icon: 'fab fa-github', label: 'GitHub', url: 'https://github.com/Rathana-SOKHA' },
+    { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_dev' },
+    { icon: 'fab fa-facebook', label: 'Facebook', url: 'https://www.facebook.com/Rathanacoding' }
   ];
 
   return (
-    <footer className="footer">
-      {/* Main Footer Content */}
-      <div className="footer-container">
-        {/* Footer Grid */}
-        <div className="footer-grid">
-          {/* Brand Section */}
-          <div className="footer-brand">
-            <h3 className="footer-logo">Portfolio</h3>
-            <p className="footer-desc">Building beautiful and functional web experiences with modern technologies.</p>
-            <div className="footer-social">
-              {socialLinks.map((social, index) => (
+    <footer className="cyber-footer">
+      <div className="footer-top-line" aria-hidden="true" />
+
+      <div className="cyber-footer-container">
+        {/* Main Footer Row */}
+        <div className="footer-hud-grid">
+          {/* Brand Col */}
+          <div className="footer-brand-col">
+            <a href="#home" className="footer-cyber-logo">
+              <span className="logo-bracket">[</span>
+              <span className="logo-tag">&lt;/&gt;</span>
+              <span className="logo-name">RATHANA</span>
+              <span className="logo-accent">.DEV</span>
+              <span className="logo-bracket">]</span>
+            </a>
+            <p className="footer-tagline">
+              BUILDING DIGITAL SOLUTIONS THAT MAKE AN IMPACT. CLEAN CODE. SMART DESIGN. BETTER EXPERIENCES.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="footer-nav-col">
+            <h4 className="footer-col-title">// SYSTEM_INDEX</h4>
+            <ul className="footer-links-list">
+              {quickLinks.map((link, i) => (
+                <li key={i}>
+                  <a href={link.url} className="footer-nav-link">{link.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Connect Network */}
+          <div className="footer-connect-col">
+            <h4 className="footer-col-title">// SIGNAL_RELAYS</h4>
+            <div className="footer-social-buttons">
+              {socialLinks.map((social, i) => (
                 <a
-                  key={index}
+                  key={i}
                   href={social.url}
-                  className={`footer-social-link ${social.label.toLowerCase()}`}
+                  className="footer-social-chip"
                   title={social.label}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className={social.icon}></i>
+                  <i className={social.icon} />
+                  <span>{social.label.toUpperCase()}</span>
                 </a>
               ))}
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div className="footer-section">
-            <h4 className="footer-section-title">Quick Links</h4>
-            <ul className="footer-links">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <a href={link.url} className="footer-link">{link.name}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div className="footer-section">
-            <h4 className="footer-section-title">Resources</h4>
-            <ul className="footer-links">
-              {resources.map((resource, index) => (
-                <li key={index}>
-                  <a href={resource.url} className="footer-link">{resource.name}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Newsletter Signup */}
-          <div className="footer-section">
-            <h4 className="footer-section-title">Stay Updated</h4>
-            <p className="footer-section-desc">Subscribe to get the latest updates on new projects and articles.</p>
-            <form className="newsletter-form">
-              <input
-                type="email"
-                className="newsletter-input"
-                placeholder="Enter your email"
-                required
-              />
-              <button type="submit" className="newsletter-button">Subscribe</button>
-            </form>
+            <div className="footer-direct-contact">
+              <span className="direct-label">DIRECT EMAIL:</span>
+              <a href="mailto:rathanasokha26@gmail.com" className="direct-email">
+                rathanasokha26@gmail.com
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="footer-divider"></div>
+        {/* Footer Sub-Bar */}
+        <div className="footer-bottom-bar">
+          <div className="copyright-hud">
+            <span>&copy; {currentYear} SOKHA RATHANA. ALL RIGHTS RESERVED.</span>
+          </div>
 
-        {/* Footer Bottom */}
-        <div className="footer-bottom">
-          <p className="footer-copyright">
-            &copy; {currentYear} All rights reserved. Designed & built by <span className="highlight">Rathana SOKHA</span>
-          </p>
-          <div className="footer-bottom-links">
-            <a href="#" className="footer-bottom-link">Privacy Policy</a>
-            <span className="separator">•</span>
-            <a href="#" className="footer-bottom-link">Terms of Service</a>
-            <span className="separator">•</span>
-            <a href="#" className="footer-bottom-link">Sitemap</a>
+          <div className="footer-crosshairs" aria-hidden="true">
+            <span>+</span><span>+</span><span>+</span>
+          </div>
+
+          <div className="dev-credit-hud">
+            <span>BUILT WITH REACT & TAILWIND // HOSTED ON VITE</span>
           </div>
         </div>
       </div>
 
-      {/* Back to Top Button */}
+      {/* Cyber Back to Top Button */}
       {showBackToTop && (
         <button
-          className="back-to-top"
+          className="cyber-back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          title="Back to top"
+          title="Back to Top"
+          aria-label="Scroll to top of page"
         >
-          ↑
+          <span className="top-arrow">↑</span>
+          <span className="top-text">TOP</span>
         </button>
       )}
     </footer>
   );
-};
-
-export default Footer;
+}

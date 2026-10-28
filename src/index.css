@@ -1,53 +1,39 @@
-/* Import Monokai Pro-style Bold Modern Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+/* Import Fonts & Icons */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Montserrat:wght@800;900&family=Space+Mono:wght@400;700&family=Kaushan+Script&family=Caveat:wght@600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 /* CSS Variables for Theme Colors */
 :root {
-  /* Teal Color Palette */
-  --primary-teal: #14b8a6;
-  --secondary-teal: #0d9488;
-  --light-teal: #2dd4bf;
-  --teal-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
-  
-  /* Dark Mode (Default) */
-  --bg-primary: #0f0f1e;
-  --bg-secondary: #1a1a2e;
-  --bg-gradient: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-  --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
-  --text-muted: #94a9c9;
-  --card-bg: rgba(17, 24, 39, 0.95);
-  --card-border: rgba(20, 184, 166, 0.12);
-  --shadow-color: rgba(20, 184, 166, 0.3);
+  /* Cyber Accent Palette */
+  --accent-color: #ff5419;
+  --accent-light: #ff8c42;
+  --accent-glow: rgba(255, 84, 25, 0.4);
 
-  --project-btn-bg: rgba(15, 23, 42, 0.28);
-  --project-btn-border: rgba(125, 211, 252, 0.8);
-  --project-btn-text: #dbeafe;
-  --project-btn-hover-bg: rgba(125, 211, 252, 0.1);
-  --project-btn-secondary-bg: rgba(15, 23, 42, 0.22);
-  --project-btn-secondary-border: rgba(94, 234, 212, 0.7);
-  --project-btn-secondary-text: #dcfef7;
+  /* Dark Mode (Default) */
+  --bg-primary: #06070a;
+  --bg-secondary: #090b10;
+  --bg-gradient: linear-gradient(180deg, #06070a 0%, #0a0c10 50%, #050608 100%);
+  --text-primary: #ffffff;
+  --text-primary-rgb: 255, 255, 255;
+  --text-secondary: #cbd5e1;
+  --text-muted: #8b949e;
+  --card-bg: rgba(9, 11, 16, 0.85);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --shadow-color: rgba(255, 84, 25, 0.25);
 }
 
-/* Light Mode */
+/* Light Mode (White Color) */
 [data-theme="light"] {
   --bg-primary: #f8fafc;
-  --bg-secondary: #e2e8f0;
-  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  --text-primary: #1e293b;
-  --text-secondary: #475569;
+  --bg-secondary: #f1f5f9;
+  --bg-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  --text-primary: #0f172a;
+  --text-primary-rgb: 15, 23, 42;
+  --text-secondary: #334155;
   --text-muted: #64748b;
   --card-bg: rgba(255, 255, 255, 0.95);
-  --card-border: rgba(20, 184, 166, 0.2);
-  --shadow-color: rgba(20, 184, 166, 0.2);
-
-  --project-btn-bg: rgba(15, 23, 42, 0.04);
-  --project-btn-border: rgba(20, 184, 166, 0.8);
-  --project-btn-text: #0f172a;
-  --project-btn-hover-bg: rgba(20, 184, 166, 0.08);
-  --project-btn-secondary-bg: rgba(20, 184, 166, 0.05);
-  --project-btn-secondary-border: rgba(13, 148, 136, 0.8);
-  --project-btn-secondary-text: #0f172a;
+  --card-border: rgba(15, 23, 42, 0.08);
+  --shadow-color: rgba(255, 84, 25, 0.15);
 }
 
 /* Smooth scroll behavior for all anchor links */
@@ -55,9 +41,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Prevent horizontal scroll from decorative elements and off-canvas menus.
-   Note: overflow-x: clip (modern) doesn't create a scroll container, so the
-   sticky navbar keeps working. overflow-x: hidden is the fallback. */
+/* Prevent horizontal scroll */
 html,
 body {
   overflow-x: hidden;
@@ -66,59 +50,40 @@ body {
 
 body {
   background: var(--bg-gradient);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background 0.3s ease, color 0.3s ease;
-  /* font-family: "Poppins", sans-serif; */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
   -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
-/* Theme Toggle */
-.theme-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1001;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+/* Selection Color */
+::selection {
+  background: #ff5419;
+  color: #ffffff;
+}
+
+/* Global Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
   background: var(--accent-color);
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.5);
-}
-
-.theme-toggle:focus {
-  outline: 2px solid var(--accent-light);
-  outline-offset: 2px;
-}
-
-/* Custom animations */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.theme-toggle.active {
-  animation: pulse 2s infinite;
 }
 
 /* ===== Scroll Reveal Global Styles ===== */
 .scroll-reveal {
   will-change: transform, opacity;
 }
-

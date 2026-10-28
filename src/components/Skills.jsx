@@ -1,8 +1,8 @@
+import React, { useState } from "react";
 import "../styles/Skills.css";
 import ScrollReveal from "./ScrollReveal";
 
 // ─── Inline SVG data URIs for real brand logos ──────────────────────
-
 const cssLogo = `data:image/svg+xml,${encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#1572B6" d="M8.76 1l10.055 112.204 45.186 12.544 45.22-12.542L119.24 1H8.76zm89.816 37.376l-.768 8.586-2.918 32.678L64 103.214v-.016l-.023.006-30.949-23.365-2.165-24.252h13.552l1.137 12.715L64 80.68l16.39-13.576 1.707-19.125H30.78l-.552-6.143-.645-7.144h69.202l.845 9.484zm0 0"/></svg>`
 )}`;
@@ -20,7 +20,7 @@ const phpLogo = `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 const nodejsLogo = `data:image/svg+xml,${encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="n" x1="37.042" y1="11.82" x2="87.452" y2="105.91" gradientUnits="userSpaceOnUse"><stop offset=".3" stop-color="#3f873f"/><stop offset="1" stop-color="#67ba67"/></linearGradient></defs><path fill="url(#n)" d="M115.707 94.134c.033-1.603.04-3.2 0-4.803-.013-.522-.08-1.043-.103-1.565-.11-2.5-.375-4.978-.943-7.437-.422-1.832-1.007-3.615-1.723-5.347-1.367-3.306-3.282-6.29-5.578-8.99-2.425-2.85-5.232-5.239-8.404-7.18-1.628-.996-3.37-1.752-5.144-2.433-.493-.19-1.002-.338-1.505-.504-.408-.135-.7.27-.703.684-.003.465 0 .93 0 1.394v73.424c0 .596.048.996.708 1.464 3.336 2.37 6.645 4.75 9.424 7.777 2.716 2.958 4.918 6.316 6.661 9.956.617 1.29 1.14 2.618 1.606 3.965.058.167.104.338.158.506.153.47.295.942.434 1.416.65 2.21 1.142 4.46 1.46 6.742.138.99.21 1.987.252 2.983.06 1.397-.007 2.796-.09 4.19-1.69 2.914.24 6.877 3.22 8.76 1.58.993 3.327 1.226 4.96.284 1.53-.879 2.515-2.573 2.677-4.233a619.83 619.83 0 00-.094-60.946zM94.755 173.927c-3.815-3.86-8.545-6.224-13.643-7.64-2.676-.74-5.423-1.055-8.19-1.178 7.03-.322 13.943-1.014 20.414-3.837 2.033-.888 3.955-1.999 5.736-3.318.446-.33.588-.78.588-1.32V128.69c0-.496-.177-.812-.61-.452-1.969 1.64-4.066 3.112-6.271 4.413-1.748 1.03-3.56 1.922-5.42 2.677-4.088 1.663-8.38 2.526-12.792 2.6-5.06.083-9.957-.67-14.55-2.602-1.646-.692-3.214-1.562-4.708-2.556-2.15-1.43-4.097-3.108-5.856-4.996-2.126-2.28-3.915-4.84-5.404-7.587-.844-1.557-1.544-3.18-2.127-4.848-1.327-3.8-2.053-7.752-2.227-11.744-.042-.938-.08-1.876-.066-2.815.026-1.89.146-3.78.347-5.658.23-2.16.622-4.298 1.129-6.408.48-2.01 1.107-3.98 1.856-5.904 1.46-3.753 3.44-7.233 5.825-10.464 1.191-1.613 2.492-3.137 3.862-4.604 1.146-1.225 2.344-2.4 3.6-3.516 1.09-.967 2.238-1.868 3.425-2.717 1.068-.765 2.18-1.466 3.323-2.107.462-.26.935-.504 1.404-.752.418-.22.555-.578.391-1.022-.156-.423-.548-.53-1.005-.586-1.95-.24-3.907-.33-5.861-.175-2.67.21-5.315.67-7.891 1.419-3.147.912-6.136 2.21-8.915 3.898-2.992 1.812-5.724 3.967-8.189 6.44-2.398 2.408-4.514 5.062-6.364 7.916-1.865 2.876-3.424 5.93-4.68 9.13-.72 1.833-1.313 3.71-1.792 5.614-.51 2.02-.886 4.068-1.152 6.136-.222 1.73-.342 3.47-.435 5.208-.059 1.112-.063 2.227-.166 3.336-.166 1.78-.257-1.157-.23-1.588.16-2.614.473-5.216.939-7.796.56-3.097 1.341-6.147 2.375-9.126.77-2.218 1.66-4.388 2.693-6.489 2.05-4.167 4.578-8.028 7.56-11.578 1.863-2.22 3.878-4.306 6.024-6.253 2.244-2.038 4.656-3.862 7.215-5.464 1.117-.699 2.267-1.343 3.438-1.957.366-.192.736-.379 1.106-.566.4-.203.631-.355.627-.914-.008-1.148-.006-2.298.002-3.447.002-.813-.201-1.743-.507-2.3-.618-1.125-1.96-1.51-3.404-1.2-.438.094-.874.198-1.306.315-2.824.766-5.414 2.003-7.826 3.585-2.892 1.895-5.426 4.213-7.643 6.86-2.33 2.78-4.286 5.836-5.917 9.092-1.673 3.336-2.969 6.84-3.942 10.47-.634 2.365-1.104 4.765-1.431 7.19-.16 1.192-.275 2.393-.364 3.592-.034.462-.072.924-.082 1.387-.012.55-.15.97-.68 1.37-.246.184-.216-.146-.216-.146 0-.098.008-.196.015-.294.075-1.126.17-2.252.307-3.373.147-1.2.33-2.396.564-3.58.504-2.54 1.196-5.04 2.083-7.48 1.035-2.848 2.3-5.598 3.83-8.222 1.523-2.614 3.307-5.04 5.315-7.29 2.142-2.4 4.539-4.508 7.164-6.353 2.324-1.636 4.822-2.96 7.46-4.002.577-.228 1.16-.442 1.745-.647.449-.157.904-.302 1.356-.451.365-.12.653-.24.65-.756-.006-1.164 0-2.33 0-3.494v-3.158c0-.443-.115-.596-.544-.388-.965.47-1.905.98-2.821 1.534-3.25 1.964-6.238 4.27-8.977 6.878-2.482 2.362-4.712 4.953-6.693 7.74-1.917 2.694-3.568 5.553-4.963 8.54-.61 1.306-1.155 2.642-1.64 4-.466 1.305-.862 2.633-1.204 3.974-.346 1.356-.618 2.729-.843 4.11-.153.94-.27 1.885-.354 2.834-.065.736-.106 1.474-.153 2.21-.022.34-.214.847.456.454l.008-.004c.255-.15.465-.36.642-.616.432-.624.627-.774 1.155-.478.31.174.3.566.246.915-.143.93-.273 1.864-.468 2.782-.189.89-.403 1.775-.65 2.651-.76 2.69-1.748 5.293-3.004 7.783-.519 1.028-1.096 2.024-1.706 3.003-1.105 1.77-2.338 3.442-3.716 5.004-1.183 1.343-2.45 2.61-3.798 3.795-.705.617-1.44 1.197-2.194 1.752-.697.512-1.42.986-2.152 1.447-.654.412-1.318.806-1.99 1.188-.66.375-1.33.731-2.003 1.082-.612.32-1.228.633-1.846.94-.318.158-.783.434-.362.358.745-.135 1.486-.282 2.224-.44 2.406-.517 4.72-1.348 6.94-2.451 2.124-1.055 4.126-2.33 5.998-3.805 1.075-.847 2.09-1.762 3.048-2.737 1.129-1.151 2.182-2.372 3.163-3.65 1.294-1.686 2.443-3.47 3.464-5.33 1.644-3 2.93-6.164 3.9-9.45.997-3.38 1.624-6.84 1.92-10.356.048-.57.09-1.142.12-1.714.031-.584.05-1.17.06-1.755.01-.742-.006-1.302.692-1.105.307.086.576.26.82.494 3.388 3.262 6.415 6.857 8.966 10.794 2.126 3.279 3.935 6.736 5.405 10.347.776 1.907 1.42 3.86 1.93 5.854.27 1.056.5 2.119.681 3.192.166.983.288 1.974.365 2.97.046.584.07 1.17.088 1.755.012.324.043 1.365.088 1.706.206 1.55.127 3.112-.04 4.663z"/></svg>`
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="n" x1="37.042" y1="11.82" x2="87.452" y2="105.91" gradientUnits="userSpaceOnUse"><stop offset=".3" stop-color="#3f873f"/><stop offset="1" stop-color="#67ba67"/></linearGradient></defs><path fill="url(#n)" d="M115.707 94.134c.033-1.603.04-3.2 0-4.803-.013-.522-.08-1.043-.103-1.565-.11-2.5-.375-4.978-.943-7.437-.422-1.832-1.007-3.615-1.723-5.347-1.367-3.306-3.282-6.29-5.578-8.99-2.425-2.85-5.232-5.239-8.404-7.18-1.628-.996-3.37-1.752-5.144-2.433-.493-.19-1.002-.338-1.505-.504-.408-.135-.7.27-.703.684-.003.465 0 .93 0 1.394v73.424c0 .596.048.996.708 1.464 3.336 2.37 6.645 4.75 9.424 7.777 2.716 2.958 4.918 6.316 6.661 9.956.617 1.29 1.14 2.618 1.606 3.965.058.167.104.338.158.506.153.47.295.942.434 1.416.65 2.21 1.142 4.46 1.46 6.742.138.99.21 1.987.252 2.983.06 1.397-.007 2.796-.09 4.19-1.69 2.914.24 6.877 3.22 8.76 1.58.993 3.327 1.226 4.96.284 1.53-.879 2.515-2.573 2.677-4.233a619.83 619.83 0 00-.094-60.946z"/></svg>`
 )}`;
 
 const typescriptLogo = `data:image/svg+xml,${encodeURIComponent(
@@ -28,7 +28,7 @@ const typescriptLogo = `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 const mysqlLogo = `data:image/svg+xml,${encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="m" x1="39.457" y1="13.567" x2="82.822" y2="106.494" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#00758F"/><stop offset="1" stop-color="#005C75"/></linearGradient></defs><path fill="url(#m)" d="M117.177 101.976c-1.242-.394-2.134-.442-4.034-.442-2.998 0-5.685.532-8.664 1.783-1.57.658-5.131 2.635-5.847 2.635-.129 0-.055-.537-.055-.704 0-2.206-2.003-4.165-4.17-4.962-1.608-.595-4.973-.914-7.342-.914-2.937 0-6.405.44-9.383 1.635-.818.328-1.607.702-2.455 1.109v-1.298c0-2.562.006-5.869-1.199-8.195-.66-1.27-2.916-2.793-5.51-2.793-2.127 0-5.617.345-9.605 2.03-3.054 1.29-7.053 3.938-11.522 6.94-.386.26-.759.52-1.117.78v-7.527c0-3.117-.155-4.794-1.31-6.155-.993-1.175-2.674-1.677-5.072-1.677-2.38 0-6.721.717-11.643 1.988l-1.028.267v35.115c0 .078.004.15.012.22.577 4.563 2.485 5.752 6.666 6.33l.983.085v-4.35c1.984.549 3.6.824 5.222.824 2.93 0 5.01-.823 6.666-2.61 1.31-1.409 1.824-3.323 1.824-6.815v-17.655c0-1.205-.03-2.378-.086-3.493.79-.542 1.572-1.03 2.309-1.443 3.151-1.76 6.034-2.462 8.476-2.462 2.035 0 2.824.575 2.824 2.88v12.25c0 5.084.557 8.155 1.98 10.285 1.247 1.862 3.248 2.902 6.14 2.902 2.012 0 4.33-.507 7.16-1.794 2.722-1.235 6.386-3.331 10.693-6.108.421-.272.855-.547 1.298-.823v7.334c0 2.733.155 4.071 1.31 5.428.993 1.172 2.674 1.675 5.072 1.675 2.003 0 4.468-.332 7.486-1.106 3.293-.843 7.384-2.357 11.459-4.49 4.058-2.127 8.51-4.816 12.47-7.542 2.023-1.393 3.802-3.28 3.802-5.684 0-1.994-1.397-3.163-3.495-3.874zM82.622 83.5c-4.493 3.14-7.868 4.727-10.29 4.727-1.252 0-1.86-.29-2.065-1.025-.269-.981.115-2.688.657-3.54.476-.746 1.683-1.394 3.234-1.91-.194.05-.38.107-.56.17-3.399 1.17-5.542 2.918-6.352 5.216-.845 2.414.49 4.868 3.054 4.868 2.412 0 5.838-1.44 10.324-4.502v0zM18.415 89.75H10.94l5.636-11.32-5.558-11.116h7.611l2.076 4.714 2.725-4.714h7.288l-5.848 10.916 5.636 11.52h-7.54l-2.358-4.85-2.608 4.85z"/></svg>`
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="m" x1="39.457" y1="13.567" x2="82.822" y2="106.494" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#00758F"/><stop offset="1" stop-color="#005C75"/></linearGradient></defs><path fill="url(#m)" d="M117.177 101.976c-1.242-.394-2.134-.442-4.034-.442-2.998 0-5.685.532-8.664 1.783-1.57.658-5.131 2.635-5.847 2.635-.129 0-.055-.537-.055-.704 0-2.206-2.003-4.165-4.17-4.962-1.608-.595-4.973-.914-7.342-.914-2.937 0-6.405.44-9.383 1.635-.818.328-1.607.702-2.455 1.109v-1.298c0-2.562.006-5.869-1.199-8.195-.66-1.27-2.916-2.793-5.51-2.793-2.127 0-5.617.345-9.605 2.03-3.054 1.29-7.053 3.938-11.522 6.94-.386.26-.759.52-1.117.78v-7.527c0-3.117-.155-4.794-1.31-6.155-.993-1.175-2.674-1.677-5.072-1.677-2.38 0-6.721.717-11.643 1.988l-1.028.267v35.115c0 .078.004.15.012.22.577 4.563 2.485 5.752 6.666 6.33l.983.085v-4.35c1.984.549 3.6.824 5.222.824 2.93 0 5.01-.823 6.666-2.61 1.31-1.409 1.824-3.323 1.824-6.815v-17.655c0-1.205-.03-2.378-.086-3.493.79-.542 1.572-1.03 2.309-1.443 3.151-1.76 6.034-2.462 8.476-2.462 2.035 0 2.824.575 2.824 2.88v12.25c0 5.084.557 8.155 1.98 10.285 1.247 1.862 3.248 2.902 6.14 2.902 2.012 0 4.33-.507 7.16-1.794 2.722-1.235 6.386-3.331 10.693-6.108.421-.272.855-.547 1.298-.823v7.334c0 2.733.155 4.071 1.31 5.428.993 1.172 2.674 1.675 5.072 1.675 2.003 0 4.468-.332 7.486-1.106 3.293-.843 7.384-2.357 11.459-4.49 4.058-2.127 8.51-4.816 12.47-7.542 2.023-1.393 3.802-3.28 3.802-5.684 0-1.994-1.397-3.163-3.495-3.874z"/></svg>`
 )}`;
 
 const mongodbLogo = `data:image/svg+xml,${encodeURIComponent(
@@ -69,54 +69,6 @@ const javaLogo =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="jv1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f89820"/><stop offset="1" stop-color="#ed8b00"/></linearGradient></defs><path fill="url(#jv1)" d="M47.6 19.7L25.2 65.1c5.4 9.5 11.9 17.7 19.6 23.3l22.4-45.4c-2.4-3.9-6.3-6.5-10.8-7.2L47.6 19.7zm-5.3 68.2c8.3 5.8 17.3 10.1 26.8 12.7l7.1-14.5c-6.2-1.7-12.1-4.8-17.2-9.3l-16.7 11.1zm52.5-29.8L76.7 16.5c-1.4-.8-3-.1-3.4 1.4l-1.1 4.8 22.5 19.3-2.2 2.2-22.1-16.3-13.6 27.7 22.5 19.3c-1.3 2.8-2.5 5.6-3.5 8.5l1.7 1.7 24.5-17c3.4-2.4 5.3-6.4 5.3-10.6.1-4.2-1.8-8.2-5.2-10.5z"/><path fill="#5382a1" d="M73.2 31.1L50.8 76.5c5.4 9.5 11.9 17.7 19.6 23.3l22.4-45.4c-2.4-3.9-6.3-6.5-10.8-7.2L73.2 31.1zm-5.3 68.2c8.3 5.8 17.3 10.1 26.8 12.7l7.1-14.5c-6.2-1.7-12.1-4.8-17.2-9.3L67.9 99.3z"/></svg>'
   );
 
-// ─── Data ───────────────────────────────────────────────────────────
-
-const skillCategories = [
-  {
-    id: "frontend",
-    label: "Frontend",
-    skills: [
-      { name: "CSS", icon: cssLogo, proficiency: 95, color: "#1572B6", glow: "rgba(21,114,182,0.35)" },
-      { name: "JavaScript", icon: jsLogo, proficiency: 85, color: "#F7DF1E", glow: "rgba(247,223,30,0.35)" },
-      { name: "Vue.js", icon: "vue", proficiency: 85, color: "#4FC08D", glow: "rgba(79,192,141,0.35)" },
-      { name: "React.js", icon: "react", proficiency: 70, color: "#61DAFB", glow: "rgba(97,218,251,0.35)" },
-      { name: "Tailwind CSS", icon: "tailwind", proficiency: 75, color: "#38BDF8", glow: "rgba(56,189,248,0.35)" },
-      { name: "Bootstrap", icon: bootstrapLogo, proficiency: 70, color: "#7E16EA", glow: "rgba(126,22,234,0.35)" },
-    ],
-  },
-  {
-    id: "backend",
-    label: "Backend",
-    skills: [
-      { name: "PHP (MVC Pattern)", icon: phpLogo, proficiency: 85, color: "#6181B6", glow: "rgba(97,129,182,0.35)" },
-      { name: "Laravel", icon: "laravel", proficiency: 85, color: "#FF2D20", glow: "rgba(255,45,32,0.35)" },
-      { name: "Node.js", icon: nodejsLogo, proficiency: 75, color: "#67BA67", glow: "rgba(103,186,103,0.35)" },
-      { name: "OOP (TypeScript)", icon: typescriptLogo, proficiency: 85, color: "#3178C6", glow: "rgba(49,120,198,0.35)" },
-      { name: "Python", icon: pythonImg, proficiency: 50, color: "#3776AB", glow: "rgba(55,118,171,0.35)" },
-      { name: "Java", icon: javaLogo, proficiency: 50, color: "#ED8B00", glow: "rgba(237,139,0,0.35)" },
-    ],
-  },
-  {
-    id: "database",
-    label: "Database",
-    skills: [
-      { name: "MySQL", icon: mysqlLogo, proficiency: 90, color: "#00758F", glow: "rgba(0,117,143,0.35)" },
-      { name: "MongoDB", icon: mongodbLogo, proficiency: 80, color: "#43A447", glow: "rgba(67,164,71,0.35)" },
-      { name: "PostgreSQL", icon: postgresqlLogo, proficiency: 60, color: "#336791", glow: "rgba(51,103,145,0.35)" },
-    ],
-  },
-  {
-    id: "tools",
-    label: "Tools",
-    skills: [
-      { name: "Git", icon: gitLogo, proficiency: 90, color: "#F34F29", glow: "rgba(243,79,41,0.35)" },
-      { name: "Jira", icon: jiraLogo, proficiency: 80, color: "#0052CC", glow: "rgba(0,82,204,0.35)" },
-      { name: "Postman", icon: postmanLogo, proficiency: 95, color: "#FF6C37", glow: "rgba(255,108,55,0.35)" },
-      { name: "VS Code", icon: vscodeLogo, proficiency: 95, color: "#007ACC", glow: "rgba(0,122,204,0.35)" },
-    ],
-  },
-];
-
 const svgMap = {
   react: reactImg,
   vue: vueImg,
@@ -126,66 +78,205 @@ const svgMap = {
   java: javaLogo,
 };
 
-const Skills = () => {
+const skillCategories = [
+  {
+    id: "frontend",
+    code: "CAT_01",
+    label: "Frontend",
+    tagline: "CLIENT-SIDE ARCHITECTURE",
+    skills: [
+      { name: "CSS3", icon: cssLogo, proficiency: 95, level: "Advanced", color: "#1572B6", glow: "rgba(21,114,182,0.35)" },
+      { name: "JavaScript", icon: jsLogo, proficiency: 85, level: "Advanced", color: "#F7DF1E", glow: "rgba(247,223,30,0.35)" },
+      { name: "Vue.js", icon: "vue", proficiency: 85, level: "Advanced", color: "#4FC08D", glow: "rgba(79,192,141,0.35)" },
+      { name: "React.js", icon: "react", proficiency: 75, level: "Proficient", color: "#61DAFB", glow: "rgba(97,218,251,0.35)" },
+      { name: "Tailwind CSS", icon: "tailwind", proficiency: 80, level: "Proficient", color: "#38BDF8", glow: "rgba(56,189,248,0.35)" },
+      { name: "Bootstrap", icon: bootstrapLogo, proficiency: 75, level: "Proficient", color: "#7E16EA", glow: "rgba(126,22,234,0.35)" },
+    ],
+  },
+  {
+    id: "backend",
+    code: "CAT_02",
+    label: "Backend",
+    tagline: "SERVER, APIS & SERVICES",
+    skills: [
+      { name: "PHP (MVC)", icon: phpLogo, proficiency: 85, level: "Advanced", color: "#6181B6", glow: "rgba(97,129,182,0.35)" },
+      { name: "Laravel", icon: "laravel", proficiency: 85, level: "Advanced", color: "#FF2D20", glow: "rgba(255,45,32,0.35)" },
+      { name: "Node.js", icon: nodejsLogo, proficiency: 75, level: "Proficient", color: "#67BA67", glow: "rgba(103,186,103,0.35)" },
+      { name: "OOP TypeScript", icon: typescriptLogo, proficiency: 80, level: "Proficient", color: "#3178C6", glow: "rgba(49,120,198,0.35)" },
+      { name: "Python", icon: pythonImg, proficiency: 55, level: "Intermediate", color: "#3776AB", glow: "rgba(55,118,171,0.35)" },
+      { name: "Java", icon: javaLogo, proficiency: 55, level: "Intermediate", color: "#ED8B00", glow: "rgba(237,139,0,0.35)" },
+    ],
+  },
+  {
+    id: "database",
+    code: "CAT_03",
+    label: "Database",
+    tagline: "PERSISTENCE & SCHEMAS",
+    skills: [
+      { name: "MySQL", icon: mysqlLogo, proficiency: 90, level: "Advanced", color: "#00758F", glow: "rgba(0,117,143,0.35)" },
+      { name: "MongoDB", icon: mongodbLogo, proficiency: 80, level: "Proficient", color: "#43A447", glow: "rgba(67,164,71,0.35)" },
+      { name: "PostgreSQL", icon: postgresqlLogo, proficiency: 65, level: "Intermediate", color: "#336791", glow: "rgba(51,103,145,0.35)" },
+    ],
+  },
+  {
+    id: "tools",
+    code: "CAT_04",
+    label: "Dev Tools",
+    tagline: "WORKFLOW & PIPELINES",
+    skills: [
+      { name: "Git & GitHub", icon: gitLogo, proficiency: 90, level: "Advanced", color: "#F34F29", glow: "rgba(243,79,41,0.35)" },
+      { name: "Postman", icon: postmanLogo, proficiency: 90, level: "Advanced", color: "#FF6C37", glow: "rgba(255,108,55,0.35)" },
+      { name: "VS Code", icon: vscodeLogo, proficiency: 95, level: "Advanced", color: "#007ACC", glow: "rgba(0,122,204,0.35)" },
+      { name: "Jira", icon: jiraLogo, proficiency: 80, level: "Proficient", color: "#0052CC", glow: "rgba(0,82,204,0.35)" },
+    ],
+  },
+];
+
+export default function Skills() {
+  const [activeTab, setActiveTab] = useState("all");
+
+  const filteredCategories =
+    activeTab === "all"
+      ? skillCategories
+      : skillCategories.filter((cat) => cat.id === activeTab);
+
   return (
-    <section className="skills-section" id="skills">
+    <section className="cyber-skills-section" id="skills">
+      {/* Background Grid & Ambience */}
+      <div className="skills-bg-grid" aria-hidden="true" />
+      <div className="skills-ambient-glow" aria-hidden="true" />
+
       <div className="skills-container">
-        <div className="skills-header">
-          <h2>My Skills</h2>
+        {/* Section Header Tag */}
+        <div className="skills-header-tag">
+          <span className="tag-cross">+</span>
+          <span className="tag-mono">// 03. TECHNICAL_ARSENAL</span>
+          <span className="tag-bracket">[ STACK_MATRIX ]</span>
         </div>
 
-        <div className="skills-shell">
-          <div className="skills-columns">
-            {skillCategories.map((category) => (
-              <div key={category.id} className="skill-group">
-                <div className="skill-group-header">
-                  <span>{category.label}</span>
-                </div>
+        <h2 className="skills-main-title">
+          EXPLORING MY <span className="title-orange">TECH SKILLS</span>
+        </h2>
 
-                <div className="skill-group-grid">
-                  {category.skills.map((skill, index) => (
+        {/* Cyber Filter Navigation */}
+        <div className="skills-filter-bar">
+          <button
+            type="button"
+            className={`filter-btn ${activeTab === "all" ? "active" : ""}`}
+            onClick={() => setActiveTab("all")}
+          >
+            <span className="btn-bracket">[</span>
+            <span className="btn-name">ALL_MODULES</span>
+            <span className="btn-bracket">]</span>
+          </button>
+
+          {skillCategories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              className={`filter-btn ${activeTab === cat.id ? "active" : ""}`}
+              onClick={() => setActiveTab(cat.id)}
+            >
+              <span className="btn-bracket">[</span>
+              <span className="cat-code">{cat.code} //</span>
+              <span className="btn-name">{cat.label.toUpperCase()}</span>
+              <span className="btn-bracket">]</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Multi-Column HUD Grid */}
+        <div className="skills-hud-grid">
+          {filteredCategories.map((category) => (
+            <div key={category.id} className="skills-category-panel">
+              {/* Corner Brackets */}
+              <div className="corner-bracket corner-top-left" />
+              <div className="corner-bracket corner-top-right" />
+              <div className="corner-bracket corner-bottom-left" />
+              <div className="corner-bracket corner-bottom-right" />
+
+              {/* Panel Header */}
+              <div className="panel-header-strip">
+                <div className="panel-title-group">
+                  <span className="panel-code">{category.code}</span>
+                  <span className="panel-dash">—</span>
+                  <h3 className="panel-title">{category.label}</h3>
+                </div>
+                <span className="panel-tagline">{category.tagline}</span>
+              </div>
+
+              {/* Skills Card Cluster */}
+              <div className="skills-card-cluster">
+                {category.skills.map((skill, index) => {
+                  const logoSrc =
+                    typeof skill.icon === "string" && skill.icon.startsWith("data:")
+                      ? skill.icon
+                      : svgMap[skill.icon];
+
+                  return (
                     <ScrollReveal
                       key={`${category.id}-${skill.name}`}
                       animation="fade-up"
-                      delay={index * 60}
-                      threshold={0.1}
+                      delay={index * 50}
+                      threshold={0.08}
                     >
                       <article
-                        className="skill-row-card"
+                        className="cyber-skill-card"
                         style={{
                           "--skill-color": skill.color,
                           "--skill-glow": skill.glow,
                           "--skill-width": `${skill.proficiency}%`,
                         }}
                       >
-                        <div className="skill-row-top">
-                          <div className="skill-row-meta">
-                            <div className="skill-badge">
-                              <img
-                                src={typeof skill.icon === "string" && skill.icon.startsWith("data:") ? skill.icon : svgMap[skill.icon]}
-                                alt={`${skill.name} logo`}
-                              />
+                        <div className="card-top-row">
+                          <div className="skill-brand-group">
+                            <div className="brand-logo-frame">
+                              <img src={logoSrc} alt={`${skill.name} icon`} />
                             </div>
-                            <span className="skill-name">{skill.name}</span>
+                            <div className="skill-text-info">
+                              <span className="skill-display-name">{skill.name}</span>
+                              <span className="skill-tier-badge">{skill.level}</span>
+                            </div>
                           </div>
 
-                          <span className="skill-score">{skill.proficiency}%</span>
+                          <span className="skill-pct-value">{skill.proficiency}%</span>
                         </div>
 
-                        <div className="skill-progress-track">
-                          <span className="skill-progress-fill" />
+                        {/* Cyber Segmented Progress Track */}
+                        <div className="cyber-progress-track">
+                          <div className="cyber-progress-fill" />
                         </div>
                       </article>
                     </ScrollReveal>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Section Bottom Readout HUD */}
+        <div className="skills-footer-hud">
+          <div className="hud-readout-left">
+            <span className="readout-cross">+</span>
+            <span className="readout-text">
+              ARSENAL_STATUS: <span className="readout-green">● OPTIMIZED FOR PRODUCTION</span>
+            </span>
+          </div>
+
+          <div className="hud-readout-center" aria-hidden="true">
+            <div className="crosshair-row">
+              <span>+</span><span>+</span><span>+</span>
+            </div>
+          </div>
+
+          <div className="hud-readout-right" aria-hidden="true">
+            <div className="hud-slashes">
+              <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Skills;
+}

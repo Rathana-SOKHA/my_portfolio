@@ -1,85 +1,152 @@
+import React from 'react';
 import '../styles/Education.css';
 import ScrollReveal from './ScrollReveal';
 
-const Education = () => {
-  const educationData = [
-    {
-      id: 1,
-      title: 'Pursuing Associate Degree at',
-      school: 'Passerelles Numériques Cambodia (PNC)',
-      subtitle: 'in Web Programming',
-      year: '2025 - Present',
-      icon: '🎓',
-      color: '#14b8a6'
-    },
-    {
-      id: 2,
-      title: 'Graduated Bacll certificate',
-      school: 'Phnom Kravanh High School',
-      subtitle: 'Diploma with Grade C achievement.',
-      year: '2023 - 2024',
-      details: '',
-      icon: '📘',
-      color: '#5eead4'
-    },
-  ];
+const educationData = [
+  {
+    id: 1,
+    code: "EDU_01",
+    status: "CURRENTLY_ENROLLED",
+    statusType: "active",
+    degree: "Associate Degree in Web Programming",
+    institution: "Passerelles Numériques Cambodia (PNC)",
+    specialization: "Full-Stack Web Development, System Architecture & Database Engineering",
+    period: "2025 - PRESENT",
+    location: "Phnom Penh, Cambodia",
+    tags: ["Laravel", "Vue.js", "Node.js", "React", "MySQL", "Agile/Scrum"],
+    description: "Rigorous full-stack computer science and web engineering training focused on industry-standard methodologies, scalable system design, and practical production projects."
+  },
+  {
+    id: 2,
+    code: "EDU_02",
+    status: "GRADUATED",
+    statusType: "completed",
+    degree: "National Baccalaureate Certificate (Grade C)",
+    institution: "Phnom Kravanh High School",
+    specialization: "General Education & Sciences",
+    period: "2023 - 2024",
+    location: "Pursat Province, Cambodia",
+    tags: ["Mathematics", "Logical Reasoning", "Science & Tech", "Communication"],
+    description: "Completed secondary education with focused coursework in analytical thinking, mathematics, and natural sciences."
+  }
+];
 
+export default function Education() {
   return (
-    <section className="education-section" id="education">
+    <section className="cyber-education-section" id="education">
+      {/* Background Grid & Ambience */}
+      <div className="edu-bg-grid" aria-hidden="true" />
+      <div className="edu-ambient-glow" aria-hidden="true" />
+
       <div className="education-container">
-        {/* Section Header */}
-        <div className="education-header">
-          <h2>Education</h2>
+        {/* Section Header Tag */}
+        <div className="education-header-tag">
+          <span className="tag-cross">+</span>
+          <span className="tag-mono">// 05. ACADEMIC_TRAJECTORY</span>
+          <span className="tag-bracket">[ LEARNING_MILESTONES ]</span>
         </div>
 
-        <div className="education-content">
-          {/* Education Timeline */}
-          <div className="timeline">
-            <div className="timeline-line"></div>
-            {educationData.map((edu, index) => (
-              <ScrollReveal
-                key={edu.id}
-                animation={index % 2 === 0 ? 'fade-left' : 'fade-right'}
-                delay={index * 150}
-                threshold={0.2}
-              >
-                <div className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-                  {/* Timeline Marker Dot */}
-                  <div
-                    className="timeline-marker"
-                    style={{
-                      background: `linear-gradient(135deg, ${edu.color}, #5eead4)`,
-                      boxShadow: `0 0 0 4px rgba(20, 184, 166, 0.15), 0 0 20px ${edu.color}44`
-                    }}
-                  ></div>
+        <h2 className="education-main-title">
+          MY <span className="title-orange">EDUCATION JOURNEY</span>
+        </h2>
 
-                  {/* Content Card */}
-                  <div className="edu-card">
-                    {/* Glow overlay */}
-                    <div className="edu-card-glow" style={{ background: `radial-gradient(ellipse at 50% -20%, ${edu.color}18, transparent 60%)` }}></div>
+        {/* Cyber Timeline */}
+        <div className="cyber-timeline">
+          <div className="timeline-axis" aria-hidden="true" />
 
-                    {/* Card content */}
-                    <div className="edu-card-inner">
-                      <div className="edu-card-main">
-                        <h3 className="edu-degree-name" style={{ color: edu.color }}>{edu.title}</h3>
-                        <p className="edu-school-name">{edu.school}</p>
-                        {edu.subtitle && <p className="edu-subtitle">{edu.subtitle}</p>}
-                        {edu.details && <p className="edu-description">{edu.details}</p>}
-                      </div>
+          {educationData.map((item, index) => (
+            <ScrollReveal
+              key={item.id}
+              animation={index % 2 === 0 ? "fade-right" : "fade-left"}
+              delay={index * 120}
+              threshold={0.1}
+            >
+              <div className={`timeline-entry ${index % 2 === 0 ? "left-entry" : "right-entry"}`}>
+                {/* Timeline Center Node */}
+                <div className="timeline-node" aria-hidden="true">
+                  <span className="node-diamond" />
+                  <span className="node-pulse-ring" />
+                </div>
 
-                      <div className="edu-year-row">
-                        <span className="edu-year-text">{edu.year}</span>
-                      </div>
+                {/* Timeline Card */}
+                <article className="cyber-edu-card">
+                  {/* HUD Corner Brackets */}
+                  <div className="corner-bracket corner-top-left" />
+                  <div className="corner-bracket corner-top-right" />
+                  <div className="corner-bracket corner-bottom-left" />
+                  <div className="corner-bracket corner-bottom-right" />
+
+                  {/* Card Header Strip */}
+                  <div className="edu-card-strip">
+                    <span className="edu-code">{item.code}</span>
+                    <span className="edu-period-badge">
+                      <span className="period-bracket">[</span>
+                      {item.period}
+                      <span className="period-bracket">]</span>
+                    </span>
+                    <span className={`edu-status-pill ${item.statusType}`}>
+                      <span className="status-dot" />
+                      {item.status}
+                    </span>
+                  </div>
+
+                  {/* Card Main Info */}
+                  <div className="edu-card-content">
+                    <h3 className="edu-degree-title">{item.degree}</h3>
+                    <h4 className="edu-institution-name">
+                      <span className="school-marker">@</span> {item.institution}
+                    </h4>
+                    <p className="edu-spec-subtitle">{item.specialization}</p>
+
+                    <p className="edu-card-desc">{item.description}</p>
+
+                    {/* Skill Tags */}
+                    <div className="edu-tag-group">
+                      {item.tags.map((tag, tIdx) => (
+                        <span key={tIdx} className="edu-tag">
+                          <span className="tag-hash">#</span>{tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </div>
-              </ScrollReveal>
-            ))}
+
+                  {/* Card Footer Location */}
+                  <div className="edu-card-footer">
+                    <span className="edu-loc-text">
+                      <i className="fas fa-map-marker-alt" /> {item.location}
+                    </span>
+                    <span className="edu-verified-flag">
+                      <span className="v-tick">✓</span> VERIFIED_RECORD
+                    </span>
+                  </div>
+                </article>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        {/* Section Footer HUD Readout */}
+        <div className="education-footer-hud">
+          <div className="hud-readout-left">
+            <span className="readout-cross">+</span>
+            <span className="readout-text">
+              TRAJECTORY_STATUS: <span className="readout-orange">CONTINUOUS LEARNING ACTIVE</span>
+            </span>
+          </div>
+
+          <div className="hud-readout-center" aria-hidden="true">
+            <div className="crosshair-row">
+              <span>+</span><span>+</span><span>+</span>
+            </div>
+          </div>
+
+          <div className="hud-readout-right" aria-hidden="true">
+            <div className="hud-slashes">
+              <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Education;
+}
