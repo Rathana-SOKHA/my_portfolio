@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/IntroScreen.css';
+import '../../styles/IntroScreen.css';
 
 export default function IntroScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);

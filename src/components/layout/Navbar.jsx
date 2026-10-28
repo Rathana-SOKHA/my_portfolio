@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/Navbar.css";
+import "../../styles/Navbar.css";
 
 const navItems = [
   { id: "home", label: "Home", num: "01" },

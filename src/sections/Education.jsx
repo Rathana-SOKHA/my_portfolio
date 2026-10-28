@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Education.css';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from '../components/animations/ScrollReveal';
 
 const educationData = [
   {

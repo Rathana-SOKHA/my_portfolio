@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Footer.css';
+import '../../styles/Footer.css';
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);

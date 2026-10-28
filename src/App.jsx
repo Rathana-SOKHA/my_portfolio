@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react"
-import Navbar from "./components/Navbar"
-import HeroSection from "./components/HeroSection"
-import About from "./components/About"
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Education from "./components/Education";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer"
-import ScrollReveal from "./components/ScrollReveal"
-import IntroScreen from "./components/IntroScreen"
+import Navbar from "./components/layout/Navbar"
+import Footer from "./components/layout/Footer"
+import ScrollProgress from "./components/animations/ScrollProgress"
+import ScrollReveal from "./components/animations/ScrollReveal"
+import IntroScreen from "./components/ui/IntroScreen"
+import Hero from "./sections/Hero"
+import About from "./sections/About"
+import Skills from "./sections/Skills"
+import Projects from "./sections/Projects"
+import Education from "./sections/Education"
+import Contact from "./sections/Contact"
 
 function App() {
   // Lazy initializer: reads from localStorage synchronously to avoid flicker
@@ -38,8 +39,9 @@ function App() {
     <div className="App">
       <IntroScreen onComplete={handleIntroComplete} />
       <div style={{ opacity: showIntro ? 0 : 1, transition: 'opacity 0.5s ease' }}>
+        <ScrollProgress />
         <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <HeroSection isActive={!showIntro} />
+        <Hero isActive={!showIntro} />
         
         <ScrollReveal animation="fade-up" delay={100} duration={800}>
           <About />

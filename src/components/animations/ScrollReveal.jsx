@@ -12,9 +12,16 @@ const ScrollReveal = ({
   style = {},
 }) => {
   const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [prefersReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+  const [isVisible, setIsVisible] = useState(
+    () => prefersReducedMotion || !("IntersectionObserver" in window)
+  );
 
   useEffect(() => {
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) return;
+
     const element = ref.current;
     if (!element) return;
 
@@ -35,17 +42,22 @@ const ScrollReveal = ({
     observer.observe(element);
 
     return () => observer.disconnect();
-  }, [threshold, once]);
+  }, [threshold, once, prefersReducedMotion]);
 
   const animationStyles = {
-    opacity: 0,
-    transform: 'translateY(0)',
-    transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1), transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+    opacity: isVisible || prefersReducedMotion ? 1 : 0,
+    transform: prefersReducedMotion ? 'none' : 'translateY(0)',
+    transition: prefersReducedMotion
+      ? 'none'
+      : `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1), transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`,
     transitionDelay: `${delay}ms`,
     ...style,
   };
 
-  if (isVisible) {
+  if (prefersReducedMotion) {
+    animationStyles.opacity = 1;
+    animationStyles.transform = 'none';
+  } else if (isVisible) {
     animationStyles.opacity = 1;
     switch (animation) {
       case 'fade-up':

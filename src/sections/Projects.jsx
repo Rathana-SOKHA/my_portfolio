@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import '../styles/Projects.css';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from '../components/animations/ScrollReveal';
+import ParallaxImage from '../components/animations/ParallaxImage';
 import musicImage from '../assets/projects/music.png';
 import foodImage from '../assets/projects/food.png';
 import cleanImage from '../assets/projects/clean.png';
@@ -192,7 +193,7 @@ export default function Projects() {
                   </div>
 
                   {project.image ? (
-                    <img
+                    <ParallaxImage
                       src={project.image}
                       alt={project.title}
                       className="project-screenshot"

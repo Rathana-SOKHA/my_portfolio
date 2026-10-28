@@ -73,6 +73,26 @@
   -webkit-mask-image: radial-gradient(circle at 50% 50%, black 50%, transparent 95%);
 }
 
+.hero-atmosphere-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cyber-hero.is-visible .hero-atmosphere-canvas {
+  animation: atmosphere-fade-in 1s ease-out 3.1s both;
+}
+
+@keyframes atmosphere-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
 /* Technical Hairline Crosshair Coordinate Guides */
 .crosshair-guide {
   position: absolute;
@@ -1184,12 +1204,6 @@
     font-size: 0.65rem;
   }
 
-  .hud-mission-text {
-    font-size: 0.64rem;
-  }
-
-
-
   .portrait-container {
     height: 300px;
     max-width: 300px;
@@ -1283,6 +1297,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-atmosphere-canvas {
+    opacity: 1;
+  }
+
   .cyber-hero *,
   .cyber-hero *::before,
   .cyber-hero *::after {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Skills.css";
-import ScrollReveal from "./ScrollReveal";
+import ScrollReveal from "../components/animations/ScrollReveal";
 
 // ─── Inline SVG data URIs for real brand logos ──────────────────────
 const cssLogo = `data:image/svg+xml,${encodeURIComponent(

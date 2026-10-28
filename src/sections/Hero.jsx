@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/HeroSection.css";
 import profileCutout from "../assets/profile-cutout.png";
+import Button from "../components/ui/Button";
 
 const roleWords = ["FULL-STACK​​  -","-  DEVELOPER"];
 
@@ -9,6 +10,7 @@ export default function HeroSection({ isActive = true }) {
   const [activeDot, setActiveDot] = useState(0);
   const [isRoleVisible, setIsRoleVisible] = useState(false);
   const heroRef = useRef(null);
+  const atmosphereCanvasRef = useRef(null);
 
   useEffect(() => {
     if (!isActive) return;
@@ -76,6 +78,264 @@ export default function HeroSection({ isActive = true }) {
     };
   }, [isRoleVisible]);
 
+  useEffect(() => {
+    if (!isRoleVisible) return;
+
+    const canvas = atmosphereCanvasRef.current;
+    const hero = heroRef.current;
+    const context = canvas?.getContext("2d");
+    if (!canvas || !hero || !context) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const particleCount = isMobile ? 28 : 56;
+    const pulseCount = isMobile ? 3 : 4;
+    const gridSize = 85;
+    const randomBetween = (min, max) => min + Math.random() * (max - min);
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let frameId = 0;
+    let previousTime = 0;
+    let isInView = false;
+    let hasDrawnStatic = false;
+    let particles = [];
+    let pulses = [];
+
+    const isQuietZone = (x, y) => (
+      (x < width * 0.4 && y < height * 0.43)
+      || (x > width * 0.67 && y > height * 0.74)
+    );
+
+    const chooseNextPoint = (pulse) => {
+      const options = [
+        { x: pulse.x + gridSize, y: pulse.y, direction: "right" },
+        { x: pulse.x - gridSize, y: pulse.y, direction: "left" },
+        { x: pulse.x, y: pulse.y + gridSize, direction: "down" },
+        { x: pulse.x, y: pulse.y - gridSize, direction: "up" },
+      ].filter((point) => (
+        point.x >= 0 && point.x <= width
+        && point.y >= 0 && point.y <= height
+        && point.direction !== pulse.previousDirection
+      ));
+
+      const next = options[Math.floor(Math.random() * options.length)]
+        || { x: pulse.x, y: pulse.y, direction: "right" };
+      pulse.startX = pulse.x;
+      pulse.startY = pulse.y;
+      pulse.endX = next.x;
+      pulse.endY = next.y;
+      pulse.previousDirection = {
+        right: "left",
+        left: "right",
+        down: "up",
+        up: "down",
+      }[next.direction];
+      pulse.progress = 0;
+      pulse.speed = randomBetween(0.18, 0.42);
+    };
+
+    const resetScene = () => {
+      const bounds = hero.getBoundingClientRect();
+      width = bounds.width;
+      height = bounds.height;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      particles = Array.from({ length: particleCount }, () => ({
+        x: randomBetween(width * 0.25, width),
+        y: height - Math.pow(Math.random(), 1.7) * height,
+        radius: randomBetween(1, 3),
+        speed: randomBetween(7, 18),
+        sway: randomBetween(2, 10),
+        phase: randomBetween(0, Math.PI * 2),
+        opacity: randomBetween(0.25, 0.8),
+        green: randomBetween(115, 165),
+      }));
+
+      pulses = Array.from({ length: pulseCount }, () => {
+        const minColumn = Math.ceil(-width / (2 * gridSize));
+        const maxColumn = Math.floor(width / (2 * gridSize));
+        const minRow = Math.ceil(-height / (2 * gridSize));
+        const maxRow = Math.floor(height / (2 * gridSize));
+        const pulse = {
+          x: width / 2 + Math.round(randomBetween(minColumn, maxColumn)) * gridSize,
+          y: height / 2 + Math.round(randomBetween(minRow, maxRow)) * gridSize,
+          previousDirection: "",
+        };
+        chooseNextPoint(pulse);
+        pulse.progress = randomBetween(0, 1);
+        return pulse;
+      });
+
+      if (reducedMotion) {
+        drawScene(0, false);
+        hasDrawnStatic = true;
+      }
+    };
+
+    const drawOrb = (x, y, radius, alpha) => {
+      const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, `rgba(255, 112, 38, ${alpha})`);
+      gradient.addColorStop(0.45, `rgba(255, 153, 55, ${alpha * 0.42})`);
+      gradient.addColorStop(1, "rgba(255, 153, 55, 0)");
+      context.fillStyle = gradient;
+      context.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+    };
+
+    const drawPulse = (pulse, deltaSeconds, animate) => {
+      if (animate) {
+        pulse.progress += pulse.speed * deltaSeconds;
+        if (pulse.progress >= 1) {
+          pulse.x = pulse.endX;
+          pulse.y = pulse.endY;
+          chooseNextPoint(pulse);
+        }
+      }
+
+      const progress = animate ? pulse.progress : 0.45;
+      const x = pulse.startX + (pulse.endX - pulse.startX) * progress;
+      const y = pulse.startY + (pulse.endY - pulse.startY) * progress;
+      const dx = pulse.endX - pulse.startX;
+      const dy = pulse.endY - pulse.startY;
+      const length = Math.hypot(dx, dy) || 1;
+      const tailX = x - (dx / length) * 40;
+      const tailY = y - (dy / length) * 40;
+      const opacity = isQuietZone(x, y) ? 0.08 : 0.6;
+      const gradient = context.createLinearGradient(tailX, tailY, x, y);
+      gradient.addColorStop(0, "rgba(255, 105, 35, 0)");
+      gradient.addColorStop(0.72, `rgba(255, 127, 40, ${opacity * 0.45})`);
+      gradient.addColorStop(1, `rgba(255, 190, 100, ${opacity})`);
+      context.strokeStyle = gradient;
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(tailX, tailY);
+      context.lineTo(x, y);
+      context.stroke();
+      context.fillStyle = `rgba(255, 194, 116, ${opacity})`;
+      context.beginPath();
+      context.arc(x, y, 2, 0, Math.PI * 2);
+      context.fill();
+    };
+
+    const drawScene = (time, animate) => {
+      const deltaSeconds = previousTime
+        ? Math.min((time - previousTime) / 1000, 0.05)
+        : 0;
+      previousTime = time;
+      context.clearRect(0, 0, width, height);
+      context.save();
+
+      context.beginPath();
+      context.rect(0, 0, width, height);
+      context.rect(0, 0, width * 0.4, height * 0.43);
+      context.rect(width * 0.67, height * 0.74, width * 0.33, height * 0.26);
+      context.clip("evenodd");
+
+      const seconds = time / 1000;
+      drawOrb(
+        width * (0.47 + Math.sin(seconds * (Math.PI * 2 / 27)) * 0.035),
+        height * (0.58 + Math.cos(seconds * (Math.PI * 2 / 24)) * 0.035),
+        Math.min(width, height) * 0.33,
+        0.14
+      );
+      drawOrb(
+        width * (0.76 + Math.sin(seconds * (Math.PI * 2 / 22) + 2) * 0.04),
+        height * (0.43 + Math.cos(seconds * (Math.PI * 2 / 29) + 1) * 0.04),
+        Math.min(width, height) * 0.27,
+        0.11
+      );
+      if (!isMobile) {
+        drawOrb(
+          width * (0.34 + Math.sin(seconds * (Math.PI * 2 / 25) + 4) * 0.035),
+          height * 0.73,
+          Math.min(width, height) * 0.22,
+          0.1
+        );
+      }
+
+      particles.forEach((particle) => {
+        if (animate) {
+          particle.y -= particle.speed * deltaSeconds;
+          particle.phase += deltaSeconds * 0.7;
+          particle.x += Math.sin(particle.phase) * particle.sway * deltaSeconds;
+          if (particle.y < -4) {
+            particle.y = height - Math.pow(Math.random(), 1.7) * height;
+            particle.x = randomBetween(width * 0.25, width);
+          }
+        }
+
+        if (isQuietZone(particle.x, particle.y)) return;
+        const fade = 0.45 + Math.sin(particle.phase) * 0.25;
+        context.fillStyle = `rgba(255, ${particle.green}, 55, ${particle.opacity * fade})`;
+        context.beginPath();
+        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      pulses.forEach((pulse) => drawPulse(pulse, deltaSeconds, animate));
+      context.restore();
+
+      if (animate && isInView) {
+        frameId = window.requestAnimationFrame((nextTime) => drawScene(nextTime, true));
+      }
+    };
+
+    const startAnimation = () => {
+      if (reducedMotion || !isInView || frameId) return;
+      previousTime = 0;
+      frameId = window.requestAnimationFrame((time) => {
+        frameId = 0;
+        drawScene(time, true);
+      });
+    };
+
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver(([entry]) => {
+        isInView = entry.isIntersecting;
+        if (isInView) {
+          if (!reducedMotion) startAnimation();
+          else if (!hasDrawnStatic) drawScene(0, false);
+        } else {
+          window.cancelAnimationFrame(frameId);
+          frameId = 0;
+        }
+      }, { threshold: 0 })
+      : null;
+
+    const resizeObserver = "ResizeObserver" in window
+      ? new ResizeObserver(() => {
+        resetScene();
+        if (!reducedMotion && isInView) startAnimation();
+      })
+      : null;
+    const handleResize = () => {
+      resetScene();
+      if (!reducedMotion && isInView) startAnimation();
+    };
+
+    resetScene();
+    observer?.observe(hero);
+    resizeObserver?.observe(hero);
+    if (!resizeObserver) window.addEventListener("resize", handleResize);
+    if (!observer) {
+      isInView = true;
+      startAnimation();
+    }
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
+      resizeObserver?.disconnect();
+      if (!resizeObserver) window.removeEventListener("resize", handleResize);
+    };
+  }, [isRoleVisible]);
+
   return (
     <section
       className={`cyber-hero${isRoleVisible ? " is-visible" : ""}`}
@@ -85,6 +345,11 @@ export default function HeroSection({ isActive = true }) {
       {/* Background Ambience & Cyber Grid */}
       <div className="cyber-bg-atmosphere" />
       <div className="cyber-grid-lines" />
+      <canvas
+        className="hero-atmosphere-canvas"
+        ref={atmosphereCanvasRef}
+        aria-hidden="true"
+      />
 
       {/* Crosshair Guides */}
       <div className="crosshair-guide guide-top-center" />
@@ -200,10 +465,10 @@ export default function HeroSection({ isActive = true }) {
 
             {/* Primary Action Button */}
             <div className="hud-action-row">
-              <a href="#contact" className="cyber-btn-primary">
+              <Button href="#contact" className="cyber-btn-primary">
                 <span className="btn-text">LET'S BUILD SOMETHING GREAT</span>
                 <span className="btn-arrow">&gt;</span>
-              </a>
+              </Button>
             </div>
 
             {/* Quick Access Actions (Download CV & Socials) */}
