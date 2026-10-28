@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/HeroSection.css";
 import profileCutout from "../assets/profile-cutout.png";
 
-const roleText = "FULL-STACK   --   DEVELOPER";
+const roleText = "FULL-STACK  ---  DEVELOPER";
 
 export default function HeroSection() {
   const cvFilePath = "/CV & CL Rathana SOKHA.pdf";
