@@ -81,10 +81,6 @@ export default function IntroScreen({ onComplete }) {
         <div className="intro-hud-left">
           <span className="hud-cross">+</span>
         </div>
-        <div className="intro-hud-right">
-          <span className="hud-mono">LOC: PHNOM_PENH [KH]</span>
-          <span className="hud-cross">+</span>
-        </div>
       </div>
 
       {/* Center Console Box */}
