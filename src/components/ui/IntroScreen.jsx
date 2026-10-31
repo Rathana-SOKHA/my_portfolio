@@ -80,10 +80,6 @@ export default function IntroScreen({ onComplete }) {
       <div className="intro-top-hud">
         <div className="intro-hud-left">
           <span className="hud-cross">+</span>
-          <span className="hud-mono">SYS.BOOT // ARCHITECTURE_V2.0</span>
-          <span className="hud-status-badge">
-            <span className="hud-pulse-dot" /> LIVE
-          </span>
         </div>
         <div className="intro-hud-right">
           <span className="hud-mono">LOC: PHNOM_PENH [KH]</span>
