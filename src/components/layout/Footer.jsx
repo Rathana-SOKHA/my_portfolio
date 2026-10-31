@@ -17,12 +17,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: '01 // Home', url: '#home' },
-    { name: '02 // About', url: '#about' },
-    { name: '03 // Skills', url: '#skills' },
-    { name: '04 // Projects', url: '#projects' },
-    { name: '05 // Education', url: '#education' },
-    { name: '06 // Contact', url: '#contact' }
+    { name: 'Home', url: '#home' },
+    { name: 'About', url: '#about' },
+    { name: 'Skills', url: '#skills' },
+    { name: 'Projects', url: '#projects' },
+    { name: 'Education', url: '#education' }
   ];
 
   const socialLinks = [
