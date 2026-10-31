@@ -139,16 +139,8 @@ export default function IntroScreen({ onComplete }) {
 
       {/* Bottom HUD Telemetry Bar */}
       <div className="intro-bottom-hud">
-        <div className="hud-coordinates">
-          <span>LAT: 11.5564° N</span>
-          <span className="hud-separator">|</span>
-          <span>LON: 104.9282° E</span>
-        </div>
         <div className="hud-crosshairs">
           <span>+</span><span>+</span><span>+</span>
-        </div>
-        <div className="hud-build-id">
-          <span>BUILD: PRODUCTION_V2.0.4</span>
         </div>
       </div>
 
