@@ -1,49 +1,78 @@
-import { createElement } from "react";
+import React from "react";
 import { motion, useReducedMotion } from "motion/react";
 
-const ScrollReveal = ({
+const animationVariants = {
+  "fade-up": {
+    hidden: { opacity: 0, y: 36 },
+    visible: { opacity: 1, y: 0 },
+  },
+  "fade-down": {
+    hidden: { opacity: 0, y: -36 },
+    visible: { opacity: 1, y: 0 },
+  },
+  "fade-left": {
+    hidden: { opacity: 0, x: 40 },
+    visible: { opacity: 1, x: 0 },
+  },
+  "fade-right": {
+    hidden: { opacity: 0, x: -40 },
+    visible: { opacity: 1, x: 0 },
+  },
+  "zoom-in": {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1 },
+  },
+  "blur-in": {
+    hidden: { opacity: 0, filter: "blur(8px)", y: 20 },
+    visible: { opacity: 1, filter: "blur(0px)", y: 0 },
+  },
+  "fade": {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  },
+};
+
+export default function ScrollReveal({
   children,
   className = "",
   animation = "fade-up",
   delay = 0,
-  duration = 700,
+  duration = 0.65,
   threshold = 0.15,
+  margin = "0px 0px -40px 0px",
   once = true,
-  distance = "36px",
   style = {},
-}) => {
+  as = "div",
+}) {
   const shouldReduceMotion = useReducedMotion();
-  const initial = {
-    opacity: 0,
-    x: 0,
-    y: 0,
-    scale: 1,
-  };
+  const selectedVariant = animationVariants[animation] || animationVariants["fade-up"];
 
-  if (animation === "fade-up") initial.y = distance;
-  else if (animation === "fade-down") initial.y = `-${distance}`;
-  else if (animation === "fade-left") initial.x = distance;
-  else if (animation === "fade-right") initial.x = `-${distance}`;
-  else if (animation === "zoom-in") initial.scale = 0.85;
+  const MotionComponent = motion[as] || motion.div;
 
-  return createElement(
-    motion.div,
-    {
-      className: `scroll-reveal ${className}`,
-      initial: shouldReduceMotion ? false : initial,
-      whileInView: shouldReduceMotion
-        ? undefined
-        : { opacity: 1, x: 0, y: 0, scale: 1 },
-      viewport: { once, amount: threshold },
-      transition: {
-        duration: duration / 1000,
-        delay: delay / 1000,
+  if (shouldReduceMotion) {
+    const Component = as;
+    return (
+      <Component className={className} style={style}>
+        {children}
+      </Component>
+    );
+  }
+
+  return (
+    <MotionComponent
+      className={`scroll-reveal ${className}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, amount: threshold, margin }}
+      variants={selectedVariant}
+      transition={{
+        duration: typeof duration === "number" && duration > 10 ? duration / 1000 : duration,
+        delay: typeof delay === "number" && delay > 10 ? delay / 1000 : delay,
         ease: [0.22, 1, 0.36, 1],
-      },
-      style,
-    },
-    children
+      }}
+      style={style}
+    >
+      {children}
+    </MotionComponent>
   );
-};
-
-export default ScrollReveal;
+}

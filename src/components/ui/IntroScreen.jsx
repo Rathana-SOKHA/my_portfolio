@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../../styles/IntroScreen.css';
 
 export default function IntroScreen({ onComplete }) {
@@ -9,7 +9,7 @@ export default function IntroScreen({ onComplete }) {
   const hasFinishedRef = useRef(false);
 
   // Trigger completion
-  const finishIntro = () => {
+  const finishIntro = useCallback(() => {
     if (hasFinishedRef.current) return;
     hasFinishedRef.current = true;
     setProgress(100);
@@ -22,7 +22,7 @@ export default function IntroScreen({ onComplete }) {
         onComplete();
       }
     }, 600); // Wait for exit animation
-  };
+  }, [onComplete]);
 
   useEffect(() => {
     // Keyboard skip listener (Escape or Space or Enter)
@@ -60,7 +60,7 @@ export default function IntroScreen({ onComplete }) {
       clearInterval(interval);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [finishIntro]);
 
   if (isFinished) return null;
 

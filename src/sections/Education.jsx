@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring, useReducedMotion } from 'motion/react';
 import '../styles/Education.css';
 import ScrollReveal from '../components/animations/ScrollReveal';
 
@@ -32,6 +33,20 @@ const educationData = [
 ];
 
 export default function Education() {
+  const timelineRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 50%"],
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 250,
+    damping: 35,
+    restDelta: 0.001,
+  });
+
   return (
     <section className="cyber-education-section" id="education">
       {/* Background Grid & Ambience */}
@@ -39,27 +54,39 @@ export default function Education() {
       <div className="edu-ambient-glow" aria-hidden="true" />
 
       <div className="education-container">
-        {/* Section Header Tag */}
-        <div className="education-header-tag">
-          <span className="tag-cross">+</span>
-          <span className="tag-mono">// 05. ACADEMIC_TRAJECTORY</span>
-          <span className="tag-bracket">[ LEARNING_MILESTONES ]</span>
-        </div>
+        {/* Section Header Tag & Title */}
+        <ScrollReveal animation="fade-up" delay={0}>
+          <div className="education-header-tag">
+            <span className="tag-cross">+</span>
+            <span className="tag-mono">// 05. ACADEMIC_TRAJECTORY</span>
+            <span className="tag-bracket">[ LEARNING_MILESTONES ]</span>
+          </div>
 
-        <h2 className="education-main-title">
-          MY <span className="title-orange">EDUCATION JOURNEY</span>
-        </h2>
+          <h2 className="education-main-title">
+            MY <span className="title-orange">EDUCATION JOURNEY</span>
+          </h2>
+        </ScrollReveal>
 
         {/* Cyber Timeline */}
-        <div className="cyber-timeline">
-          <div className="timeline-axis" aria-hidden="true" />
+        <div className="cyber-timeline" ref={timelineRef}>
+          {/* Static axis track */}
+          <div className="timeline-axis" aria-hidden="true">
+            {/* Scroll-driven animated glowing progress axis */}
+            <motion.div
+              className="timeline-axis-fill"
+              style={{
+                scaleY: shouldReduceMotion ? 1 : scaleY,
+                transformOrigin: "top center",
+              }}
+            />
+          </div>
 
           {educationData.map((item, index) => (
             <ScrollReveal
               key={item.id}
               animation={index % 2 === 0 ? "fade-right" : "fade-left"}
-              delay={index * 120}
-              threshold={0.1}
+              delay={index * 140}
+              threshold={0.12}
             >
               <div className={`timeline-entry ${index % 2 === 0 ? "left-entry" : "right-entry"}`}>
                 {/* Timeline Center Node */}
@@ -126,26 +153,28 @@ export default function Education() {
         </div>
 
         {/* Section Footer HUD Readout */}
-        <div className="education-footer-hud">
-          <div className="hud-readout-left">
-            <span className="readout-cross">+</span>
-            <span className="readout-text">
-              TRAJECTORY_STATUS: <span className="readout-orange">CONTINUOUS LEARNING ACTIVE</span>
-            </span>
-          </div>
+        <ScrollReveal animation="fade-up" delay={150}>
+          <div className="education-footer-hud">
+            <div className="hud-readout-left">
+              <span className="readout-cross">+</span>
+              <span className="readout-text">
+                TRAJECTORY_STATUS: <span className="readout-orange">CONTINUOUS LEARNING ACTIVE</span>
+              </span>
+            </div>
 
-          <div className="hud-readout-center" aria-hidden="true">
-            <div className="crosshair-row">
-              <span>+</span><span>+</span><span>+</span>
+            <div className="hud-readout-center" aria-hidden="true">
+              <div className="crosshair-row">
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+
+            <div className="hud-readout-right" aria-hidden="true">
+              <div className="hud-slashes">
+                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
+              </div>
             </div>
           </div>
-
-          <div className="hud-readout-right" aria-hidden="true">
-            <div className="hud-slashes">
-              <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-            </div>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import "../../styles/Navbar.css";
 
 const navItems = [
@@ -27,7 +28,7 @@ export default function Navbar({ theme, toggleTheme }) {
       setIsScrolled(window.scrollY > 25);
 
       const sections = ["home", "about", "skills", "projects", "education", "contact"];
-      for (let section of sections) {
+      for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -47,51 +48,60 @@ export default function Navbar({ theme, toggleTheme }) {
   return (
     <header className="cyber-navbar-wrapper">
       <nav className={`cyber-navbar ${isScrolled ? "scrolled" : ""}`}>
-        {/* HUD Corner Brackets */}
-        <div className="nav-corner nav-corner-tl" aria-hidden="true" />
-        <div className="nav-corner nav-corner-tr" aria-hidden="true" />
-        <div className="nav-corner nav-corner-bl" aria-hidden="true" />
-        <div className="nav-corner nav-corner-br" aria-hidden="true" />
-
         <div className="cyber-navbar-container">
           {/* Cyber Brand Logo */}
           <div className="cyber-logo-wrapper">
             <a href="#home" className="cyber-logo" onClick={handleNavClick}>
-              {/* <span className="logo-bracket">[</span> */}
-              {/* <span className="logo-tag">&lt;/&gt;</span> */}
               <span className="logo-name">RATHANA</span>
               <span className="logo-accent">.DEV</span>
-              {/* <span className="logo-bracket">]</span> */}
             </a>
           </div>
 
-          {/* Navigation Links */}
-          <ul className={`cyber-nav-menu ${isOpen ? "active" : ""}`}>
-            {navItems.map((item) => (
-              <li key={item.id} className="cyber-nav-item">
-                <a
-                  href={`#${item.id}`}
-                  className={`cyber-nav-link ${activeSection === item.id ? "active" : ""}`}
-                  onClick={handleNavClick}
-                >
-                  <span className="nav-item-num">{item.num}</span>
-                  <span className="nav-item-slash">//</span>
-                  <span className="nav-item-label">{item.label}</span>
-                  {activeSection === item.id && <span className="nav-active-pip" />}
+          {/* Unified Navigation Capsule (Matching Reference Image) */}
+          <div className="cyber-capsule-wrapper">
+            <ul className={`cyber-nav-menu ${isOpen ? "active" : ""}`}>
+              {navItems.map((item) => (
+                <li key={item.id} className="cyber-nav-item">
+                  <a
+                    href={`#${item.id}`}
+                    className={`cyber-nav-link ${activeSection === item.id ? "active" : ""}`}
+                    onClick={handleNavClick}
+                  >
+                    <span className="nav-item-num">{item.num}</span>
+                    <span className="nav-item-slash">//</span>
+                    <span className="nav-item-label">{item.label}</span>
+                    {activeSection === item.id && (
+                      <motion.span
+                        className="nav-active-pip"
+                        layoutId="activeNavPip"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </a>
+                </li>
+              ))}
+
+              {/* Slanted Vents Chamber (Desktop only inside capsule) */}
+              <li className="cyber-nav-vents-item" aria-hidden="true">
+                <div className="capsule-vents-grill">
+                  <span className="vent-bar" />
+                  <span className="vent-bar" />
+                  <span className="vent-bar" />
+                  <span className="vent-bar" />
+                </div>
+              </li>
+
+              {/* Golden Pill Hire Me CTA Button */}
+              <li className="cyber-nav-cta-item">
+                <a href="#contact" className="nav-capsule-cta" onClick={handleNavClick}>
+                  <span className="capsule-cta-text">HIRE ME</span>
+                  <span className="capsule-cta-arrow">&gt;</span>
                 </a>
               </li>
-            ))}
+            </ul>
+          </div>
 
-            {/* Mobile-Only Actions inside dropdown */}
-            <li className="cyber-nav-item mobile-only-cta">
-              <a href="#contact" className="cyber-hire-btn mobile-btn" onClick={handleNavClick}>
-                <span className="hire-btn-text">LET'S TALK</span>
-                <span className="hire-btn-arrow">&gt;</span>
-              </a>
-            </li>
-          </ul>
-
-          {/* Right Action Group */}
+          {/* Right Action Group: Theme Toggle & Mobile Hamburger */}
           <div className="cyber-nav-actions">
             {/* Theme Toggle */}
             <button
@@ -107,13 +117,7 @@ export default function Navbar({ theme, toggleTheme }) {
               </span>
             </button>
 
-            {/* Desktop CTA Button */}
-            <a href="#contact" className="cyber-hire-btn desktop-btn" onClick={handleNavClick}>
-              <span className="hire-btn-text">HIRE ME</span>
-              <span className="hire-btn-arrow">&gt;</span>
-            </a>
-
-            {/* Hamburger Button */}
+            {/* Mobile Hamburger Button */}
             <button
               className={`cyber-hamburger ${isOpen ? "active" : ""}`}
               onClick={toggleMenu}

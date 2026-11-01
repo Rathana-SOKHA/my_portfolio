@@ -1,13 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import '../styles/Projects.css';
 import ScrollReveal from '../components/animations/ScrollReveal';
 import ParallaxImage from '../components/animations/ParallaxImage';
 import musicImage from '../assets/projects/music.png';
 import foodImage from '../assets/projects/food.png';
-import cleanImage from '../assets/projects/clean.png';
 import pncImage from '../assets/projects/pnc_life.png';
-import folioImage from '../assets/projects/folio.png';
-import folioNowImage from '../assets/projects/folio_now.png';
 import pncSelectionImage from "../assets/projects/pncSelection.png";
 import ecommerceImage from "../assets/projects/ecommerce.png";
 import elearningImage from "../assets/projects/elearning.png";
@@ -118,6 +116,7 @@ export default function Projects() {
       project.type,
       ...project.tech,
     ].join(' ').toLowerCase();
+
     return matchesCategory && searchableText.includes(normalizedQuery);
   });
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
@@ -181,57 +180,73 @@ export default function Projects() {
       <div className="projects-ambient-glow" aria-hidden="true" />
 
       <div className="projects-container">
-        {/* Section Header Tag */}
-        <div className="projects-header-tag">
-          <span className="tag-cross">+</span>
-          <span className="tag-mono">// 04. FEATURED_BUILDS</span>
-          <span className="tag-bracket">[ DEPLOYED_WORK ]</span>
-        </div>
-
-        <h2 className="projects-main-title">
-          FEATURED <span className="title-orange">PROJECTS</span>
-        </h2>
-
-        <div className="projects-controls">
-          <div className="projects-filter-list" role="group" aria-label="Filter projects by category">
-            {projectFilters.map((filter) => {
-              const count = filter.id === 'ALL'
-                ? projects.length
-                : projects.filter((project) => project.category === filter.id).length;
-
-              return (
-                <button
-                  key={filter.id}
-                  type="button"
-                  className={`projects-filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
-                  onClick={() => selectFilter(filter.id)}
-                  aria-pressed={activeFilter === filter.id}
-                >
-                  <span>{filter.label}</span>
-                  <span className="projects-filter-count">{count.toString().padStart(2, '0')}</span>
-                </button>
-              );
-            })}
+        {/* Section Header Tag & Title */}
+        <ScrollReveal animation="fade-up" delay={0}>
+          <div className="projects-header-tag">
+            <span className="tag-cross">+</span>
+            <span className="tag-mono">// 04. FEATURED_BUILDS</span>
+            <span className="tag-bracket">[ DEPLOYED_WORK ]</span>
           </div>
 
-          <label className="projects-search">
-            <svg className="projects-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="10.8" cy="10.8" r="6.8" />
-              <path d="m16 16 4.2 4.2" />
-            </svg>
-            <span className="visually-hidden">Search projects by name or technology</span>
-            <input
-              type="search"
-              value={searchQuery}
-              onChange={updateSearchQuery}
-              placeholder="SEARCH PROJECTS..."
-            />
-          </label>
-        </div>
+          <h2 className="projects-main-title">
+            FEATURED <span className="title-orange">PROJECTS</span>
+          </h2>
+        </ScrollReveal>
 
-        <p className="projects-results-count" aria-live="polite">
-          SHOWING <span>{currentProjects.length}</span> OF <span>{filteredProjects.length}</span> PROJECTS
-        </p>
+        {/* Interactive project filters and search */}
+        <ScrollReveal animation="fade-up" delay={100}>
+          <div className="projects-controls">
+            <div className="projects-filter-list" role="group" aria-label="Filter projects by category">
+              {projectFilters.map((filter) => {
+                const count = filter.id === 'ALL'
+                  ? projects.length
+                  : projects.filter((project) => project.category === filter.id).length;
+
+                return (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    className={`projects-filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
+                    onClick={() => selectFilter(filter.id)}
+                    aria-pressed={activeFilter === filter.id}
+                  >
+                    <span>{filter.label}</span>
+                    <span className="projects-filter-count">{count.toString().padStart(2, '0')}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <label className="projects-search">
+              <svg className="projects-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.8" />
+                <path d="m16 16 4.2 4.2" />
+              </svg>
+              <input
+                type="search"
+                className="projects-search-input"
+                placeholder="Search projects by tech, keyword..."
+                value={searchQuery}
+                onChange={updateSearchQuery}
+                aria-label="Search projects by name or technology"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="projects-search-clear"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </label>
+          </div>
+
+          <p className="projects-results-count" aria-live="polite">
+            SHOWING <span>{currentProjects.length}</span> OF <span>{filteredProjects.length}</span> PROJECTS
+          </p>
+        </ScrollReveal>
 
         {/* Projects Grid */}
         <div className="projects-grid" aria-live="polite">
@@ -239,7 +254,7 @@ export default function Projects() {
             <ScrollReveal
               key={project.id}
               animation="fade-up"
-              delay={index * 80}
+              delay={index * 60}
               threshold={0.08}
             >
               <article className="cyber-project-card">
@@ -344,135 +359,154 @@ export default function Projects() {
 
         {/* Cyber Pagination */}
         {totalPages > 1 && (
-          <div className="projects-pagination">
-            <button
-              className={`pagination-cyber-btn ${currentPage === 1 ? 'disabled' : ''}`}
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              aria-label="Previous page"
-            >
-              <span className="btn-bracket">[</span>
-              <span>&lt; PREV</span>
-              <span className="btn-bracket">]</span>
-            </button>
+          <ScrollReveal animation="fade-up" delay={100}>
+            <div className="projects-pagination">
+              <button
+                className={`pagination-cyber-btn ${currentPage === 1 ? 'disabled' : ''}`}
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                aria-label="Previous page"
+              >
+                <span className="btn-bracket">[</span>
+                <span>&lt; PREV</span>
+                <span className="btn-bracket">]</span>
+              </button>
 
-            <div className="pagination-numbers">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  className={`pagination-num-btn ${currentPage === page ? 'active' : ''}`}
-                  onClick={() => setCurrentPage(page)}
-                  aria-label={`Go to page ${page}`}
-                  aria-current={currentPage === page ? 'page' : undefined}
-                >
-                  {page < 10 ? `0${page}` : page}
-                </button>
-              ))}
+              <div className="pagination-numbers">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    className={`pagination-number-btn ${currentPage === page ? 'active' : ''}`}
+                    onClick={() => setCurrentPage(page)}
+                    aria-current={currentPage === page ? 'page' : undefined}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                className={`pagination-cyber-btn ${currentPage === totalPages ? 'disabled' : ''}`}
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                aria-label="Next page"
+              >
+                <span className="btn-bracket">[</span>
+                <span>NEXT &gt;</span>
+                <span className="btn-bracket">]</span>
+              </button>
             </div>
-
-            <button
-              className={`pagination-cyber-btn ${currentPage === totalPages ? 'disabled' : ''}`}
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              aria-label="Next page"
-            >
-              <span className="btn-bracket">[</span>
-              <span>NEXT &gt;</span>
-              <span className="btn-bracket">]</span>
-            </button>
-          </div>
+          </ScrollReveal>
         )}
 
         {/* Section Footer HUD Readout */}
-        <div className="projects-footer-hud">
-          <div className="hud-readout-left">
-            <span className="readout-cross">+</span>
-            <span className="readout-text">
-              WORKSPACE_METRICS: <span className="readout-orange">{projects.length} PROJECTS CATALOGED</span>
-            </span>
-          </div>
+        <ScrollReveal animation="fade-up" delay={150}>
+          <div className="projects-footer-hud">
+            <div className="hud-readout-left">
+              <span className="readout-cross">+</span>
+              <span className="readout-text">
+                WORKSPACE_METRICS: <span className="readout-orange">{projects.length} PROJECTS CATALOGED</span>
+              </span>
+            </div>
 
-          <div className="hud-readout-center" aria-hidden="true">
-            <div className="crosshair-row">
-              <span>+</span><span>+</span><span>+</span>
+            <div className="hud-readout-center" aria-hidden="true">
+              <div className="crosshair-row">
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+
+            <div className="hud-readout-right" aria-hidden="true">
+              <div className="hud-slashes">
+                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
+              </div>
             </div>
           </div>
-
-          <div className="hud-readout-right" aria-hidden="true">
-            <div className="hud-slashes">
-              <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-            </div>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
 
-      {/* ===== High-Tech Repo Selection Modal ===== */}
-      {modalOpen && modalProject && (
-        <div className="cyber-modal-overlay" onClick={closeModal}>
-          <div className="cyber-modal-dialog" onClick={(e) => e.stopPropagation()}>
-            {/* Modal HUD Corner Brackets */}
-            <div className="corner-bracket corner-top-left" />
-            <div className="corner-bracket corner-top-right" />
-            <div className="corner-bracket corner-bottom-left" />
-            <div className="corner-bracket corner-bottom-right" />
+      {/* ===== High-Tech Repo Selection Modal with AnimatePresence ===== */}
+      <AnimatePresence>
+        {modalOpen && modalProject && (
+          <motion.div
+            className="cyber-modal-overlay"
+            onClick={closeModal}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="cyber-modal-dialog"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Modal HUD Corner Brackets */}
+              <div className="corner-bracket corner-top-left" />
+              <div className="corner-bracket corner-top-right" />
+              <div className="corner-bracket corner-bottom-left" />
+              <div className="corner-bracket corner-bottom-right" />
 
-            {/* Close Button */}
-            <button className="cyber-modal-close" onClick={closeModal} aria-label="Close modal">
-              ✕
-            </button>
+              {/* Close Button */}
+              <button className="cyber-modal-close" onClick={closeModal} aria-label="Close modal">
+                ✕
+              </button>
 
-            {/* Modal Header */}
-            <div className="cyber-modal-header">
-              <span className="modal-header-tag">// REPO_SOURCE_SELECTOR</span>
-              <h3 className="cyber-modal-title">{modalProject.title}</h3>
-              <p className="cyber-modal-subtitle">Choose repository module to explore on GitHub:</p>
-            </div>
+              {/* Modal Header */}
+              <div className="cyber-modal-header">
+                <span className="modal-header-tag">// REPO_SOURCE_SELECTOR</span>
+                <h3 className="cyber-modal-title">{modalProject.title}</h3>
+                <p className="cyber-modal-subtitle">Choose repository module to explore on GitHub:</p>
+              </div>
 
-            {/* Repo Options */}
-            <div className="cyber-modal-options">
-              {modalProject.github.frontend && (
-                <a
-                  href={modalProject.github.frontend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cyber-repo-option"
-                >
-                  <div className="repo-badge frontend-badge">
-                    <span>FRONTEND</span>
-                  </div>
-                  <div className="repo-info-col">
-                    <span className="repo-role-label">Client Interface Repository</span>
-                    <span className="repo-slug-text">
-                      {modalProject.github.frontend.replace('https://github.com/', '')}
-                    </span>
-                  </div>
-                  <span className="repo-arrow-action">&gt;</span>
-                </a>
-              )}
+              {/* Repo Options */}
+              <div className="cyber-modal-options">
+                {modalProject.github.frontend && (
+                  <a
+                    href={modalProject.github.frontend}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cyber-repo-option"
+                  >
+                    <div className="repo-badge frontend-badge">
+                      <span>FRONTEND</span>
+                    </div>
+                    <div className="repo-info-col">
+                      <span className="repo-role-label">Client Interface Repository</span>
+                      <span className="repo-slug-text">
+                        {modalProject.github.frontend.replace('https://github.com/', '')}
+                      </span>
+                    </div>
+                    <span className="repo-arrow-action">&gt;</span>
+                  </a>
+                )}
 
-              {modalProject.github.backend && (
-                <a
-                  href={modalProject.github.backend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cyber-repo-option"
-                >
-                  <div className="repo-badge backend-badge">
-                    <span>BACKEND</span>
-                  </div>
-                  <div className="repo-info-col">
-                    <span className="repo-role-label">Server & API Repository</span>
-                    <span className="repo-slug-text">
-                      {modalProject.github.backend.replace('https://github.com/', '')}
-                    </span>
-                  </div>
-                  <span className="repo-arrow-action">&gt;</span>
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+                {modalProject.github.backend && (
+                  <a
+                    href={modalProject.github.backend}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cyber-repo-option"
+                  >
+                    <div className="repo-badge backend-badge">
+                      <span>BACKEND</span>
+                    </div>
+                    <div className="repo-info-col">
+                      <span className="repo-role-label">Server & API Repository</span>
+                      <span className="repo-slug-text">
+                        {modalProject.github.backend.replace('https://github.com/', '')}
+                      </span>
+                    </div>
+                    <span className="repo-arrow-action">&gt;</span>
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

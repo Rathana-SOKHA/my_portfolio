@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "motion/react";
 import "../styles/Skills.css";
 import ScrollReveal from "../components/animations/ScrollReveal";
 
@@ -99,35 +100,35 @@ const skillCategories = [
     label: "Backend",
     tagline: "SERVER, APIS & SERVICES",
     skills: [
-      { name: "PHP (MVC)", icon: phpLogo, proficiency: 85, level: "Advanced", color: "#6181B6", glow: "rgba(97,129,182,0.35)" },
-      { name: "Laravel", icon: "laravel", proficiency: 85, level: "Advanced", color: "#FF2D20", glow: "rgba(255,45,32,0.35)" },
-      { name: "Node.js", icon: nodejsLogo, proficiency: 75, level: "Proficient", color: "#67BA67", glow: "rgba(103,186,103,0.35)" },
-      { name: "OOP TypeScript", icon: typescriptLogo, proficiency: 80, level: "Proficient", color: "#3178C6", glow: "rgba(49,120,198,0.35)" },
-      { name: "Python", icon: pythonImg, proficiency: 55, level: "Intermediate", color: "#3776AB", glow: "rgba(55,118,171,0.35)" },
-      { name: "Java", icon: javaLogo, proficiency: 55, level: "Intermediate", color: "#ED8B00", glow: "rgba(237,139,0,0.35)" },
+      { name: "PHP", icon: phpLogo, proficiency: 80, level: "Proficient", color: "#777BB4", glow: "rgba(119,123,180,0.35)" },
+      { name: "Laravel", icon: "laravel", proficiency: 80, level: "Proficient", color: "#FF2D20", glow: "rgba(255,45,32,0.35)" },
+      { name: "Node.js", icon: nodejsLogo, proficiency: 75, level: "Proficient", color: "#5FA04E", glow: "rgba(95,160,78,0.35)" },
+      { name: "TypeScript", icon: typescriptLogo, proficiency: 75, level: "Proficient", color: "#3178C6", glow: "rgba(49,120,198,0.35)" },
+      { name: "Python", icon: "python", proficiency: 70, level: "Competent", color: "#3776AB", glow: "rgba(55,118,171,0.35)" },
+      { name: "Java", icon: "java", proficiency: 65, level: "Competent", color: "#ED8B00", glow: "rgba(237,139,0,0.35)" },
     ],
   },
   {
     id: "database",
     code: "CAT_03",
     label: "Database",
-    tagline: "PERSISTENCE & SCHEMAS",
+    tagline: "STORAGE & DATA MODELING",
     skills: [
-      { name: "MySQL", icon: mysqlLogo, proficiency: 90, level: "Advanced", color: "#00758F", glow: "rgba(0,117,143,0.35)" },
-      { name: "MongoDB", icon: mongodbLogo, proficiency: 80, level: "Proficient", color: "#43A447", glow: "rgba(67,164,71,0.35)" },
-      { name: "PostgreSQL", icon: postgresqlLogo, proficiency: 65, level: "Intermediate", color: "#336791", glow: "rgba(51,103,145,0.35)" },
+      { name: "MySQL", icon: mysqlLogo, proficiency: 80, level: "Proficient", color: "#4479A1", glow: "rgba(68,121,161,0.35)" },
+      { name: "MongoDB", icon: mongodbLogo, proficiency: 70, level: "Competent", color: "#47A248", glow: "rgba(71,162,72,0.35)" },
+      { name: "PostgreSQL", icon: postgresqlLogo, proficiency: 65, level: "Competent", color: "#336791", glow: "rgba(51,103,145,0.35)" },
     ],
   },
   {
     id: "tools",
     code: "CAT_04",
-    label: "Dev Tools",
-    tagline: "WORKFLOW & PIPELINES",
+    label: "Tools & DevOps",
+    tagline: "WORKFLOW & DEPLOYMENT",
     skills: [
-      { name: "Git & GitHub", icon: gitLogo, proficiency: 90, level: "Advanced", color: "#F34F29", glow: "rgba(243,79,41,0.35)" },
-      { name: "Postman", icon: postmanLogo, proficiency: 90, level: "Advanced", color: "#FF6C37", glow: "rgba(255,108,55,0.35)" },
-      { name: "VS Code", icon: vscodeLogo, proficiency: 95, level: "Advanced", color: "#007ACC", glow: "rgba(0,122,204,0.35)" },
-      { name: "Jira", icon: jiraLogo, proficiency: 80, level: "Proficient", color: "#0052CC", glow: "rgba(0,82,204,0.35)" },
+      { name: "Git", icon: gitLogo, proficiency: 80, level: "Proficient", color: "#F05032", glow: "rgba(240,80,50,0.35)" },
+      { name: "Jira", icon: jiraLogo, proficiency: 70, level: "Competent", color: "#0052CC", glow: "rgba(0,82,204,0.35)" },
+      { name: "Postman", icon: postmanLogo, proficiency: 75, level: "Proficient", color: "#FF6C37", glow: "rgba(255,108,55,0.35)" },
+      { name: "VS Code", icon: vscodeLogo, proficiency: 85, level: "Advanced", color: "#007ACC", glow: "rgba(0,122,204,0.35)" },
     ],
   },
 ];
@@ -138,52 +139,60 @@ export default function Skills() {
   const filteredCategories =
     activeTab === "all"
       ? skillCategories
-      : skillCategories.filter((cat) => cat.id === activeTab);
+      : skillCategories.filter((c) => c.id === activeTab);
 
   return (
     <section className="cyber-skills-section" id="skills">
-      {/* Background Grid & Ambience */}
+      {/* Background Ambience & Grid */}
       <div className="skills-bg-grid" aria-hidden="true" />
       <div className="skills-ambient-glow" aria-hidden="true" />
 
       <div className="skills-container">
-        {/* Section Header Tag */}
-        <div className="skills-header-tag">
-          <span className="tag-cross">+</span>
-          <span className="tag-mono">// 03. TECHNICAL_ARSENAL</span>
-          <span className="tag-bracket">[ STACK_MATRIX ]</span>
-        </div>
+        {/* Section Header Tag & Title */}
+        <ScrollReveal animation="fade-up" delay={0}>
+          <div className="skills-header-tag">
+            <span className="tag-cross">+</span>
+            <span className="tag-mono">// 03. TECHNICAL_ARSENAL</span>
+            <span className="tag-bracket">[ CAPABILITIES ]</span>
+          </div>
 
-        <h2 className="skills-main-title">
-          EXPLORING MY <span className="title-orange">TECH SKILLS</span>
-        </h2>
+          <h2 className="skills-main-title">
+            SKILLS & <span className="title-orange">EXPERTISE</span>
+          </h2>
+        </ScrollReveal>
 
         {/* Cyber Filter Navigation */}
-        <div className="skills-filter-bar">
-          <button
-            type="button"
-            className={`filter-btn ${activeTab === "all" ? "active" : ""}`}
-            onClick={() => setActiveTab("all")}
-          >
-            <span className="btn-bracket">[</span>
-            <span className="btn-name">ALL_MODULES</span>
-            <span className="btn-bracket">]</span>
-          </button>
-
-          {skillCategories.map((cat) => (
+        <ScrollReveal animation="fade-up" delay={100}>
+          <div className="skills-filter-bar" role="tablist" aria-label="Skill category filter">
             <button
-              key={cat.id}
               type="button"
-              className={`filter-btn ${activeTab === cat.id ? "active" : ""}`}
-              onClick={() => setActiveTab(cat.id)}
+              className={`filter-btn ${activeTab === "all" ? "active" : ""}`}
+              onClick={() => setActiveTab("all")}
+              aria-selected={activeTab === "all"}
+              role="tab"
             >
               <span className="btn-bracket">[</span>
-              <span className="cat-code">{cat.code} //</span>
-              <span className="btn-name">{cat.label.toUpperCase()}</span>
+              <span className="btn-name">ALL_MODULES</span>
               <span className="btn-bracket">]</span>
             </button>
-          ))}
-        </div>
+
+            {skillCategories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                className={`filter-btn ${activeTab === cat.id ? "active" : ""}`}
+                onClick={() => setActiveTab(cat.id)}
+                aria-selected={activeTab === cat.id}
+                role="tab"
+              >
+                <span className="btn-bracket">[</span>
+                <span className="cat-code">{cat.code} //</span>
+                <span className="btn-name">{cat.label.toUpperCase()}</span>
+                <span className="btn-bracket">]</span>
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
 
         {/* Multi-Column HUD Grid */}
         <div className="skills-hud-grid">
@@ -217,7 +226,7 @@ export default function Skills() {
                     <ScrollReveal
                       key={`${category.id}-${skill.name}`}
                       animation="fade-up"
-                      delay={index * 50}
+                      delay={index * 45}
                       threshold={0.08}
                     >
                       <article
@@ -242,9 +251,23 @@ export default function Skills() {
                           <span className="skill-pct-value">{skill.proficiency}%</span>
                         </div>
 
-                        {/* Cyber Segmented Progress Track */}
+                        {/* Cyber Segmented Progress Track with scroll-driven fill */}
                         <div className="cyber-progress-track">
-                          <div className="cyber-progress-fill" />
+                          <motion.div
+                            className="cyber-progress-fill"
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{
+                              duration: 0.85,
+                              delay: 0.1 + index * 0.04,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
+                            style={{
+                              transformOrigin: "left center",
+                              width: `${skill.proficiency}%`,
+                            }}
+                          />
                         </div>
                       </article>
                     </ScrollReveal>
@@ -256,26 +279,28 @@ export default function Skills() {
         </div>
 
         {/* Section Bottom Readout HUD */}
-        <div className="skills-footer-hud">
-          <div className="hud-readout-left">
-            <span className="readout-cross">+</span>
-            <span className="readout-text">
-              ARSENAL_STATUS: <span className="readout-green">● OPTIMIZED FOR PRODUCTION</span>
-            </span>
-          </div>
+        <ScrollReveal animation="fade-up" delay={200}>
+          <div className="skills-footer-hud">
+            <div className="hud-readout-left">
+              <span className="readout-cross">+</span>
+              <span className="readout-text">
+                ARSENAL_STATUS: <span className="readout-green">● OPTIMIZED FOR PRODUCTION</span>
+              </span>
+            </div>
 
-          <div className="hud-readout-center" aria-hidden="true">
-            <div className="crosshair-row">
-              <span>+</span><span>+</span><span>+</span>
+            <div className="hud-readout-center" aria-hidden="true">
+              <div className="crosshair-row">
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+
+            <div className="hud-readout-right" aria-hidden="true">
+              <div className="hud-slashes">
+                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
+              </div>
             </div>
           </div>
-
-          <div className="hud-readout-right" aria-hidden="true">
-            <div className="hud-slashes">
-              <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-            </div>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

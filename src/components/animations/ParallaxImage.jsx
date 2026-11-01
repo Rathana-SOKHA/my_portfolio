@@ -1,61 +1,50 @@
-import { useEffect, useRef } from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "motion/react";
 import "../../styles/ParallaxImage.css";
 
 export default function ParallaxImage({
   alt,
   className = "",
-  speed = 0.08,
+  speed = 0.15,
   ...imageProps
 }) {
-  const wrapperRef = useRef(null);
+  const containerRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    if (reducedMotion || isMobile) return;
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 300,
+    damping: 40,
+    restDelta: 0.001,
+  });
 
-    let isVisible = false;
-    let frameId = 0;
+  // Calculate parallax offset: from speed * 30px to -speed * 30px
+  const y = useTransform(smoothProgress, [0, 1], [`${speed * 40}px`, `-${speed * 40}px`]);
 
-    const updatePosition = () => {
-      frameId = 0;
-      if (!isVisible) return;
-
-      const bounds = wrapper.getBoundingClientRect();
-      const distanceFromCenter = bounds.top + bounds.height / 2 - window.innerHeight / 2;
-      const offset = Math.max(-18, Math.min(18, -distanceFromCenter * speed));
-      wrapper.style.transform = `translate3d(0, ${offset}px, 0)`;
-    };
-
-    const scheduleUpdate = () => {
-      if (isVisible && !frameId) frameId = window.requestAnimationFrame(updatePosition);
-    };
-
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-      if (isVisible) scheduleUpdate();
-    }, { rootMargin: "100px 0px" });
-
-    observer.observe(wrapper);
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-
-    return () => {
-      observer.disconnect();
-      window.cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-    };
-  }, [speed]);
+  if (shouldReduceMotion) {
+    return (
+      <div className="parallax-image" ref={containerRef}>
+        <img {...imageProps} alt={alt} className={className} />
+      </div>
+    );
+  }
 
   return (
-    <div className="parallax-image" ref={wrapperRef}>
-      <img {...imageProps} alt={alt} className={className} />
+    <div className="parallax-image" ref={containerRef} style={{ overflow: "hidden" }}>
+      <motion.img
+        {...imageProps}
+        alt={alt}
+        className={className}
+        style={{
+          y,
+          scale: 1.08,
+          willChange: "transform",
+        }}
+      />
     </div>
   );
 }

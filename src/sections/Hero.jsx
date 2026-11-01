@@ -3,36 +3,37 @@ import "../styles/HeroSection.css";
 import profileCutout from "../assets/profile-cutout.png";
 import Button from "../components/ui/Button";
 
-const roleWords = ["FULL-STACK​​  -","-  DEVELOPER"];
-
 export default function HeroSection({ isActive = true }) {
   const cvFilePath = "/CV & CL Rathana SOKHA.pdf";
-  const [activeDot, setActiveDot] = useState(0);
-  const [isRoleVisible, setIsRoleVisible] = useState(false);
+  const [isRoleVisible, setIsRoleVisible] = useState(() => (
+    typeof window !== "undefined" ? !("IntersectionObserver" in window) : true
+  ));
   const heroRef = useRef(null);
-  const atmosphereCanvasRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive || isRoleVisible) return;
 
     const hero = heroRef.current;
     if (!hero) return;
 
-    if (!("IntersectionObserver" in window)) {
-      return;
-    }
+    if (!("IntersectionObserver" in window)) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsRoleVisible(true);
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsRoleVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
 
     observer.observe(hero);
     return () => observer.disconnect();
-  }, [isActive]);
+  }, [isActive, isRoleVisible]);
 
+  // Scroll effect on typography & portrait
   useEffect(() => {
     if (!isRoleVisible) return;
 
@@ -47,292 +48,338 @@ export default function HeroSection({ isActive = true }) {
     const updateScrollProgress = () => {
       const { top, height } = hero.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, -top / (height * 0.75)));
-      hero.style.setProperty("--first-word-offset", `${-progress * 80}px`);
-      hero.style.setProperty("--second-word-offset", `${progress * 80}px`);
-      hero.style.setProperty("--portrait-scale", `${1 + progress * 0.08}`);
-      hero.style.setProperty("--portrait-opacity", `${1 - progress}`);
+      hero.style.setProperty("--hero-scroll-y", `${progress * 60}px`);
+      hero.style.setProperty("--portrait-scale", `${1 + progress * 0.05}`);
+      hero.style.setProperty("--portrait-opacity", `${1 - progress * 0.9}`);
+      hero.style.setProperty("--hud-scroll-opacity", `${Math.max(0, 1 - progress * 2.2)}`);
     };
 
     updateScrollProgress();
     window.addEventListener("scroll", updateScrollProgress, { passive: true });
 
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const updateSpotlight = (event) => {
-      if (event.pointerType !== "mouse") return;
-      const bounds = hero.getBoundingClientRect();
-      hero.style.setProperty(
-        "--spotlight-offset-x",
-        `${event.clientX - bounds.left - bounds.width / 2}px`
-      );
-      hero.style.setProperty(
-        "--spotlight-offset-y",
-        `${event.clientY - bounds.top - bounds.height * 0.45}px`
-      );
-    };
-
-    if (canHover) hero.addEventListener("pointermove", updateSpotlight);
-
     return () => {
       window.removeEventListener("scroll", updateScrollProgress);
-      if (canHover) hero.removeEventListener("pointermove", updateSpotlight);
     };
   }, [isRoleVisible]);
 
+  // Procedural Canvas: Golden Torus Ribbon Halo & PCB Circuit Board Traces
   useEffect(() => {
     if (!isRoleVisible) return;
 
-    const canvas = atmosphereCanvasRef.current;
+    const canvas = canvasRef.current;
     const hero = heroRef.current;
-    const context = canvas?.getContext("2d");
-    if (!canvas || !hero || !context) return;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !hero || !ctx) return;
 
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const particleCount = isMobile ? 28 : 56;
-    const pulseCount = isMobile ? 3 : 4;
-    const gridSize = 85;
-    const randomBetween = (min, max) => min + Math.random() * (max - min);
 
     let width = 0;
     let height = 0;
     let dpr = 1;
-    let frameId = 0;
-    let previousTime = 0;
-    let isInView = false;
-    let hasDrawnStatic = false;
-    let particles = [];
-    let pulses = [];
+    let animId = 0;
+    let isInView = true;
 
-    const isQuietZone = (x, y) => (
-      (x < width * 0.4 && y < height * 0.43)
-      || (x > width * 0.67 && y > height * 0.74)
-    );
+    // Fixed PCB traces definition relative to canvas bounds
+    let pcbTraces = [];
+    let pcbNodes = [];
+    let haloParticles = [];
 
-    const chooseNextPoint = (pulse) => {
-      const options = [
-        { x: pulse.x + gridSize, y: pulse.y, direction: "right" },
-        { x: pulse.x - gridSize, y: pulse.y, direction: "left" },
-        { x: pulse.x, y: pulse.y + gridSize, direction: "down" },
-        { x: pulse.x, y: pulse.y - gridSize, direction: "up" },
-      ].filter((point) => (
-        point.x >= 0 && point.x <= width
-        && point.y >= 0 && point.y <= height
-        && point.direction !== pulse.previousDirection
-      ));
+    const initPCBAndHalo = (w, h) => {
+      // Create glowing PCB tracks mimicking the reference image
+      const centerY = h * 0.46;
+      const trackDefs = [
+        // Left side PCB traces
+        [
+          { x: 0, y: centerY - 140 },
+          { x: w * 0.18, y: centerY - 140 },
+          { x: w * 0.24, y: centerY - 80 },
+          { x: w * 0.34, y: centerY - 80 },
+        ],
+        [
+          { x: 0, y: centerY - 70 },
+          { x: w * 0.12, y: centerY - 70 },
+          { x: w * 0.17, y: centerY - 20 },
+          { x: w * 0.31, y: centerY - 20 },
+        ],
+        [
+          { x: 0, y: centerY + 30 },
+          { x: w * 0.15, y: centerY + 30 },
+          { x: w * 0.22, y: centerY + 100 },
+          { x: w * 0.29, y: centerY + 100 },
+        ],
+        [
+          { x: w * 0.06, y: centerY - 200 },
+          { x: w * 0.21, y: centerY - 200 },
+          { x: w * 0.27, y: centerY - 140 },
+        ],
+        [
+          { x: 0, y: centerY + 120 },
+          { x: w * 0.11, y: centerY + 120 },
+          { x: w * 0.16, y: centerY + 170 },
+          { x: w * 0.25, y: centerY + 170 },
+        ],
 
-      const next = options[Math.floor(Math.random() * options.length)]
-        || { x: pulse.x, y: pulse.y, direction: "right" };
-      pulse.startX = pulse.x;
-      pulse.startY = pulse.y;
-      pulse.endX = next.x;
-      pulse.endY = next.y;
-      pulse.previousDirection = {
-        right: "left",
-        left: "right",
-        down: "up",
-        up: "down",
-      }[next.direction];
-      pulse.progress = 0;
-      pulse.speed = randomBetween(0.18, 0.42);
+        // Right side PCB traces
+        [
+          { x: w, y: centerY - 140 },
+          { x: w * 0.82, y: centerY - 140 },
+          { x: w * 0.76, y: centerY - 80 },
+          { x: w * 0.66, y: centerY - 80 },
+        ],
+        [
+          { x: w, y: centerY - 60 },
+          { x: w * 0.87, y: centerY - 60 },
+          { x: w * 0.82, y: centerY - 10 },
+          { x: w * 0.69, y: centerY - 10 },
+        ],
+        [
+          { x: w, y: centerY + 40 },
+          { x: w * 0.84, y: centerY + 40 },
+          { x: w * 0.78, y: centerY + 100 },
+          { x: w * 0.71, y: centerY + 100 },
+        ],
+        [
+          { x: w * 0.94, y: centerY - 200 },
+          { x: w * 0.79, y: centerY - 200 },
+          { x: w * 0.73, y: centerY - 140 },
+        ],
+        [
+          { x: w, y: centerY + 130 },
+          { x: w * 0.89, y: centerY + 130 },
+          { x: w * 0.84, y: centerY + 180 },
+          { x: w * 0.74, y: centerY + 180 },
+        ],
+      ];
+
+      pcbTraces = trackDefs.map((points, idx) => ({
+        points,
+        pulseProgress: (idx * 0.17) % 1,
+        pulseSpeed: 0.18 + (idx % 3) * 0.08,
+      }));
+
+      // Gather endpoints & junctions as circular via nodes
+      pcbNodes = [];
+      trackDefs.forEach((pts) => {
+        pts.forEach((pt, pIdx) => {
+          if (pIdx === 0 && (pt.x === 0 || pt.x === w)) return; // don't draw via on screen edge
+          pcbNodes.push({
+            x: pt.x,
+            y: pt.y,
+            isGlowing: pIdx === pts.length - 1 || pIdx === 1,
+            pulseOffset: Math.random() * Math.PI * 2,
+          });
+        });
+      });
+
+      // Halo particle cloud
+      const particleCount = 140;
+      haloParticles = Array.from({ length: particleCount }, () => {
+        const theta = Math.random() * Math.PI * 2;
+        const radius = (0.16 + Math.random() * 0.16) * Math.min(w, h);
+        return {
+          theta,
+          radius,
+          speed: (0.15 + Math.random() * 0.25) * (Math.random() > 0.5 ? 1 : -1),
+          size: 1 + Math.random() * 2.2,
+          alpha: 0.2 + Math.random() * 0.7,
+          radialWobble: Math.random() * Math.PI * 2,
+        };
+      });
     };
 
-    const resetScene = () => {
+    const handleResize = () => {
       const bounds = hero.getBoundingClientRect();
       width = bounds.width;
       height = bounds.height;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      particles = Array.from({ length: particleCount }, () => ({
-        x: randomBetween(width * 0.25, width),
-        y: height - Math.pow(Math.random(), 1.7) * height,
-        radius: randomBetween(1, 3),
-        speed: randomBetween(7, 18),
-        sway: randomBetween(2, 10),
-        phase: randomBetween(0, Math.PI * 2),
-        opacity: randomBetween(0.25, 0.8),
-        green: randomBetween(115, 165),
-      }));
-
-      pulses = Array.from({ length: pulseCount }, () => {
-        const minColumn = Math.ceil(-width / (2 * gridSize));
-        const maxColumn = Math.floor(width / (2 * gridSize));
-        const minRow = Math.ceil(-height / (2 * gridSize));
-        const maxRow = Math.floor(height / (2 * gridSize));
-        const pulse = {
-          x: width / 2 + Math.round(randomBetween(minColumn, maxColumn)) * gridSize,
-          y: height / 2 + Math.round(randomBetween(minRow, maxRow)) * gridSize,
-          previousDirection: "",
-        };
-        chooseNextPoint(pulse);
-        pulse.progress = randomBetween(0, 1);
-        return pulse;
-      });
-
+      initPCBAndHalo(width, height);
       if (reducedMotion) {
         drawScene(0, false);
-        hasDrawnStatic = true;
       }
-    };
-
-    const drawOrb = (x, y, radius, alpha) => {
-      const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
-      gradient.addColorStop(0, `rgba(255, 112, 38, ${alpha})`);
-      gradient.addColorStop(0.45, `rgba(255, 153, 55, ${alpha * 0.42})`);
-      gradient.addColorStop(1, "rgba(255, 153, 55, 0)");
-      context.fillStyle = gradient;
-      context.fillRect(x - radius, y - radius, radius * 2, radius * 2);
-    };
-
-    const drawPulse = (pulse, deltaSeconds, animate) => {
-      if (animate) {
-        pulse.progress += pulse.speed * deltaSeconds;
-        if (pulse.progress >= 1) {
-          pulse.x = pulse.endX;
-          pulse.y = pulse.endY;
-          chooseNextPoint(pulse);
-        }
-      }
-
-      const progress = animate ? pulse.progress : 0.45;
-      const x = pulse.startX + (pulse.endX - pulse.startX) * progress;
-      const y = pulse.startY + (pulse.endY - pulse.startY) * progress;
-      const dx = pulse.endX - pulse.startX;
-      const dy = pulse.endY - pulse.startY;
-      const length = Math.hypot(dx, dy) || 1;
-      const tailX = x - (dx / length) * 40;
-      const tailY = y - (dy / length) * 40;
-      const opacity = isQuietZone(x, y) ? 0.08 : 0.6;
-      const gradient = context.createLinearGradient(tailX, tailY, x, y);
-      gradient.addColorStop(0, "rgba(255, 105, 35, 0)");
-      gradient.addColorStop(0.72, `rgba(255, 127, 40, ${opacity * 0.45})`);
-      gradient.addColorStop(1, `rgba(255, 190, 100, ${opacity})`);
-      context.strokeStyle = gradient;
-      context.lineWidth = 2;
-      context.beginPath();
-      context.moveTo(tailX, tailY);
-      context.lineTo(x, y);
-      context.stroke();
-      context.fillStyle = `rgba(255, 194, 116, ${opacity})`;
-      context.beginPath();
-      context.arc(x, y, 2, 0, Math.PI * 2);
-      context.fill();
     };
 
     const drawScene = (time, animate) => {
-      const deltaSeconds = previousTime
-        ? Math.min((time - previousTime) / 1000, 0.05)
-        : 0;
-      previousTime = time;
-      context.clearRect(0, 0, width, height);
-      context.save();
+      ctx.clearRect(0, 0, width, height);
 
-      context.beginPath();
-      context.rect(0, 0, width, height);
-      context.rect(0, 0, width * 0.4, height * 0.43);
-      context.rect(width * 0.67, height * 0.74, width * 0.33, height * 0.26);
-      context.clip("evenodd");
+      const sec = time / 1000;
+      const cx = width * 0.5;
+      const cy = height * 0.44;
+      const baseRadius = Math.min(width, height) * 0.24;
 
-      const seconds = time / 1000;
-      drawOrb(
-        width * (0.47 + Math.sin(seconds * (Math.PI * 2 / 27)) * 0.035),
-        height * (0.58 + Math.cos(seconds * (Math.PI * 2 / 24)) * 0.035),
-        Math.min(width, height) * 0.33,
-        0.14
-      );
-      drawOrb(
-        width * (0.76 + Math.sin(seconds * (Math.PI * 2 / 22) + 2) * 0.04),
-        height * (0.43 + Math.cos(seconds * (Math.PI * 2 / 29) + 1) * 0.04),
-        Math.min(width, height) * 0.27,
-        0.11
-      );
-      if (!isMobile) {
-        drawOrb(
-          width * (0.34 + Math.sin(seconds * (Math.PI * 2 / 25) + 4) * 0.035),
-          height * 0.73,
-          Math.min(width, height) * 0.22,
-          0.1
-        );
-      }
+      // 1. Draw Background Warm Spotlight behind the Halo
+      const spotGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseRadius * 1.8);
+      spotGrad.addColorStop(0, "rgba(225, 140, 40, 0.22)");
+      spotGrad.addColorStop(0.4, "rgba(190, 105, 25, 0.12)");
+      spotGrad.addColorStop(1, "rgba(10, 12, 16, 0)");
+      ctx.fillStyle = spotGrad;
+      ctx.fillRect(0, 0, width, height);
 
-      particles.forEach((particle) => {
+      // 2. Draw PCB Copper Traces
+      pcbTraces.forEach((trace) => {
+        const pts = trace.points;
+        if (pts.length < 2) return;
+
+        // Base etched trace
+        ctx.strokeStyle = "rgba(165, 110, 50, 0.28)";
+        ctx.lineWidth = 2.2;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length; i++) {
+          ctx.lineTo(pts[i].x, pts[i].y);
+        }
+        ctx.stroke();
+
+        // Inner golden core trace
+        ctx.strokeStyle = "rgba(235, 165, 75, 0.42)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length; i++) {
+          ctx.lineTo(pts[i].x, pts[i].y);
+        }
+        ctx.stroke();
+
+        // Moving data pulse along trace
         if (animate) {
-          particle.y -= particle.speed * deltaSeconds;
-          particle.phase += deltaSeconds * 0.7;
-          particle.x += Math.sin(particle.phase) * particle.sway * deltaSeconds;
-          if (particle.y < -4) {
-            particle.y = height - Math.pow(Math.random(), 1.7) * height;
-            particle.x = randomBetween(width * 0.25, width);
+          trace.pulseProgress = (trace.pulseProgress + trace.pulseSpeed * 0.016) % 1;
+          const totalPoints = pts.length;
+          const segProgress = trace.pulseProgress * (totalPoints - 1);
+          const segIdx = Math.floor(segProgress);
+          const frac = segProgress - segIdx;
+
+          if (segIdx < totalPoints - 1) {
+            const p1 = pts[segIdx];
+            const p2 = pts[segIdx + 1];
+            const pulseX = p1.x + (p2.x - p1.x) * frac;
+            const pulseY = p1.y + (p2.y - p1.y) * frac;
+
+            const pulseGrad = ctx.createRadialGradient(pulseX, pulseY, 0, pulseX, pulseY, 12);
+            pulseGrad.addColorStop(0, "rgba(255, 220, 140, 0.95)");
+            pulseGrad.addColorStop(0.35, "rgba(255, 150, 45, 0.65)");
+            pulseGrad.addColorStop(1, "rgba(255, 120, 25, 0)");
+            ctx.fillStyle = pulseGrad;
+            ctx.beginPath();
+            ctx.arc(pulseX, pulseY, 12, 0, Math.PI * 2);
+            ctx.fill();
           }
         }
-
-        if (isQuietZone(particle.x, particle.y)) return;
-        const fade = 0.45 + Math.sin(particle.phase) * 0.25;
-        context.fillStyle = `rgba(255, ${particle.green}, 55, ${particle.opacity * fade})`;
-        context.beginPath();
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fill();
       });
 
-      pulses.forEach((pulse) => drawPulse(pulse, deltaSeconds, animate));
-      context.restore();
+      // 3. Draw PCB Via Nodes & Glowing Vias
+      pcbNodes.forEach((node) => {
+        // Outer dark ring
+        ctx.strokeStyle = "rgba(180, 120, 60, 0.65)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 4, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Inner pad
+        ctx.fillStyle = node.isGlowing ? "#ffb548" : "#2a1e14";
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glowing node halo
+        if (node.isGlowing) {
+          const glowAlpha = animate
+            ? 0.35 + Math.sin(sec * 3 + node.pulseOffset) * 0.25
+            : 0.45;
+          const nodeGlow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 16);
+          nodeGlow.addColorStop(0, `rgba(255, 175, 60, ${glowAlpha})`);
+          nodeGlow.addColorStop(1, "rgba(255, 140, 30, 0)");
+          ctx.fillStyle = nodeGlow;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 16, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      // 4. Draw Golden Parametric Torus Halo (Matching Reference Image)
+      const numStrands = 22;
+      const steps = 110;
+      const waveSpeed = animate ? sec * 0.7 : 0;
+
+      for (let s = 0; s < numStrands; s++) {
+        const strandOffset = (s / numStrands) * Math.PI * 2;
+        const strandAlpha = 0.28 + (s % 3) * 0.16;
+
+        ctx.beginPath();
+        for (let i = 0; i <= steps; i++) {
+          const theta = (i / steps) * Math.PI * 2;
+          const wave1 = Math.sin(theta * 4 + strandOffset + waveSpeed) * (baseRadius * 0.18);
+          const wave2 = Math.cos(theta * 6 - strandOffset * 1.4 + waveSpeed * 0.8) * (baseRadius * 0.11);
+          const r = baseRadius + wave1 + wave2;
+
+          const px = cx + Math.cos(theta) * r;
+          const py = cy + Math.sin(theta) * (r * 0.82); // 3D tilt
+
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+
+        ctx.strokeStyle = `rgba(240, 180, 80, ${strandAlpha})`;
+        ctx.lineWidth = s % 2 === 0 ? 1.2 : 0.8;
+        ctx.stroke();
+      }
+
+      // 5. Draw Halo Particles / Golden Dust Motes
+      haloParticles.forEach((p) => {
+        if (animate) {
+          p.theta += p.speed * 0.016;
+          p.radialWobble += 0.02;
+        }
+        const dynamicR = p.radius + Math.sin(p.radialWobble) * 12;
+        const px = cx + Math.cos(p.theta) * dynamicR;
+        const py = cy + Math.sin(p.theta) * (dynamicR * 0.82);
+
+        const flicker = animate ? 0.6 + Math.sin(sec * 4 + p.theta * 5) * 0.4 : 0.8;
+        ctx.fillStyle = `rgba(255, 210, 120, ${p.alpha * flicker})`;
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
       if (animate && isInView) {
-        frameId = window.requestAnimationFrame((nextTime) => drawScene(nextTime, true));
+        animId = window.requestAnimationFrame((nextTime) => drawScene(nextTime, true));
       }
     };
 
-    const startAnimation = () => {
-      if (reducedMotion || !isInView || frameId) return;
-      previousTime = 0;
-      frameId = window.requestAnimationFrame((time) => {
-        frameId = 0;
-        drawScene(time, true);
-      });
-    };
+    handleResize();
 
-    const observer = "IntersectionObserver" in window
-      ? new IntersectionObserver(([entry]) => {
-        isInView = entry.isIntersecting;
-        if (isInView) {
-          if (!reducedMotion) startAnimation();
-          else if (!hasDrawnStatic) drawScene(0, false);
-        } else {
-          window.cancelAnimationFrame(frameId);
-          frameId = 0;
-        }
-      }, { threshold: 0 })
+    const obs = "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          ([entry]) => {
+            isInView = entry.isIntersecting;
+            if (isInView && !reducedMotion) {
+              animId = window.requestAnimationFrame((time) => drawScene(time, true));
+            } else {
+              window.cancelAnimationFrame(animId);
+            }
+          },
+          { threshold: 0 }
+        )
       : null;
 
-    const resizeObserver = "ResizeObserver" in window
-      ? new ResizeObserver(() => {
-        resetScene();
-        if (!reducedMotion && isInView) startAnimation();
-      })
-      : null;
-    const handleResize = () => {
-      resetScene();
-      if (!reducedMotion && isInView) startAnimation();
-    };
+    obs?.observe(hero);
+    window.addEventListener("resize", handleResize);
 
-    resetScene();
-    observer?.observe(hero);
-    resizeObserver?.observe(hero);
-    if (!resizeObserver) window.addEventListener("resize", handleResize);
-    if (!observer) {
-      isInView = true;
-      startAnimation();
+    if (!reducedMotion) {
+      animId = window.requestAnimationFrame((time) => drawScene(time, true));
     }
 
     return () => {
-      window.cancelAnimationFrame(frameId);
-      observer?.disconnect();
-      resizeObserver?.disconnect();
-      if (!resizeObserver) window.removeEventListener("resize", handleResize);
+      window.cancelAnimationFrame(animId);
+      obs?.disconnect();
+      window.removeEventListener("resize", handleResize);
     };
   }, [isRoleVisible]);
 
@@ -342,88 +389,76 @@ export default function HeroSection({ isActive = true }) {
       id="home"
       ref={heroRef}
     >
-      {/* Background Ambience & Cyber Grid */}
-      <div className="cyber-bg-atmosphere" />
-      <div className="cyber-grid-lines" />
+      {/* Matte Dark Carbon Background & Procedural Golden Canvas */}
+      <div className="cyber-hero-backdrop" />
       <canvas
-        className="hero-atmosphere-canvas"
-        ref={atmosphereCanvasRef}
+        className="hero-pcb-canvas"
+        ref={canvasRef}
         aria-hidden="true"
       />
 
-      {/* Crosshair Guides */}
-      <div className="crosshair-guide guide-top-center" />
-      <div className="crosshair-guide guide-right-axis" />
+      {/* Far Edge Console Grip Tabs (Tactical UI cockpit tabs from screenshot) */}
+      <div className="console-grip-tab grip-left" aria-hidden="true">
+        <span className="grip-screw top-screw" />
+        <span className="grip-notch" />
+        <span className="grip-screw bottom-screw" />
+      </div>
+      <div className="console-grip-tab grip-right" aria-hidden="true">
+        <span className="grip-screw top-screw" />
+        <span className="grip-notch" />
+        <span className="grip-screw bottom-screw" />
+      </div>
 
-      {/* ================= CENTER STAGE: GIANT TYPOGRAPHY + CUTOUT + SIGNATURE ================= */}
+      {/* ================= CENTER STAGE: 3D TYPOGRAPHY + CUTOUT PORTRAIT ================= */}
       <div className="center-stage">
-        <div
-          className={`giant-role-marquee${isRoleVisible ? " is-visible" : ""}`}
-          aria-hidden="true"
-        >
-          <div className="giant-role-marquee-track">
-            <span>
-              {roleWords.map((word, wordIndex) => (
-                <React.Fragment key={word}>
-                  <span className={`role-word role-word--${wordIndex === 0 ? "first" : "second"}`}>
-                    {Array.from(word, (letter, letterIndex) => (
-                      <span
-                        className="role-letter"
-                        key={letterIndex}
-                        style={{ "--letter-index": wordIndex * 11 + letterIndex }}
-                      >
-                        {letter}
-                      </span>
-                    ))}
-                  </span>
-                  {wordIndex === 0 && "\u00a0"}
-                </React.Fragment>
-              ))}
-            </span>
-          </div>
+        {/* Bold 3D White Typography: FULL-STACK DEVELOPER */}
+        <div className="center-typography-wrapper" aria-hidden="true">
+          <h1 className="hero-giant-title">
+            <span className="title-part part-fullstack">FULL-STACK</span>
+            <span className="title-spacer">&nbsp;</span>
+            <span className="title-part part-developer">DEVELOPER</span>
+          </h1>
         </div>
 
-        {/* Portrait of SOKHA Rathana */}
-        <div className="portrait-container">
-          <div className="portrait-halo" />
+        {/* Center Portrait Cutout of Rathana */}
+        <div className="center-portrait-container">
           <div className="portrait-scroll-effect">
             <img
               src={profileCutout}
-              alt="SOKHA Rathana - Full Stack Developer"
+              alt="SOKHA Rathana - Full-Stack Developer"
               className="portrait-cutout-img"
             />
           </div>
-
         </div>
       </div>
 
-      {/* ================= HUD OVERLAY ================= */}
+      {/* ================= HUD OVERLAY (TOP & BOTTOM BARS) ================= */}
       <div className="hud-layer">
+        {/* TOP ROW HUD */}
         <div className="hud-top-row">
+          {/* Top Left: 4-line monospace mission text with orange + */}
           <div className="hud-top-left">
             <div className="hud-cross-row">
               <span className="orange-cross">+</span>
               <div className="hud-mission-text">
                 <p>BUILDING DIGITAL SOLUTIONS</p>
                 <p>THAT MAKE AN IMPACT.</p>
-                <p>CLEAN CODE. SMART DESIGN.</p>
+                <p>CLEAN CODE, SMART DESIGN.</p>
                 <p>BETTER EXPERIENCES.</p>
               </div>
               <span className="faint-cross">+</span>
             </div>
           </div>
 
+          {/* Top Right: Metallic status badge & dot matrix */}
           <div className="hud-top-right">
             <div className="hud-status-badge">
-              <div className="corner-bracket corner-top-left" />
-              <div className="corner-bracket corner-top-right" />
-              <div className="corner-bracket corner-bottom-left" />
-              <div className="corner-bracket corner-bottom-right" />
+              <span className="badge-bracket top-left" />
+              <span className="badge-bracket top-right" />
+              <span className="badge-bracket bottom-left" />
+              <span className="badge-bracket bottom-right" />
               <div className="status-content">
-                <span className="status-beacon">
-                  <span className="beacon-core" />
-                  <span className="beacon-ring" />
-                </span>
+                <span className="status-diamond">◇</span>
                 <span className="status-label">AVAILABLE FOR PROJECTS</span>
               </div>
             </div>
@@ -440,30 +475,40 @@ export default function HeroSection({ isActive = true }) {
           </div>
         </div>
 
-        {/* Code features, CTA, and tech stack */}
+        {/* BOTTOM ROW HUD */}
         <div className="hud-bottom-row">
-          {/* BOTTOM LEFT: SLICE, CODE HUD, CTA BUTTON */}
+          {/* Bottom Left: Slashes, Code Tag, Mission text, and Glowing Action Button */}
           <div className="hud-bottom-left">
             {/* Diagonal Orange Slashes */}
             <div className="hud-diagonal-slashes" aria-hidden="true">
               <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
             </div>
 
-            {/* Clean Code Features Box */}
-            <div className="hud-code-card">
-              <div className="code-icon-bracket">
-                <span className="bracket-left">[</span>
-                <span className="code-tag">&lt;/&gt;</span>
-                <span className="bracket-right">]</span>
+            {/* Middle Feature Group */}
+            <div className="hud-feature-group">
+              {/* Bronze Bracketed Code Icon */}
+              <div className="hud-code-card">
+                <div className="code-icon-bracket">
+                  <span className="code-tag">&#123;&lt;/&gt;&#125;</span>
+                </div>
+                <div className="code-features-list">
+                  <span className="feature-item">Clean Code</span>
+                  <span className="feature-item">Scalable Solutions</span>
+                  <span className="feature-item">User Focused</span>
+                </div>
               </div>
-              <div className="code-features-list">
-                <span className="feature-item">Clean Code</span>
-                <span className="feature-item">Scalable Solutions</span>
-                <span className="feature-item">User Focused</span>
+
+              {/* Vertical Divider */}
+              <div className="hud-vertical-divider" aria-hidden="true" />
+
+              {/* Mission Statement */}
+              <div className="hud-mission-blurb">
+                <p>BUILDING DIGITAL SOLUTIONS</p>
+                <p>THAT MAKE AN IMPACT</p>
               </div>
             </div>
 
-            {/* Primary Action Button */}
+            {/* Glowing Orange Primary Action Button */}
             <div className="hud-action-row">
               <Button href="#contact" className="cyber-btn-primary">
                 <span className="btn-text">LET'S BUILD SOMETHING GREAT</span>
@@ -471,7 +516,7 @@ export default function HeroSection({ isActive = true }) {
               </Button>
             </div>
 
-            {/* Quick Access Actions (Download CV & Socials) */}
+            {/* Quick Resume & Social Access */}
             <div className="hud-quick-links">
               <a
                 href={cvFilePath}
@@ -481,8 +526,8 @@ export default function HeroSection({ isActive = true }) {
               >
                 <svg
                   className="quick-link-icon"
-                  width="14"
-                  height="14"
+                  width="13"
+                  height="13"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -495,7 +540,7 @@ export default function HeroSection({ isActive = true }) {
                   <polyline points="7 10 12 15 17 10" />
                   <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                <span>Resume.pdf</span>
+                <span>CV &amp; CL</span>
               </a>
 
               <div className="quick-social-icons">
@@ -509,8 +554,8 @@ export default function HeroSection({ isActive = true }) {
                 >
                   <svg
                     className="quick-link-icon"
-                    width="16"
-                    height="16"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     aria-hidden="true"
@@ -528,8 +573,8 @@ export default function HeroSection({ isActive = true }) {
                 >
                   <svg
                     className="quick-link-icon"
-                    width="15"
-                    height="15"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     aria-hidden="true"
@@ -547,8 +592,8 @@ export default function HeroSection({ isActive = true }) {
                 >
                   <svg
                     className="quick-link-icon"
-                    width="15"
-                    height="15"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     aria-hidden="true"
@@ -558,31 +603,15 @@ export default function HeroSection({ isActive = true }) {
                 </a>
               </div>
             </div>
-
-            {/* Radio Indicator Dots */}
-            <div className="hud-indicator-dots" aria-hidden="true">
-              {[0, 1, 2, 3].map((idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  className={`indicator-dot ${activeDot === idx ? "active" : ""}`}
-                  onClick={() => setActiveDot(idx)}
-                  aria-label={`Slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Faint Decorative Circle */}
-            <div className="hud-faint-circle" aria-hidden="true" />
           </div>
 
-          {/* BOTTOM RIGHT: TECH STACK HUD CARD */}
+          {/* Bottom Right: Brushed Dark Metal Tech Stack Card */}
           <div className="hud-bottom-right">
             <div className="hud-tech-card">
-              <div className="corner-bracket corner-top-left" />
-              <div className="corner-bracket corner-top-right" />
-              <div className="corner-bracket corner-bottom-left" />
-              <div className="corner-bracket corner-bottom-right" />
+              <span className="card-bracket top-left" />
+              <span className="card-bracket top-right" />
+              <span className="card-bracket bottom-left" />
+              <span className="card-bracket bottom-right" />
 
               <div className="tech-card-inner">
                 <div className="tech-card-header">TECH STACK</div>
@@ -604,19 +633,6 @@ export default function HeroSection({ isActive = true }) {
                 </div>
               </div>
             </div>
-
-            {/* Coordinate Crosshairs Grid */}
-            <div className="hud-crosshair-cluster" aria-hidden="true">
-              <div className="crosshair-cluster-row">
-                <span>+</span><span>+</span><span>+</span>
-              </div>
-              <div className="crosshair-cluster-row">
-                <span>+</span><span>+</span><span>+</span>
-              </div>
-            </div>
-
-            {/* Orange Bottom-Right Anchor Mark */}
-            <div className="hud-corner-anchor" aria-hidden="true">+</div>
           </div>
         </div>
       </div>

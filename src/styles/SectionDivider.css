@@ -1,0 +1,76 @@
+/* ==========================================================================
+   CYBER SECTION DIVIDER
+   ========================================================================== */
+
+.cyber-section-divider {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.divider-line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 84, 25, 0.2) 20%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 84, 25, 0.2) 80%,
+    transparent 100%
+  );
+  transform-origin: center center;
+}
+
+.divider-core {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  background: #06070a;
+  border: 1px solid rgba(255, 84, 25, 0.25);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(255, 84, 25, 0.15);
+}
+
+.divider-cross {
+  color: #ff5419;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.divider-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+[data-theme="light"] .cyber-section-divider .divider-core {
+  background: #f8fafc;
+  border-color: rgba(255, 84, 25, 0.2);
+  box-shadow: 0 0 10px rgba(255, 84, 25, 0.1);
+}
+
+[data-theme="light"] .cyber-section-divider .divider-tag {
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .cyber-section-divider {
+    height: 20px;
+  }
+}
