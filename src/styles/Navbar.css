@@ -84,30 +84,32 @@
 .cyber-nav-menu {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 32px;
   list-style: none;
   margin: 0;
-  padding: 7px 10px 7px 28px;
-  background: rgba(13, 15, 22, 0.82);
+  padding: 8px 12px 8px 34px;
+  background: rgba(16, 18, 26, 0.68);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(215, 145, 80, 0.38);
+  border: 1px solid rgba(195, 135, 75, 0.42);
   border-radius: 9999px;
   box-shadow: 
     0 12px 36px rgba(0, 0, 0, 0.65),
-    inset 0 1px 1px rgba(255, 205, 140, 0.38),
-    0 0 26px rgba(255, 110, 20, 0.12);
+    inset 0 1px 1.5px rgba(255, 215, 145, 0.45),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(220, 125, 35, 0.1);
   position: relative;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cyber-navbar.scrolled .cyber-nav-menu {
-  background: rgba(10, 12, 18, 0.92);
-  border-color: rgba(255, 150, 70, 0.45);
+  background: rgba(12, 14, 20, 0.88);
+  border-color: rgba(225, 145, 75, 0.5);
   box-shadow: 
-    0 16px 44px rgba(0, 0, 0, 0.75),
-    inset 0 1px 1px rgba(255, 210, 150, 0.45),
-    0 0 32px rgba(255, 95, 25, 0.18);
+    0 16px 44px rgba(0, 0, 0, 0.78),
+    inset 0 1px 1.5px rgba(255, 220, 155, 0.5),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(240, 135, 40, 0.16);
   transform: translateY(-1px);
 }
 
@@ -121,78 +123,107 @@
 .cyber-nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
   text-decoration: none;
   font-family: 'Space Mono', monospace;
-  font-size: 0.82rem;
-  letter-spacing: 0.05em;
-  padding: 6px 3px;
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+  padding: 6px 4px;
   position: relative;
   transition: color 0.25s ease, transform 0.25s ease;
   white-space: nowrap;
 }
 
-/* Numbers & Slashes (Warm Muted Bronze/Copper) */
+/* Numbers & Slashes - Refined Bronze/Amber (Exact Image Match) */
 .nav-item-num {
-  color: #8c7865;
-  font-size: 0.78rem;
+  color: #b6885e;
+  font-size: 0.82rem;
   font-weight: 500;
   transition: color 0.25s ease;
 }
 
 .nav-item-slash {
-  color: #8c7865;
-  font-size: 0.78rem;
-  font-weight: 600;
-  margin: 0 2px;
+  color: #b6885e;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin: 0 1px;
   transition: color 0.25s ease;
 }
 
+/* Inactive Word Labels - Subdued Technical Slate Grey */
 .nav-item-label {
-  color: #c4cdd8;
-  font-weight: 600;
+  color: #9ea7b4;
+  font-weight: 500;
   transition: color 0.25s ease;
 }
 
 /* Hover States */
+.cyber-nav-link:hover .nav-item-label {
+  color: #e2e8f0;
+}
+
 .cyber-nav-link:hover .nav-item-num,
 .cyber-nav-link:hover .nav-item-slash {
-  color: #e59f52;
+  color: #cda073;
 }
 
-.cyber-nav-link:hover .nav-item-label {
-  color: #ffffff;
-}
-
-/* Active Nav State - Crisp White with Glowing Amber Underline */
+/* Active Nav State - Crisp Pure White with Bronze Accent */
 .cyber-nav-link.active .nav-item-num {
-  color: #e59f52;
-  font-weight: 700;
+  color: #b6885e;
+  font-weight: 600;
 }
 
 .cyber-nav-link.active .nav-item-slash {
-  color: #e59f52;
-  font-weight: 700;
+  color: #b6885e;
+  font-weight: 600;
 }
 
 .cyber-nav-link.active .nav-item-label {
   color: #ffffff;
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
 }
 
-/* Glowing Amber Active Pip Underline */
+/* Glowing Amber Active Pip Underline with Filament Flare (Exact Image Match) */
 .nav-active-pip {
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #ff8c2e 20%, #ffb356 50%, #ff8c2e 80%, transparent 100%);
+  bottom: -5px;
+  left: 2px;
+  right: 2px;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(215, 140, 70, 0.35) 15%,
+    #ff9d45 35%,
+    #ffe4a0 50%,
+    #ff9d45 65%,
+    rgba(215, 140, 70, 0.35) 85%,
+    transparent 100%
+  );
   border-radius: 9999px;
   box-shadow: 
-    0 0 10px #ff8c2e,
-    0 0 18px rgba(255, 140, 46, 0.75);
+    0 0 8px rgba(255, 157, 69, 0.85),
+    0 0 16px rgba(255, 140, 46, 0.5);
+  pointer-events: none;
+}
+
+.nav-active-pip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 6px;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 235, 175, 0.95) 0%,
+    rgba(255, 160, 50, 0.75) 45%,
+    transparent 75%
+  );
+  filter: blur(1px);
+  pointer-events: none;
 }
 
 /* ---------------- Slanted Vents Chamber ---------------- */

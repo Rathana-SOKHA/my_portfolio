@@ -40,7 +40,7 @@ function App() {
       <IntroScreen onComplete={handleIntroComplete} />
       <div style={{ opacity: showIntro ? 0 : 1, transition: 'opacity 0.5s ease' }}>
         <ScrollProgress />
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
+        <Navbar />
         
         <main>
           <Hero isActive={!showIntro} />

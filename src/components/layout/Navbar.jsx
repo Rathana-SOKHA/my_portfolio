@@ -10,7 +10,7 @@ const navItems = [
   { id: "education", label: "Education", num: "05" },
 ];
 
-export default function Navbar({ theme, toggleTheme }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -101,22 +101,8 @@ export default function Navbar({ theme, toggleTheme }) {
             </ul>
           </div>
 
-          {/* Right Action Group: Theme Toggle & Mobile Hamburger */}
+          {/* Right Action Group: Mobile Hamburger */}
           <div className="cyber-nav-actions">
-            {/* Theme Toggle */}
-            <button
-              className="cyber-theme-toggle"
-              onClick={toggleTheme}
-              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              aria-label="Toggle theme"
-              aria-pressed={theme === "dark"}
-              data-theme={theme}
-            >
-              <span className="toggle-track" aria-hidden="true">
-                <span className="toggle-thumb" />
-              </span>
-            </button>
-
             {/* Mobile Hamburger Button */}
             <button
               className={`cyber-hamburger ${isOpen ? "active" : ""}`}
