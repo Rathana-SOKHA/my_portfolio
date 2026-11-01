@@ -56,7 +56,7 @@ export default function About() {
       const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      setTilt({ x: -(y * 12), y: x * 12 });
+      setTilt({ x: -(y * 10), y: x * 10 });
     };
 
     const handleMouseLeave = () => {
@@ -74,9 +74,15 @@ export default function About() {
 
   return (
     <section className="cyber-about-section" id="about">
-      {/* Background Ambience & Grid */}
+      {/* Background Ambience & PCB Etching */}
       <div className="about-bg-grid" aria-hidden="true" />
       <div className="about-ambient-glow" aria-hidden="true" />
+      <div className="about-pcb-traces" aria-hidden="true">
+        <span className="pcb-line line-1" />
+        <span className="pcb-line line-2" />
+        <span className="pcb-node node-1" />
+        <span className="pcb-node node-2" />
+      </div>
 
       <div className="about-container">
         {/* Section Header Tag & Main Title */}
@@ -94,7 +100,7 @@ export default function About() {
 
         {/* 2-Column Main Dossier */}
         <div className="about-dossier-grid">
-          {/* Left Column: Cyber Holographic Portrait HUD */}
+          {/* Left Column: Cyber Holographic Portrait HUD with Golden Halo */}
           <ScrollReveal animation="fade-right" delay={100} duration={0.75} className="about-portrait-col">
             <div
               className="about-portrait-hud"
@@ -105,23 +111,26 @@ export default function About() {
               }}
             >
               <div className="portrait-hud-frame">
-                {/* Corner Brackets */}
-                <div className="corner-bracket corner-top-left" />
-                <div className="corner-bracket corner-top-right" />
-                <div className="corner-bracket corner-bottom-left" />
-                <div className="corner-bracket corner-bottom-right" />
+                {/* Tactical Corner Brackets Matching Hero */}
+                <span className="card-bracket top-left" />
+                <span className="card-bracket top-right" />
+                <span className="card-bracket bottom-left" />
+                <span className="card-bracket bottom-right" />
 
                 {/* HUD Header Bar */}
                 <div className="hud-frame-header">
                   <span className="hud-id-tag">ID: SOKHA_RATHANA</span>
                   <span className="hud-live-status">
-                    <span className="status-dot-pulse" />
+                    <span className="status-diamond">◇</span>
                     ONLINE
                   </span>
                 </div>
 
-                {/* Image Viewport */}
+                {/* Image Viewport with Golden Torus Halo */}
                 <div className="portrait-viewport">
+                  {/* Golden Torus Halo behind Cutout */}
+                  <div className="portrait-torus-halo" aria-hidden="true" />
+
                   <div className="viewfinder-crosshairs" aria-hidden="true">
                     <span className="vf-cross tl">+</span>
                     <span className="vf-cross tr">+</span>
@@ -141,13 +150,13 @@ export default function About() {
                 {/* HUD Bottom Info Bar */}
                 <div className="hud-frame-footer">
                   <span className="coords-text">LOC: 11.5564° N, 104.9282° E</span>
-                  <span className="foot-spec">DEV // PNC_STUDENT</span>
+                  <span className="foot-spec">FULL-STACK // DEV</span>
                 </div>
               </div>
 
-              {/* Slashes Accent */}
+              {/* Diagonal Orange Slashes Accent */}
               <div className="hud-card-slashes" aria-hidden="true">
-                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
+                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
               </div>
             </div>
           </ScrollReveal>
@@ -157,7 +166,7 @@ export default function About() {
             <ScrollReveal animation="fade-left" delay={120}>
               <div className="bio-role-lead">
                 <span className="lead-dash">—</span>
-                <span className="lead-tag">PASSIONATE DEVELOPER & PROBLEM SOLVER</span>
+                <span className="lead-tag">PASSIONATE DEVELOPER &amp; PROBLEM SOLVER</span>
               </div>
 
               <p className="bio-summary-p">
@@ -177,6 +186,11 @@ export default function About() {
             {/* Technical Dossier Metadata Table */}
             <ScrollReveal animation="fade-up" delay={200}>
               <div className="technical-dossier-table">
+                <span className="card-bracket top-left" />
+                <span className="card-bracket top-right" />
+                <span className="card-bracket bottom-left" />
+                <span className="card-bracket bottom-right" />
+
                 {techDossier.map((spec, i) => (
                   <div key={i} className="dossier-row">
                     <span className="spec-label">{spec.label}</span>
@@ -191,8 +205,8 @@ export default function About() {
             <ScrollReveal animation="fade-up" delay={260}>
               <div className="about-stats-grid">
                 <div className="stat-hud-box">
-                  <div className="corner-bracket corner-top-left" />
-                  <div className="corner-bracket corner-bottom-right" />
+                  <span className="card-bracket top-left" />
+                  <span className="card-bracket bottom-right" />
                   <div className="stat-number">
                     <AnimatedCounter target={20} suffix="+" duration={1.2} />
                   </div>
@@ -200,8 +214,8 @@ export default function About() {
                 </div>
 
                 <div className="stat-hud-box">
-                  <div className="corner-bracket corner-top-left" />
-                  <div className="corner-bracket corner-bottom-right" />
+                  <span className="card-bracket top-left" />
+                  <span className="card-bracket bottom-right" />
                   <div className="stat-number">
                     <AnimatedCounter target={2} prefix="0" suffix="+" duration={1.2} />
                   </div>
@@ -209,8 +223,8 @@ export default function About() {
                 </div>
 
                 <div className="stat-hud-box">
-                  <div className="corner-bracket corner-top-left" />
-                  <div className="corner-bracket corner-bottom-right" />
+                  <span className="card-bracket top-left" />
+                  <span className="card-bracket bottom-right" />
                   <div className="stat-number">
                     <AnimatedCounter target={100} suffix="%" duration={1.2} />
                   </div>
@@ -219,7 +233,7 @@ export default function About() {
               </div>
             </ScrollReveal>
 
-            {/* Quick Actions */}
+            {/* Quick Actions (Pill Buttons Matching Hero) */}
             <ScrollReveal animation="fade-up" delay={320}>
               <div className="about-action-group">
                 <a
@@ -260,11 +274,11 @@ export default function About() {
                 threshold={0.12}
               >
                 <div className="pillar-card">
-                  {/* HUD Corner Ticks */}
-                  <div className="corner-bracket corner-top-left" />
-                  <div className="corner-bracket corner-top-right" />
-                  <div className="corner-bracket corner-bottom-left" />
-                  <div className="corner-bracket corner-bottom-right" />
+                  {/* Tactical Corner Brackets */}
+                  <span className="card-bracket top-left" />
+                  <span className="card-bracket top-right" />
+                  <span className="card-bracket bottom-left" />
+                  <span className="card-bracket bottom-right" />
 
                   <div className="pillar-top-row">
                     <span className="pillar-code">{item.code}</span>
