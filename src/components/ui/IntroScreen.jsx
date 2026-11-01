@@ -3,17 +3,18 @@ import '../../styles/IntroScreen.css';
 
 export default function IntroScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState('LOADING CORE MODULES...');
+  const [statusText, setStatusText] = useState('01 // INITIALIZING_NEURAL_KERNEL...');
   const [isExiting, setIsExiting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const hasFinishedRef = useRef(false);
+  const canvasRef = useRef(null);
 
   // Trigger completion
   const finishIntro = useCallback(() => {
     if (hasFinishedRef.current) return;
     hasFinishedRef.current = true;
     setProgress(100);
-    setStatusText('SYSTEM READY // LAUNCHING INTERFACE...');
+    setStatusText('05 // SYSTEM_ONLINE // LAUNCHING_INTERFACE...');
     setIsExiting(true);
 
     setTimeout(() => {
@@ -21,11 +22,11 @@ export default function IntroScreen({ onComplete }) {
       if (onComplete) {
         onComplete();
       }
-    }, 600); // Wait for exit animation
+    }, 650); // Wait for cinematic aperture exit transition
   }, [onComplete]);
 
+  // Keyboard skip listener
   useEffect(() => {
-    // Keyboard skip listener (Escape or Space or Enter)
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
         finishIntro();
@@ -33,7 +34,7 @@ export default function IntroScreen({ onComplete }) {
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // Fast, smooth loading progress timer (0 to 100 in ~1.6s)
+    // Boot progress simulation (~1.6s)
     const startTime = Date.now();
     const duration = 1600;
 
@@ -42,25 +43,120 @@ export default function IntroScreen({ onComplete }) {
       const pct = Math.min(100, Math.floor((elapsed / duration) * 100));
       setProgress(pct);
 
-      if (pct < 30) {
-        setStatusText('INITIALIZING_CORE_SYSTEMS...');
-      } else if (pct < 60) {
-        setStatusText('MOUNTING_REACT_ECOSYSTEM...');
-      } else if (pct < 85) {
-        setStatusText('OPTIMIZING_NEURAL_ASSETS...');
+      if (pct < 25) {
+        setStatusText('01 // INITIALIZING_NEURAL_KERNEL...');
+      } else if (pct < 50) {
+        setStatusText('02 // ROUTING_PCB_CIRCUIT_TRACES...');
+      } else if (pct < 75) {
+        setStatusText('03 // COMPILING_FULLSTACK_MODULES...');
+      } else if (pct < 95) {
+        setStatusText('04 // SYNCHRONIZING_TACTICAL_HUD...');
       } else if (pct < 100) {
-        setStatusText('SYNCHRONIZING_INTERFACE...');
+        setStatusText('05 // SYSTEM_ONLINE // LAUNCHING_INTERFACE...');
       } else {
         clearInterval(interval);
         finishIntro();
       }
-    }, 30);
+    }, 28);
 
     return () => {
       clearInterval(interval);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [finishIntro]);
+
+  // Ambient PCB & Golden particles background canvas matching Hero section
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) return;
+
+    let animId = 0;
+    let width = 0;
+    let height = 0;
+
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Particles
+    const particles = Array.from({ length: 45 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      speed: 0.3 + Math.random() * 0.8,
+      size: 1 + Math.random() * 2,
+      alpha: 0.2 + Math.random() * 0.6,
+      sway: Math.random() * Math.PI * 2,
+    }));
+
+    // Fixed PCB lines matching Hero aesthetic
+    const drawPCB = (time) => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Central amber spotlight
+      const spot = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.min(width, height) * 0.6);
+      spot.addColorStop(0, 'rgba(235, 140, 40, 0.16)');
+      spot.addColorStop(0.5, 'rgba(180, 95, 25, 0.06)');
+      spot.addColorStop(1, 'rgba(8, 9, 12, 0)');
+      ctx.fillStyle = spot;
+      ctx.fillRect(0, 0, width, height);
+
+      // PCB horizontal traces
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(195, 130, 60, 0.22)';
+      const trackRows = [height * 0.25, height * 0.5, height * 0.75];
+      trackRows.forEach((y, i) => {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width * 0.35, y);
+        ctx.lineTo(width * 0.45, y + (i % 2 === 0 ? 30 : -30));
+        ctx.lineTo(width, y + (i % 2 === 0 ? 30 : -30));
+        ctx.stroke();
+
+        // Small nodes
+        ctx.fillStyle = '#ff9d45';
+        ctx.beginPath();
+        ctx.arc(width * 0.35, y, 2.5, 0, Math.PI * 2);
+        ctx.arc(width * 0.65, y + (i % 2 === 0 ? 30 : -30), 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Ambient golden dust motes
+      const sec = time / 1000;
+      particles.forEach((p) => {
+        p.y -= p.speed;
+        p.sway += 0.02;
+        const px = p.x + Math.sin(p.sway) * 8;
+        if (p.y < 0) {
+          p.y = height + 10;
+          p.x = Math.random() * width;
+        }
+
+        const flicker = 0.7 + Math.sin(sec * 3 + p.sway) * 0.3;
+        ctx.fillStyle = `rgba(255, 205, 110, ${p.alpha * flicker})`;
+        ctx.beginPath();
+        ctx.arc(px, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animId = requestAnimationFrame(drawPCB);
+    };
+
+    animId = requestAnimationFrame(drawPCB);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   if (isFinished) return null;
 
@@ -72,30 +168,49 @@ export default function IntroScreen({ onComplete }) {
       tabIndex={0}
       title="Click anywhere to skip intro"
     >
-      {/* Background Grid & Atmospheric Orange Glow */}
-      <div className="cyber-intro-grid" aria-hidden="true" />
-      <div className="cyber-intro-glow" aria-hidden="true" />
+      {/* Background Ambience & Canvas */}
+      <div className="intro-bg-backdrop" aria-hidden="true" />
+      <canvas className="intro-pcb-canvas" ref={canvasRef} aria-hidden="true" />
+
+      {/* Viewport Edge Grip Tabs (Matching Hero Cockpit) */}
+      <div className="console-grip-tab grip-left intro-grip" aria-hidden="true">
+        <span className="grip-screw top-screw" />
+        <span className="grip-notch" />
+        <span className="grip-screw bottom-screw" />
+      </div>
+      <div className="console-grip-tab grip-right intro-grip" aria-hidden="true">
+        <span className="grip-screw top-screw" />
+        <span className="grip-notch" />
+        <span className="grip-screw bottom-screw" />
+      </div>
 
       {/* Top HUD Telemetry Bar */}
       <div className="intro-top-hud">
         <div className="intro-hud-left">
-          <span className="hud-cross">+</span>
+          <span className="orange-cross">+</span>
+          <span className="hud-label-text">TACTICAL_SYS_BOOT // v2.6</span>
+        </div>
+        <div className="intro-hud-right">
+          <div className="intro-status-pill">
+            <span className="pill-dot" />
+            <span>ONLINE</span>
+          </div>
+          <span className="faint-cross">+</span>
         </div>
       </div>
 
-      {/* Center Console Box */}
+      {/* Center Console Panel (Styled to match Hero Tech Card / HUD) */}
       <div className="cyber-intro-console">
-        {/* HUD Corner Brackets */}
-        <div className="corner-bracket corner-top-left" />
-        <div className="corner-bracket corner-top-right" />
-        <div className="corner-bracket corner-bottom-left" />
-        <div className="corner-bracket corner-bottom-right" />
+        {/* Tactical Corner Brackets */}
+        <span className="card-bracket top-left" />
+        <span className="card-bracket top-right" />
+        <span className="card-bracket bottom-left" />
+        <span className="card-bracket bottom-right" />
 
-        {/* Tag Header */}
+        {/* Top Tag Header: Logo branding matching navbar */}
         <div className="intro-console-header">
-          <span className="console-bracket">[</span>
-          <span className="console-code">&lt;/&gt; INITIALIZING_DEV_ENVIRONMENT</span>
-          <span className="console-bracket">]</span>
+          <span className="header-brand-name">RATHANA</span>
+          <span className="header-brand-accent">.DEV</span>
         </div>
 
         {/* Name Display */}
@@ -104,11 +219,14 @@ export default function IntroScreen({ onComplete }) {
           <span className="intro-lastname">RATHANA</span>
         </div>
 
-        {/* Role & Manifesto Tag */}
-        <div className="intro-role-tag">
-          <span className="slash-decor">//////</span>
-          <span>FULL-STACK DEVELOPER & SYSTEM DESIGNER</span>
-          <span className="slash-decor">//////</span>
+        {/* Hero-matched 3D Role Subtitle */}
+        <div className="intro-role-subtitle">
+          <span className="role-sub-text">FULL-STACK DEVELOPER</span>
+        </div>
+
+        {/* Slashes Decor Matching Hero Bottom-Left */}
+        <div className="intro-diagonal-slashes" aria-hidden="true">
+          <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
         </div>
 
         {/* Progress Display Bar */}
@@ -123,17 +241,14 @@ export default function IntroScreen({ onComplete }) {
               className="intro-progress-fill"
               style={{ width: `${progress}%` }}
             />
-            <div className="intro-track-segments">
-              <span /><span /><span /><span /><span />
-            </div>
           </div>
         </div>
 
-        {/* Skip Hint */}
+        {/* Quick Skip Hint */}
         <div className="intro-skip-hint">
-          <span className="hint-bracket">[</span>
-          <span>CLICK ANYWHERE OR PRESS ESC TO SKIP</span>
-          <span className="hint-bracket">]</span>
+          <span className="skip-bracket">[</span>
+          <span>CLICK ANYWHERE OR PRESS ESC TO PROCEED</span>
+          <span className="skip-bracket">]</span>
         </div>
       </div>
 
@@ -142,11 +257,10 @@ export default function IntroScreen({ onComplete }) {
         <div className="hud-crosshairs">
           <span>+</span><span>+</span><span>+</span>
         </div>
+        <div className="intro-hud-credits">
+          <span>CLEAN CODE • SCALABLE SOLUTIONS • BETTER EXPERIENCES</span>
+        </div>
       </div>
-
-      {/* Wipe Shutter Transition Overlays */}
-      <div className="cyber-shutter shutter-top" />
-      <div className="cyber-shutter shutter-bottom" />
     </div>
   );
 }
