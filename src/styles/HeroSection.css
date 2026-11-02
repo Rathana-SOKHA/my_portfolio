@@ -303,6 +303,160 @@
   line-height: 1;
 }
 
+/* ==========================================================================
+   CYBER SOCIAL DOCK - REFERENCE IMAGE 1:1 REPLICATION
+   Vertical Frosted Glass Capsule with Glowing Amber Tactical Buttons
+   ========================================================================== */
+.cyber-social-dock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+  width: fit-content;
+  z-index: 15;
+}
+
+/* Ambient warm orange bloom behind the active button */
+.social-dock-ambient-glow {
+  position: absolute;
+  left: 33px;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, rgba(245, 145, 30, 0.42) 0%, rgba(245, 145, 30, 0.12) 55%, transparent 75%);
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: -1;
+  transition: top 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.social-dock-ambient-glow.glow-telegram {
+  top: 8px;
+}
+
+.social-dock-ambient-glow.glow-github {
+  top: 74px;
+}
+
+.social-dock-ambient-glow.glow-facebook {
+  top: 138px;
+}
+
+/* Vertical Elongated Capsule Pill */
+.social-dock-capsule {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 66px;
+  height: 220px;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(24, 27, 36, 0.78) 0%, rgba(13, 15, 22, 0.86) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  border: 1.5px solid rgba(225, 155, 75, 0.35);
+  box-shadow: 
+    0 16px 38px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(245, 145, 30, 0.08),
+    inset 0 1.5px 1.5px rgba(255, 215, 140, 0.28),
+    inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.7),
+    inset 0 0 16px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-dock-capsule:hover {
+  border-color: rgba(245, 160, 50, 0.48);
+  box-shadow: 
+    0 18px 44px rgba(0, 0, 0, 0.8),
+    0 0 28px rgba(245, 145, 30, 0.16),
+    inset 0 1.5px 1.5px rgba(255, 225, 160, 0.38),
+    inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.7),
+    inset 0 0 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Individual Social Button */
+.social-dock-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  color: #e59a4c;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Circle state (GitHub and Facebook default) */
+.social-dock-btn.is-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(220, 150, 70, 0.55);
+  background: rgba(18, 21, 29, 0.45);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 220, 140, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* Squircle state (Telegram default, and any active button) */
+.social-dock-btn.is-squircle,
+.social-dock-btn.is-active {
+  width: 50px;
+  height: 50px;
+  border-radius: 18px;
+  border: 1.5px solid rgba(245, 160, 48, 0.88);
+  background: radial-gradient(circle at 50% 35%, rgba(245, 160, 48, 0.26) 0%, rgba(200, 110, 25, 0.1) 68%, rgba(22, 25, 34, 0.85) 100%);
+  color: #ffa63e;
+  box-shadow: 
+    0 0 18px rgba(245, 145, 30, 0.45),
+    inset 0 0 12px rgba(245, 145, 30, 0.22),
+    inset 0 1.5px 1.5px rgba(255, 225, 160, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.5);
+  transform: scale(1.02);
+}
+
+/* Hover on buttons */
+.social-dock-btn:hover {
+  color: #ffba5a;
+  transform: scale(1.08);
+  border-color: rgba(245, 165, 55, 0.95);
+  box-shadow: 
+    0 0 22px rgba(245, 145, 30, 0.6),
+    inset 0 0 14px rgba(245, 145, 30, 0.28),
+    inset 0 1.5px 1.5px rgba(255, 235, 180, 0.65),
+    0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.social-dock-btn.is-circle:hover {
+  background: radial-gradient(circle at 50% 35%, rgba(245, 160, 48, 0.22) 0%, rgba(200, 110, 25, 0.08) 70%, rgba(18, 21, 29, 0.6) 100%);
+}
+
+/* Icon SVGs */
+.dock-svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.social-dock-btn:hover .dock-svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px rgba(255, 170, 60, 0.8));
+}
+
+.telegram-svg {
+  transform: translate(-1px, 1px);
+}
+
+.social-dock-btn:hover .telegram-svg {
+  transform: translate(-1px, 1px) scale(1.1);
+}
+
 /* ---------------- TOP RIGHT HUD ---------------- */
 .hud-top-right {
   display: flex;
@@ -836,6 +990,36 @@
 
   .hud-top-left {
     max-width: 100%;
+  }
+
+  .cyber-social-dock {
+    margin-top: 14px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .social-dock-capsule {
+    flex-direction: row;
+    width: fit-content;
+    height: 58px;
+    padding: 6px 10px;
+    gap: 12px;
+  }
+
+  .social-dock-ambient-glow {
+    display: none;
+  }
+
+  .social-dock-btn.is-squircle,
+  .social-dock-btn.is-active {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .social-dock-btn.is-circle {
+    width: 40px;
+    height: 40px;
   }
 
   .hud-top-right {

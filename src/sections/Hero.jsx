@@ -8,6 +8,7 @@ export default function HeroSection({ isActive = true }) {
   const [isRoleVisible, setIsRoleVisible] = useState(() => (
     typeof window !== "undefined" ? !("IntersectionObserver" in window) : true
   ));
+  const [activeSocial, setActiveSocial] = useState("telegram");
   const heroRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -90,24 +91,24 @@ export default function HeroSection({ isActive = true }) {
       // Create glowing PCB tracks mimicking the reference image
       const centerY = h * 0.46;
       const trackDefs = [
-        // Left side PCB traces
+        // Left side PCB traces (aligned with the vertical social dock buttons)
         [
-          { x: 0, y: centerY - 140 },
-          { x: w * 0.18, y: centerY - 140 },
-          { x: w * 0.24, y: centerY - 80 },
-          { x: w * 0.34, y: centerY - 80 },
+          { x: 0, y: centerY - 130 },
+          { x: w * 0.18, y: centerY - 130 },
+          { x: w * 0.24, y: centerY - 70 },
+          { x: w * 0.34, y: centerY - 70 },
         ],
         [
-          { x: 0, y: centerY - 70 },
-          { x: w * 0.12, y: centerY - 70 },
-          { x: w * 0.17, y: centerY - 20 },
-          { x: w * 0.31, y: centerY - 20 },
+          { x: 0, y: centerY - 65 },
+          { x: w * 0.12, y: centerY - 65 },
+          { x: w * 0.17, y: centerY - 15 },
+          { x: w * 0.31, y: centerY - 15 },
         ],
         [
-          { x: 0, y: centerY + 30 },
-          { x: w * 0.15, y: centerY + 30 },
-          { x: w * 0.22, y: centerY + 100 },
-          { x: w * 0.29, y: centerY + 100 },
+          { x: 0, y: centerY },
+          { x: w * 0.15, y: centerY },
+          { x: w * 0.22, y: centerY + 70 },
+          { x: w * 0.29, y: centerY + 70 },
         ],
         [
           { x: w * 0.06, y: centerY - 200 },
@@ -448,6 +449,93 @@ export default function HeroSection({ isActive = true }) {
               </div>
               <span className="faint-cross">+</span>
             </div>
+
+            {/* Cyber Floating Social Capsule Dock (Matching Reference Image) */}
+            <div
+              className="cyber-social-dock"
+              aria-label="Social Profiles"
+              onMouseLeave={() => setActiveSocial("telegram")}
+            >
+              <div
+                className={`social-dock-ambient-glow glow-${activeSocial}`}
+                aria-hidden="true"
+              />
+              <div className="social-dock-capsule">
+                <a
+                  href="https://t.me/rathana_dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`social-dock-btn ${activeSocial === "telegram" ? "is-active is-squircle" : "is-circle"}`}
+                  title="Telegram - @rathana_dev"
+                  aria-label="Telegram Channel"
+                  onMouseEnter={() => setActiveSocial("telegram")}
+                  onClick={() => setActiveSocial("telegram")}
+                >
+                  <svg
+                    className="dock-svg telegram-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.85"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" fill="rgba(245, 160, 48, 0.18)" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://github.com/Rathana-SOKHA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`social-dock-btn ${activeSocial === "github" ? "is-active is-squircle" : "is-circle"}`}
+                  title="GitHub - @Rathana-SOKHA"
+                  aria-label="GitHub Profile"
+                  onMouseEnter={() => setActiveSocial("github")}
+                  onClick={() => setActiveSocial("github")}
+                >
+                  <svg
+                    className="dock-svg github-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.85"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://www.facebook.com/Rathanacoding"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`social-dock-btn ${activeSocial === "facebook" ? "is-active is-squircle" : "is-circle"}`}
+                  title="Facebook - @Rathanacoding"
+                  aria-label="Facebook Profile"
+                  onMouseEnter={() => setActiveSocial("facebook")}
+                  onClick={() => setActiveSocial("facebook")}
+                >
+                  <svg
+                    className="dock-svg facebook-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.85"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Top Right: Metallic status badge & dot matrix */}
@@ -516,7 +604,7 @@ export default function HeroSection({ isActive = true }) {
               </Button>
             </div>
 
-            {/* Quick Resume & Social Access */}
+            {/* Quick Resume Link */}
             <div className="hud-quick-links">
               <a
                 href={cvFilePath}
@@ -542,66 +630,6 @@ export default function HeroSection({ isActive = true }) {
                 </svg>
                 <span>CV &amp; CL</span>
               </a>
-
-              <div className="quick-social-icons">
-                <a
-                  href="https://github.com/Rathana-SOKHA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-social-link"
-                  title="GitHub"
-                  aria-label="GitHub Profile"
-                >
-                  <svg
-                    className="quick-link-icon"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://t.me/rathana_dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-social-link"
-                  title="Telegram"
-                  aria-label="Telegram Channel"
-                >
-                  <svg
-                    className="quick-link-icon"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.926z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.facebook.com/Rathanacoding"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="quick-social-link"
-                  title="Facebook"
-                  aria-label="Facebook Profile"
-                >
-                  <svg
-                    className="quick-link-icon"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                  </svg>
-                </a>
-              </div>
             </div>
           </div>
 
