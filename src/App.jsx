@@ -11,7 +11,16 @@ import Projects from "./sections/Projects";
 import Education from "./sections/Education";
 import Contact from "./sections/Contact";
 
+// Custom hook for visitor tracking
+import useVisitorTracking from "./hooks/useVisitorTracking";
+
+
 function App() {
+
+  // Call the custom hook to track visitors
+  useVisitorTracking();
+
+
   // Lazy initializer: reads from localStorage synchronously to avoid flicker
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
