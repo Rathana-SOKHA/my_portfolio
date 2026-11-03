@@ -190,6 +190,24 @@
   z-index: 5;
 }
 
+/* Action Button & CV link starting at the exact same left line as FULL-STACK */
+.hero-fullstack-actions {
+  position: absolute;
+  top: calc(100% + clamp(46px, 5vw, 68px));
+  left: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: auto;
+  z-index: 10;
+  text-shadow: none;
+}
+
+.hero-fullstack-actions * {
+  text-shadow: none;
+}
+
 /* Grouping for DEVELOPER and its Status */
 .part-developer-group {
   position: relative;
@@ -216,6 +234,89 @@
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
   pointer-events: auto;
   z-index: 5;
+}
+
+/* Social Icon Dock positioned as a horizontal row below AVAILABLE FOR PROJECTS */
+.hero-developer-socials {
+  position: absolute;
+  top: calc(100% + clamp(46px, 5vw, 68px));
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  pointer-events: auto;
+  z-index: 10;
+  text-shadow: none;
+}
+
+.hero-developer-socials * {
+  text-shadow: none;
+}
+
+/* Horizontal Social Row Capsule */
+.social-row-capsule {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 6px 10px;
+  gap: 14px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(24, 27, 36, 0.78) 0%, rgba(13, 15, 22, 0.86) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  border: 1.5px solid rgba(225, 155, 75, 0.35);
+  box-shadow: 
+    0 16px 38px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(245, 145, 30, 0.08),
+    inset 0 1.5px 1.5px rgba(255, 215, 140, 0.28),
+    inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.7),
+    inset 0 0 16px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-row-capsule:hover {
+  border-color: rgba(245, 160, 50, 0.48);
+  box-shadow: 
+    0 18px 44px rgba(0, 0, 0, 0.8),
+    0 0 28px rgba(245, 145, 30, 0.16),
+    inset 0 1.5px 1.5px rgba(255, 225, 160, 0.38),
+    inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.7),
+    inset 0 0 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Ambient glow moving along the horizontal row */
+.social-row-glow {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 76px;
+  height: 76px;
+  background: radial-gradient(circle, rgba(245, 145, 30, 0.45) 0%, rgba(245, 145, 30, 0.12) 55%, transparent 75%);
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: -1;
+  transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.social-row-glow.glow-telegram {
+  left: 33px;
+}
+
+.social-row-glow.glow-github {
+  left: 91px;
+}
+
+.social-row-glow.glow-linkedin {
+  left: 147px;
+}
+
+.social-row-glow.glow-facebook {
+  left: 203px;
 }
 
 .developer-pulse-dot {
@@ -491,8 +592,8 @@
 
 /* Circle state (GitHub and Facebook default) */
 .social-dock-btn.is-circle {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 1.5px solid rgba(220, 150, 70, 0.55);
   background: rgba(18, 21, 29, 0.45);
@@ -504,9 +605,9 @@
 /* Squircle state (Telegram default, and any active button) */
 .social-dock-btn.is-squircle,
 .social-dock-btn.is-active {
-  width: 50px;
-  height: 50px;
-  border-radius: 18px;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
   border: 1.5px solid rgba(245, 160, 48, 0.88);
   background: radial-gradient(circle at 50% 35%, rgba(245, 160, 48, 0.26) 0%, rgba(200, 110, 25, 0.1) 68%, rgba(22, 25, 34, 0.85) 100%);
   color: #ffa63e;
@@ -559,6 +660,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-left: auto;
   pointer-events: auto;
 }
 
@@ -769,11 +871,12 @@
   border-radius: 9999px;
   color: #ffffff;
   text-decoration: none;
-  font-family: 'Space Mono', monospace;
-  font-size: clamp(0.76rem, 0.82vw, 0.9rem);
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-size: clamp(0.78rem, 0.86vw, 0.92rem);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-shadow: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 
@@ -788,6 +891,7 @@
   font-weight: 800;
   font-size: 1rem;
   transition: transform 0.25s ease, color 0.25s ease;
+  text-shadow: none;
 }
 
 .cyber-btn-primary:hover {
@@ -820,9 +924,11 @@
   border-radius: 9999px;
   color: #e2e8f0;
   text-decoration: none;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-shadow: none;
   transition: all 0.25s ease;
 }
 
@@ -1097,6 +1203,12 @@
     max-width: 290px;
   }
 
+  .hero-fullstack-actions {
+    position: static;
+    margin-top: 10px;
+    align-items: center;
+  }
+
   .part-developer-group {
     flex-direction: column;
     align-items: center;
@@ -1110,6 +1222,13 @@
     text-align: center;
     justify-content: center;
     white-space: normal;
+  }
+
+  .hero-developer-socials {
+    position: static;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
   }
 
   .title-spacer {

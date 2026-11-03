@@ -420,6 +420,39 @@ export default function HeroSection({ isActive = true }) {
               <Badge className="hero-fullstack-badge">FULL-STACK DEVELOPMENT</Badge>
               <span className="title-part part-fullstack">FULL-STACK</span>
               <span className="hero-fullstack-tagline">Building digital solutions that make an impact.</span>
+              <div className="hero-fullstack-actions">
+                <Button href="#contact" className="cyber-btn-primary">
+                  <span className="btn-text">WORK WITH ME</span>
+                  <span className="btn-arrow">&gt;</span>
+                </Button>
+
+                <div className="hud-quick-links">
+                  <a
+                    href={cvFilePath}
+                    download="Rathana-SOKHA-CV.pdf"
+                    className="quick-cv-link"
+                    title="Download Full Resume"
+                  >
+                    <svg
+                      className="quick-link-icon"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>CV &amp; CL</span>
+                  </a>
+                </div>
+              </div>
             </span>
             <span className="title-spacer">&nbsp;</span>
             <span className="title-part-group part-developer-group">
@@ -428,6 +461,119 @@ export default function HeroSection({ isActive = true }) {
                 <span className="developer-pulse-dot" aria-hidden="true" />
                 <span className="developer-status-text">AVAILABLE FOR PROJECTS.</span>
               </span>
+
+              {/* Cyber Floating Social Capsule Dock - Row below AVAILABLE FOR PROJECTS */}
+              <div
+                className="hero-developer-socials"
+                aria-label="Social Profiles"
+                onMouseLeave={() => setActiveSocial("telegram")}
+              >
+                <div
+                  className={`social-row-glow glow-${activeSocial}`}
+                  aria-hidden="true"
+                />
+                <div className="social-row-capsule">
+                  <a
+                    href="https://t.me/rathana_dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`social-dock-btn ${activeSocial === "telegram" ? "is-active is-squircle" : "is-circle"}`}
+                    title="Telegram - @rathana_dev"
+                    aria-label="Telegram Channel"
+                    onMouseEnter={() => setActiveSocial("telegram")}
+                    onClick={() => setActiveSocial("telegram")}
+                  >
+                    <svg
+                      className="dock-svg telegram-svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.85"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" fill="rgba(245, 160, 48, 0.18)" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="https://github.com/Rathana-SOKHA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`social-dock-btn ${activeSocial === "github" ? "is-active is-squircle" : "is-circle"}`}
+                    title="GitHub - @Rathana-SOKHA"
+                    aria-label="GitHub Profile"
+                    onMouseEnter={() => setActiveSocial("github")}
+                    onClick={() => setActiveSocial("github")}
+                  >
+                    <svg
+                      className="dock-svg github-svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.85"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                      <path d="M9 18c-4.51 2-5-2-7-2" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/rathana-sokha/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`social-dock-btn ${activeSocial === "linkedin" ? "is-active is-squircle" : "is-circle"}`}
+                    title="LinkedIn - @rathana-sokha"
+                    aria-label="LinkedIn Profile"
+                    onMouseEnter={() => setActiveSocial("linkedin")}
+                    onClick={() => setActiveSocial("linkedin")}
+                  >
+                    <svg
+                      className="dock-svg linkedin-svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.85"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="https://www.facebook.com/Rathanacoding"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`social-dock-btn ${activeSocial === "facebook" ? "is-active is-squircle" : "is-circle"}`}
+                    title="Facebook - @Rathanacoding"
+                    aria-label="Facebook Profile"
+                    onMouseEnter={() => setActiveSocial("facebook")}
+                    onClick={() => setActiveSocial("facebook")}
+                  >
+                    <svg
+                      className="dock-svg facebook-svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.85"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </span>
           </h1>
         </div>
@@ -445,239 +591,15 @@ export default function HeroSection({ isActive = true }) {
       </div>
 
       {/* ================= HUD OVERLAY (TOP & BOTTOM BARS) ================= */}
-      <div className="hud-layer">
+      <div className="hud-layer" aria-hidden="true">
         {/* TOP ROW HUD */}
         <div className="hud-top-row">
-          {/* Top Left: 4-line monospace mission text with orange + */}
-          <div className="hud-top-left">
-            <div className="hud-cross-row">
-              <span className="orange-cross">+</span>
-              <div className="hud-mission-text">
-                <p>BUILDING DIGITAL SOLUTIONS</p>
-                <p>THAT MAKE AN IMPACT.</p>
-                <p>CLEAN CODE, SMART DESIGN.</p>
-                <p>BETTER EXPERIENCES.</p>
-              </div>
-              <span className="faint-cross">+</span>
-            </div>
-          </div>
-
-          <div className="hud-top-right">
-            {/* Cyber Floating Social Capsule Dock (Matching Reference Image) */}
-            <div
-              className="cyber-social-dock"
-              aria-label="Social Profiles"
-              onMouseLeave={() => setActiveSocial("telegram")}
-            >
-              <div
-                className={`social-dock-ambient-glow glow-${activeSocial}`}
-                aria-hidden="true"
-              />
-              <div className="social-dock-capsule">
-                <a
-                  href="https://t.me/rathana_dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`social-dock-btn ${activeSocial === "telegram" ? "is-active is-squircle" : "is-circle"}`}
-                  title="Telegram - @rathana_dev"
-                  aria-label="Telegram Channel"
-                  onMouseEnter={() => setActiveSocial("telegram")}
-                  onClick={() => setActiveSocial("telegram")}
-                >
-                  <svg
-                    className="dock-svg telegram-svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.85"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22 2 15 22 11 13 2 9 22 2" fill="rgba(245, 160, 48, 0.18)" />
-                  </svg>
-                </a>
-
-                <a
-                  href="https://github.com/Rathana-SOKHA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`social-dock-btn ${activeSocial === "github" ? "is-active is-squircle" : "is-circle"}`}
-                  title="GitHub - @Rathana-SOKHA"
-                  aria-label="GitHub Profile"
-                  onMouseEnter={() => setActiveSocial("github")}
-                  onClick={() => setActiveSocial("github")}
-                >
-                  <svg
-                    className="dock-svg github-svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.85"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                    <path d="M9 18c-4.51 2-5-2-7-2" />
-                  </svg>
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/rathana-sokha/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`social-dock-btn ${activeSocial === "linkedin" ? "is-active is-squircle" : "is-circle"}`}
-                  title="LinkedIn - @rathana-sokha"
-                  aria-label="LinkedIn Profile"
-                  onMouseEnter={() => setActiveSocial("linkedin")}
-                  onClick={() => setActiveSocial("linkedin")}
-                >
-                  <svg
-                    className="dock-svg linkedin-svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.85"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                    <rect x="2" y="9" width="4" height="12" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                </a>
-
-                <a
-                  href="https://www.facebook.com/Rathanacoding"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`social-dock-btn ${activeSocial === "facebook" ? "is-active is-squircle" : "is-circle"}`}
-                  title="Facebook - @Rathanacoding"
-                  aria-label="Facebook Profile"
-                  onMouseEnter={() => setActiveSocial("facebook")}
-                  onClick={() => setActiveSocial("facebook")}
-                >
-                  <svg
-                    className="dock-svg facebook-svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.85"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
+          <div className="hud-top-left" aria-hidden="true" />
+          <div className="hud-top-right" aria-hidden="true" />
         </div>
 
-        {/* BOTTOM ROW HUD */}
-        <div className="hud-bottom-row">
-          {/* Bottom Left: Slashes, Code Tag, Mission text, and Glowing Action Button */}
-          <div className="hud-bottom-left">
-            {/* Diagonal Orange Slashes */}
-            <div className="hud-diagonal-slashes" aria-hidden="true">
-              <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-            </div>
-
-            {/* Middle Feature Group */}
-            <div className="hud-feature-group">
-              {/* Bronze Bracketed Code Icon */}
-              <div className="hud-code-card">
-                <div className="code-icon-bracket">
-                  <span className="code-tag">&#123;&lt;/&gt;&#125;</span>
-                </div>
-                <div className="code-features-list">
-                  <span className="feature-item">Clean Code</span>
-                  <span className="feature-item">Scalable Solutions</span>
-                  <span className="feature-item">User Focused</span>
-                </div>
-              </div>
-
-              {/* Vertical Divider */}
-              <div className="hud-vertical-divider" aria-hidden="true" />
-
-              {/* Mission Statement */}
-              <div className="hud-mission-blurb">
-                <p>BUILDING DIGITAL SOLUTIONS</p>
-                <p>THAT MAKE AN IMPACT</p>
-              </div>
-            </div>
-
-            {/* Glowing Orange Primary Action Button */}
-            <div className="hud-action-row">
-              <Button href="#contact" className="cyber-btn-primary">
-                <span className="btn-text">LET'S BUILD SOMETHING GREAT</span>
-                <span className="btn-arrow">&gt;</span>
-              </Button>
-            </div>
-
-            {/* Quick Resume Link */}
-            <div className="hud-quick-links">
-              <a
-                href={cvFilePath}
-                download="Rathana-SOKHA-CV.pdf"
-                className="quick-cv-link"
-                title="Download Full Resume"
-              >
-                <svg
-                  className="quick-link-icon"
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                <span>CV &amp; CL</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Bottom Right: Brushed Dark Metal Tech Stack Card */}
-          <div className="hud-bottom-right">
-            <div className="hud-tech-card">
-              <span className="card-bracket top-left" />
-              <span className="card-bracket top-right" />
-              <span className="card-bracket bottom-left" />
-              <span className="card-bracket bottom-right" />
-
-              <div className="tech-card-inner">
-                <div className="tech-card-header">TECH STACK</div>
-
-                <div className="tech-card-row">
-                  <span className="tech-badge">LARAVEL</span>
-                  <span className="tech-sep">•</span>
-                  <span className="tech-badge">VUE.JS</span>
-                  <span className="tech-sep">•</span>
-                  <span className="tech-badge">REACT</span>
-                </div>
-
-                <div className="tech-card-row">
-                  <span className="tech-badge">MYSQL</span>
-                  <span className="tech-sep">•</span>
-                  <span className="tech-badge">TAILWIND</span>
-                  <span className="tech-sep">•</span>
-                  <span className="tech-badge">GIT</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* BOTTOM ROW HUD (Cleaned per request) */}
+        <div className="hud-bottom-row" aria-hidden="true" />
       </div>
     </section>
   );
