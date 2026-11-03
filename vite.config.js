@@ -3,7 +3,7 @@ import process from 'node:process'
 import { resolve } from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import trackVisitor from './api/track-visitor.js'
+import trackVisitor from './src/api/track-visitor.js'
 
 // https://vite.dev/config/
 export default defineConfig({
