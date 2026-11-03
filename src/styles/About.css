@@ -1,12 +1,14 @@
 /* ==========================================================================
    ABOUT SECTION - TACTICAL CYBER / EDITORIAL DEVELOPER STYLE (HERO MATCH)
+   Seamless design continuity with the Hero Section & Gold Cyber Identity
    ========================================================================== */
 
 .cyber-about-section {
   position: relative;
   width: 100%;
-  padding: 120px 4vw 100px;
+  padding: 110px 4vw 110px;
   background-color: #0b0d12;
+  background: radial-gradient(ellipse at 50% 20%, rgba(32, 36, 48, 0.65) 0%, rgba(13, 15, 20, 0.95) 60%, #08090c 100%);
   color: #ffffff;
   overflow: hidden;
   box-sizing: border-box;
@@ -14,34 +16,35 @@
   scroll-margin-top: 80px;
 }
 
-/* ---------------- Background Grid & Ambience ---------------- */
+/* ---------------- Atmospheric Backdrop & PCB Circuit Traces ---------------- */
 .about-bg-grid {
   position: absolute;
   inset: 0;
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 70px 70px;
+  background-size: 64px 64px;
   background-position: center top;
   pointer-events: none;
   z-index: 0;
-  mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 90%);
-  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 90%);
+  mask-image: radial-gradient(circle at 50% 30%, black 45%, transparent 90%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 45%, transparent 90%);
 }
 
 .about-ambient-glow {
   position: absolute;
-  top: 15%;
+  top: 10%;
   right: 5%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(235, 140, 40, 0.08) 0%, transparent 68%);
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, rgba(229, 169, 71, 0.09) 0%, rgba(229, 169, 71, 0.02) 45%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
+  filter: blur(40px);
 }
 
-/* PCB Trace Etching Accent (Matching Hero) */
+/* Copper / Gold PCB Trace Etching Accent (Matching Hero Canvas) */
 .about-pcb-traces {
   position: absolute;
   inset: 0;
@@ -52,19 +55,19 @@
 .about-pcb-traces .pcb-line {
   position: absolute;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(195, 130, 60, 0.28), transparent);
+  background: linear-gradient(90deg, transparent, rgba(229, 169, 71, 0.35), transparent);
 }
 
 .about-pcb-traces .line-1 {
   top: 180px;
   left: 0;
-  width: 320px;
+  width: 360px;
 }
 
 .about-pcb-traces .line-2 {
   bottom: 220px;
   right: 0;
-  width: 380px;
+  width: 420px;
 }
 
 .about-pcb-traces .pcb-node {
@@ -72,19 +75,19 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  border: 1.5px solid rgba(229, 169, 71, 0.65);
+  border: 1.5px solid rgba(229, 169, 71, 0.85);
   background: #f8ce72;
-  box-shadow: 0 0 10px rgba(229, 169, 71, 0.6);
+  box-shadow: 0 0 12px rgba(229, 169, 71, 0.8);
 }
 
 .about-pcb-traces .node-1 {
   top: 178px;
-  left: 280px;
+  left: 310px;
 }
 
 .about-pcb-traces .node-2 {
   bottom: 218px;
-  right: 320px;
+  right: 360px;
 }
 
 /* ---------------- Main Container ---------------- */
@@ -95,60 +98,44 @@
   z-index: 2;
 }
 
-/* Section Header Tag */
-.about-header-tag {
+/* Section Header Badge & Main Title */
+.about-header-pill {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
-.tag-cross {
-  color: #e5a947;
-  font-size: 1.15rem;
-  font-weight: 800;
-  text-shadow: 0 0 10px rgba(229, 169, 71, 0.7);
-}
-
-.tag-mono {
-  font-family: 'Space Mono', monospace;
-  font-size: clamp(0.74rem, 0.82vw, 0.88rem);
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #d4a76a;
-  text-transform: uppercase;
-}
-
-.tag-bracket {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.74rem;
-  color: #e5a947;
-  letter-spacing: 0.12em;
-}
-
-/* Main Section Title (Embossed 3D Typography Matching Hero) */
 .about-main-title {
   font-family: 'Montserrat', 'Poppins', -apple-system, sans-serif;
-  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.8rem);
   font-weight: 900;
   letter-spacing: -0.01em;
   line-height: 1.15;
   color: #ffffff;
-  margin: 0 0 60px;
+  margin: 0 0 14px;
   max-width: 950px;
   text-shadow:
     0 1px 0 #cbd5e1,
     0 2px 0 #94a3b8,
     0 3px 0 #64748b,
-    0 5px 14px rgba(0, 0, 0, 0.85);
+    0 6px 18px rgba(0, 0, 0, 0.85);
 }
 
-.title-orange {
-  color: #f8ce72;
-  text-shadow:
-    0 1px 0 #d49a3d,
-    0 2px 0 #926618,
-    0 0 24px rgba(229, 169, 71, 0.6);
+.title-gold {
+  background: linear-gradient(135deg, #f8ce72 0%, #ffdf8d 40%, #e5a947 75%, #d49a3d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 24px rgba(229, 169, 71, 0.55));
+  display: inline-block;
+}
+
+.about-lead-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.95rem, 1.1vw, 1.12rem);
+  color: #94a3b8;
+  max-width: 680px;
+  line-height: 1.65;
+  margin: 0 0 65px;
 }
 
 /* ==========================================================================
@@ -159,7 +146,7 @@
   grid-template-columns: 460px 1fr;
   gap: 65px;
   align-items: start;
-  margin-bottom: 90px;
+  margin-bottom: 95px;
 }
 
 /* ---------------- Left Column: Holographic Portrait HUD ---------------- */
@@ -171,25 +158,25 @@
 
 .portrait-hud-frame {
   position: relative;
-  background: linear-gradient(135deg, rgba(22, 25, 34, 0.94) 0%, rgba(13, 15, 22, 0.96) 100%);
+  background: linear-gradient(145deg, rgba(20, 23, 33, 0.9) 0%, rgba(12, 14, 20, 0.95) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(229, 169, 71, 0.38);
-  border-radius: 4px;
+  border: 1.5px solid rgba(229, 169, 71, 0.35);
+  border-radius: 6px;
   padding: 18px;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 235, 175, 0.35),
-    0 24px 50px rgba(0, 0, 0, 0.75),
-    0 0 25px rgba(229, 169, 71, 0.12);
+    inset 0 1.5px 1.5px rgba(255, 235, 175, 0.3),
+    0 24px 60px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(229, 169, 71, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .portrait-hud-frame:hover {
   border-color: rgba(240, 180, 80, 0.65);
   box-shadow: 
-    inset 0 1px 1.5px rgba(255, 240, 190, 0.5),
-    0 28px 60px rgba(0, 0, 0, 0.85),
-    0 0 35px rgba(229, 169, 71, 0.25);
+    inset 0 1.5px 1.5px rgba(255, 240, 190, 0.45),
+    0 28px 70px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(229, 169, 71, 0.25);
 }
 
 /* Reusable Corner Brackets (Exact Hero Match) */
@@ -203,29 +190,29 @@
 .card-bracket.top-left {
   top: -1px;
   left: -1px;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-left: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.75);
 }
 
 .card-bracket.top-right {
   top: -1px;
   right: -1px;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-right: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.75);
 }
 
 .card-bracket.bottom-left {
   bottom: -1px;
   left: -1px;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-left: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.75);
 }
 
 .card-bracket.bottom-right {
   bottom: -1px;
   right: -1px;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-right: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.75);
 }
 
 /* HUD Header Bar */
@@ -249,15 +236,35 @@
 .hud-live-status {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   color: #f8ce72;
   font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
 }
 
-.status-diamond {
-  color: #e5a947;
-  font-size: 0.85rem;
-  text-shadow: 0 0 8px rgba(229, 169, 71, 0.85);
+/* Green Pulsing Status Dot (Exact Match to Hero 'AVAILABLE FOR PROJECTS') */
+.hud-status-green-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+  display: inline-block;
+  animation: hudDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes hudDotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px #00ff88;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+    box-shadow: 0 0 4px #00ff88;
+  }
 }
 
 /* Portrait Viewport */
@@ -403,25 +410,31 @@
 }
 
 .bio-role-lead {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(229, 169, 71, 0.08);
+  border: 1px solid rgba(229, 169, 71, 0.32);
+  border-radius: 9999px;
+  margin-bottom: 22px;
+  width: fit-content;
+  box-shadow: 0 0 12px rgba(229, 169, 71, 0.12);
 }
 
 .lead-dash {
   color: #e5a947;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 900;
   line-height: 1;
 }
 
 .lead-tag {
   font-family: 'Space Mono', monospace;
-  font-size: clamp(0.78rem, 0.88vw, 0.92rem);
+  font-size: clamp(0.72rem, 0.8vw, 0.84rem);
   font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #ffffff;
+  letter-spacing: 0.14em;
+  color: #f8ce72;
   text-transform: uppercase;
 }
 
@@ -437,7 +450,7 @@
   font-weight: 600;
 }
 
-.orange-highlight {
+.gold-highlight {
   color: #f8ce72;
   font-weight: 700;
   text-shadow: 0 0 10px rgba(229, 169, 71, 0.35);
@@ -448,21 +461,21 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 12px;
   margin: 20px 0 35px;
-  padding: 20px 24px;
-  background: linear-gradient(135deg, rgba(22, 25, 34, 0.9) 0%, rgba(13, 15, 22, 0.94) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 22px 24px;
+  background: linear-gradient(145deg, rgba(20, 23, 33, 0.88) 0%, rgba(12, 14, 20, 0.94) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-left: 2.5px solid #e5a947;
   border-radius: 4px;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
     0 10px 25px rgba(0, 0, 0, 0.55);
 }
 
 .dossier-row {
   display: grid;
-  grid-template-columns: 140px 14px 1fr;
+  grid-template-columns: 145px 14px 1fr;
   align-items: baseline;
   font-family: 'Space Mono', monospace;
   font-size: 0.82rem;
@@ -495,14 +508,14 @@
 .stat-hud-box {
   position: relative;
   padding: 20px 16px;
-  background: linear-gradient(135deg, rgba(22, 25, 34, 0.9) 0%, rgba(13, 15, 22, 0.92) 100%);
+  background: linear-gradient(145deg, rgba(20, 23, 33, 0.88) 0%, rgba(12, 14, 20, 0.92) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   text-align: center;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
     0 8px 24px rgba(0, 0, 0, 0.5);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -524,7 +537,10 @@
   line-height: 1;
   margin-bottom: 6px;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  text-shadow:
+    0 1px 0 #cbd5e1,
+    0 2px 0 #94a3b8,
+    0 4px 12px rgba(0, 0, 0, 0.85);
 }
 
 .stat-caption {
@@ -546,27 +562,38 @@
 .cyber-about-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  justify-content: space-between;
+  gap: 18px;
   padding: 12px 28px;
   border-radius: 9999px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.82rem;
+  font-family: 'Poppins', -apple-system, sans-serif;
+  font-size: clamp(0.78rem, 0.86vw, 0.92rem);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .cyber-about-btn.primary-action {
-  background: rgba(15, 17, 24, 0.88);
+  background: rgba(15, 17, 24, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1.5px solid #e5a947;
   color: #ffffff;
   box-shadow: 
     0 0 16px rgba(229, 169, 71, 0.35),
     inset 0 1px 1px rgba(255, 230, 160, 0.3);
+}
+
+.cyber-about-btn.primary-action .btn-arrow {
+  color: #e5a947;
+  font-weight: 800;
+  font-size: 1.05rem;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
 .cyber-about-btn.primary-action:hover {
@@ -576,10 +603,24 @@
   transform: translateY(-2px);
 }
 
+.cyber-about-btn.primary-action:hover .btn-arrow {
+  color: #0b0c10;
+  transform: translateY(2px);
+}
+
 .cyber-about-btn.secondary-action {
   background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  color: #cbd5e1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  color: #e2e8f0;
+}
+
+.cyber-about-btn.secondary-action .btn-arrow {
+  color: #94a3b8;
+  font-weight: 800;
+  font-size: 1rem;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
 .cyber-about-btn.secondary-action:hover {
@@ -587,7 +628,12 @@
   color: #ffffff;
   background: rgba(229, 169, 71, 0.15);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(229, 169, 71, 0.3);
+  box-shadow: 0 4px 18px rgba(229, 169, 71, 0.35);
+}
+
+.cyber-about-btn.secondary-action:hover .btn-arrow {
+  color: #f8ce72;
+  transform: translateX(3px);
 }
 
 /* ==========================================================================
@@ -608,7 +654,7 @@
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: #b6885e;
+  color: #d4a76a;
   text-transform: uppercase;
   display: block;
   margin-bottom: 8px;
@@ -632,13 +678,13 @@
 .pillar-card {
   position: relative;
   padding: 30px 24px;
-  background: linear-gradient(135deg, rgba(22, 25, 34, 0.9) 0%, rgba(13, 15, 22, 0.94) 100%);
+  background: linear-gradient(145deg, rgba(20, 23, 33, 0.88) 0%, rgba(12, 14, 20, 0.94) 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
     0 10px 28px rgba(0, 0, 0, 0.6);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
@@ -669,20 +715,31 @@
   letter-spacing: 0.1em;
 }
 
+/* Squircle Icon Badge matching Hero social dock button shape */
 .pillar-icon-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(24, 18, 14, 0.85);
-  border: 1px solid rgba(229, 169, 71, 0.55);
-  border-radius: 6px;
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(28, 32, 44, 0.85) 0%, rgba(16, 18, 26, 0.9) 100%);
+  border: 1.5px solid rgba(229, 169, 71, 0.55);
+  border-radius: 10px;
   font-family: 'Space Mono', monospace;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 700;
   color: #f8ce72;
-  box-shadow: 0 0 12px rgba(229, 169, 71, 0.2);
+  box-shadow: 
+    0 0 14px rgba(229, 169, 71, 0.2),
+    inset 0 1px 1px rgba(255, 235, 175, 0.3);
+  transition: all 0.25s ease;
+}
+
+.pillar-card:hover .pillar-icon-badge {
+  border-color: rgba(240, 180, 80, 0.9);
+  color: #ffd680;
+  box-shadow: 0 0 20px rgba(229, 169, 71, 0.45);
+  transform: scale(1.06);
 }
 
 .pillar-title {
@@ -756,6 +813,9 @@
 }
 
 @media (max-width: 600px) {
+  .cyber-about-section {
+    padding: 80px 5vw 70px;
+  }
   .about-stats-grid {
     grid-template-columns: 1fr;
     gap: 12px;

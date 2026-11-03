@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SCROLL PROGRESS & FLOATING HUD SCROLL-TO-TOP BUTTON
+   SCROLL PROGRESS & FLOATING HUD SCROLL-TO-TOP BUTTON (GOLD CYBER MATCH)
    ========================================================================== */
 
 .scroll-progress {
@@ -9,10 +9,10 @@
   z-index: 9999;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #ff5419 0%, #ff8c42 50%, #ff5419 100%);
+  background: linear-gradient(90deg, #d49a3d 0%, #ffdf8d 50%, #e5a947 100%);
   background-size: 200% 100%;
   animation: progressShimmer 3s linear infinite;
-  box-shadow: 0 0 12px rgba(255, 84, 25, 0.65), 0 0 24px rgba(255, 84, 25, 0.35);
+  box-shadow: 0 0 12px rgba(229, 169, 71, 0.65), 0 0 24px rgba(229, 169, 71, 0.35);
   pointer-events: none;
   transform-origin: left center;
 }
@@ -29,7 +29,7 @@
   width: 30px;
   height: 3px;
   background: #ffffff;
-  box-shadow: 0 0 12px #ff8c42, 0 0 20px #ff5419;
+  box-shadow: 0 0 12px #f8ce72, 0 0 20px #e5a947;
 }
 
 /* ---------------- Floating HUD Back-To-Top Button ---------------- */
@@ -40,30 +40,30 @@
   z-index: 990;
   width: 48px;
   height: 48px;
-  background: rgba(9, 11, 16, 0.9);
-  border: 1px solid rgba(255, 84, 25, 0.35);
+  background: rgba(9, 11, 16, 0.92);
+  border: 1.5px solid rgba(229, 169, 71, 0.38);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 84, 25, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(229, 169, 71, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: visible;
   padding: 0;
 }
 
 .hud-scroll-top:hover {
-  border-color: #ff5419;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 84, 25, 0.45);
+  border-color: #e5a947;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 24px rgba(229, 169, 71, 0.5);
   transform: translateY(-3px);
 }
 
 .hud-scroll-top:focus-visible {
-  outline: 2px solid #ff5419;
+  outline: 2px solid #e5a947;
   outline-offset: 4px;
 }
 
@@ -72,7 +72,7 @@
   position: absolute;
   width: 6px;
   height: 6px;
-  border-color: #ff5419;
+  border-color: #e5a947;
   border-style: solid;
   pointer-events: none;
 }
@@ -104,10 +104,10 @@
 }
 
 .hud-ring-fill {
-  stroke: #ff5419;
+  stroke: #e5a947;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.12s linear;
-  filter: drop-shadow(0 0 4px rgba(255, 84, 25, 0.6));
+  filter: drop-shadow(0 0 5px rgba(229, 169, 71, 0.7));
 }
 
 /* Icon & Percentage readout */
@@ -115,12 +115,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff5419;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  color: #e5a947;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
   z-index: 1;
 }
 
 .hud-scroll-top:hover .hud-scroll-icon {
+  color: #f8ce72;
   transform: translateY(-2px);
 }
 
@@ -142,8 +143,8 @@
 /* Light theme overrides */
 [data-theme="light"] .hud-scroll-top {
   background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(255, 84, 25, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 0 16px rgba(255, 84, 25, 0.15);
+  border-color: rgba(229, 169, 71, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 0 16px rgba(229, 169, 71, 0.18);
 }
 
 [data-theme="light"] .hud-ring-track {
@@ -156,25 +157,4 @@
 
 [data-theme="light"] .hud-scroll-top:hover .hud-scroll-pct {
   color: #0f172a;
-}
-
-@media (max-width: 640px) {
-  .hud-scroll-top {
-    bottom: 20px;
-    right: 20px;
-    width: 42px;
-    height: 42px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-progress {
-    animation: none;
-  }
-  .hud-scroll-top {
-    transition: opacity 0.1s ease;
-  }
-  .hud-ring-fill {
-    transition: none;
-  }
 }

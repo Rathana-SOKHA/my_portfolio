@@ -63,7 +63,7 @@ export default function Education() {
           </div>
 
           <h2 className="education-main-title">
-            MY <span className="title-orange">EDUCATION JOURNEY</span>
+            MY <span className="title-gold">EDUCATION JOURNEY</span>
           </h2>
         </ScrollReveal>
 
@@ -158,7 +158,7 @@ export default function Education() {
             <div className="hud-readout-left">
               <span className="readout-cross">+</span>
               <span className="readout-text">
-                TRAJECTORY_STATUS: <span className="readout-orange">CONTINUOUS LEARNING ACTIVE</span>
+                TRAJECTORY_STATUS: <span className="readout-gold">CONTINUOUS LEARNING ACTIVE</span>
               </span>
             </div>
 

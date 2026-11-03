@@ -8,7 +8,7 @@
   color: #f5f2eb;
   background:
     radial-gradient(ellipse at 82% 0%, rgba(178, 113, 48, 0.13), transparent 34%),
-    radial-gradient(ellipse at 12% 100%, rgba(255, 84, 25, 0.07), transparent 38%),
+    radial-gradient(ellipse at 12% 100%, rgba(229, 169, 71, 0.07), transparent 38%),
     #0b0d12;
   border-top: 1px solid rgba(240, 180, 80, 0.24);
   font-family: 'Poppins', sans-serif;
@@ -31,7 +31,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #f0b450 48%, #ff7b32 56%, transparent);
+  background: linear-gradient(90deg, transparent, #f0b450 48%, #e5a947 56%, transparent);
   box-shadow: 0 0 18px rgba(240, 180, 80, 0.5);
 }
 
@@ -160,7 +160,7 @@
 }
 
 .footer-col-title > span {
-  color: #ff7b32;
+  color: #e5a947;
 }
 
 .footer-links-list {
@@ -184,7 +184,7 @@
 }
 
 .footer-nav-link::before {
-  color: #ff7b32;
+  color: #e5a947;
   content: '/';
   opacity: 0;
   transform: translateX(-4px);
@@ -313,7 +313,7 @@
 
 .footer-bottom-plus {
   padding: 0 4px;
-  color: #ff7b32;
+  color: #e5a947;
 }
 
 .footer-cyber-logo:focus-visible,

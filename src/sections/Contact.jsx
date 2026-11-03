@@ -86,7 +86,7 @@ export default function Contact() {
           </div>
 
           <h2 className="contact-main-title">
-            LET'S BUILD <span className="title-orange"> SOMETHING GREAT</span>
+            LET'S BUILD <span className="title-gold"> SOMETHING GREAT</span>
           </h2>
         </ScrollReveal>
 
@@ -294,7 +294,7 @@ export default function Contact() {
             <div className="hud-readout-left">
               <span className="readout-cross">+</span>
               <span className="readout-text">
-                DISPATCH_READY: <span className="readout-orange">AVERAGE RESPONSE TIME &lt; 24 HOURS</span>
+                DISPATCH_READY: <span className="readout-gold">AVERAGE RESPONSE TIME &lt; 24 HOURS</span>
               </span>
             </div>
 

@@ -87,15 +87,18 @@ export default function About() {
       <div className="about-container">
         {/* Section Header Tag & Main Title */}
         <ScrollReveal animation="fade-up" delay={0}>
-          <div className="about-header-tag">
-            <span className="tag-cross">+</span>
-            <span className="tag-mono">// 02. PROFILE_DOSSIER</span>
-            <span className="tag-bracket">[ SYSTEM_INFO ]</span>
+          <div className="about-header-pill">
+            <span className="cyber-badge">
+              <span className="cyber-badge-text">// 02. PROFILE DOSSIER</span>
+            </span>
           </div>
 
           <h2 className="about-main-title">
-            DETAIL <span className="title-orange">ABOUT ME</span>
+            DETAIL <span className="title-gold">ABOUT ME</span>
           </h2>
+          <p className="about-lead-subtitle">
+            Passionate software engineer bridging clean architectural design with high-performance web solutions.
+          </p>
         </ScrollReveal>
 
         {/* 2-Column Main Dossier */}
@@ -121,8 +124,8 @@ export default function About() {
                 <div className="hud-frame-header">
                   <span className="hud-id-tag">ID: SOKHA_RATHANA</span>
                   <span className="hud-live-status">
-                    <span className="status-diamond">◇</span>
-                    ONLINE
+                    <span className="hud-status-green-dot" />
+                    AVAILABLE FOR PROJECTS
                   </span>
                 </div>
 
@@ -171,7 +174,7 @@ export default function About() {
 
               <p className="bio-summary-p">
                 Hello, I'm <strong className="white-highlight">SOKHA RATHANA</strong>, an enthusiastic{" "}
-                <strong className="orange-highlight">Full-Stack Web Developer</strong> and second-year student
+                <strong className="gold-highlight">Full-Stack Web Developer</strong> and second-year student
                 at <strong className="white-highlight">Passerelles Numériques Cambodia (PNC)</strong>.
               </p>
 
@@ -260,7 +263,7 @@ export default function About() {
             <div className="pillars-header">
               <span className="pillar-tag">// DEVELOPMENT PHILOSOPHY</span>
               <h3 className="pillars-title">
-                CORE PRINCIPLES THAT <span className="title-orange">DRIVE MY CODE</span>
+                CORE PRINCIPLES THAT <span className="title-gold">DRIVE MY CODE</span>
               </h3>
             </div>
           </ScrollReveal>

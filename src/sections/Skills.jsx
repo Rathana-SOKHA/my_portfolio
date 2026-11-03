@@ -157,7 +157,7 @@ export default function Skills() {
           </div>
 
           <h2 className="skills-main-title">
-            SKILLS & <span className="title-orange">EXPERTISE</span>
+            SKILLS & <span className="title-gold">EXPERTISE</span>
           </h2>
         </ScrollReveal>
 

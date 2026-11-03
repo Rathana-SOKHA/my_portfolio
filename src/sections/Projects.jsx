@@ -189,7 +189,7 @@ export default function Projects() {
           </div>
 
           <h2 className="projects-main-title">
-            FEATURED <span className="title-orange">PROJECTS</span>
+            FEATURED <span className="title-gold">PROJECTS</span>
           </h2>
         </ScrollReveal>
 
@@ -405,7 +405,7 @@ export default function Projects() {
             <div className="hud-readout-left">
               <span className="readout-cross">+</span>
               <span className="readout-text">
-                WORKSPACE_METRICS: <span className="readout-orange">{projects.length} PROJECTS CATALOGED</span>
+                WORKSPACE_METRICS: <span className="readout-gold">{projects.length} PROJECTS CATALOGED</span>
               </span>
             </div>
 
