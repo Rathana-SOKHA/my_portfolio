@@ -1,3 +1,4 @@
+import TypewriterTitle from '../components/animations/TypewriterTitle';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import '../styles/Projects.css';
@@ -188,9 +189,11 @@ export default function Projects() {
             <span className="tag-bracket">[ DEPLOYED_WORK ]</span>
           </div>
 
-          <h2 className="projects-main-title">
-            FEATURED <span className="title-gold">PROJECTS</span>
-          </h2>
+          <TypewriterTitle
+            className="projects-main-title"
+            text="FEATURED "
+            goldText="PROJECTS"
+          />
         </ScrollReveal>
 
         {/* Interactive project filters and search */}

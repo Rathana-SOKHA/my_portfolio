@@ -103,3 +103,65 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ==========================================================================
+   GLOBAL TYPEWRITER TITLE EFFECT (ZERO-LAYOUT-SHIFT)
+   Used across About, Skills, Projects, Education, and Contact sections
+   ========================================================================== */
+.type-char {
+  display: inline;
+  position: relative;
+  transition: opacity 0.08s ease;
+}
+
+.type-char.char-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.type-char.char-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Zero-layout-shift glowing cursor on the active character edge */
+.type-char.has-cursor::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  right: -3px;
+  width: 3.5px;
+  height: 80%;
+  background-color: #f8ce72;
+  box-shadow: 0 0 10px rgba(248, 206, 114, 0.9), 0 0 20px rgba(229, 169, 71, 0.6);
+  border-radius: 2px;
+  animation: typewriterBlink 0.85s infinite;
+  pointer-events: none;
+}
+
+.type-char.cursor-at-start::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: -3px;
+  width: 3.5px;
+  height: 80%;
+  background-color: #f8ce72;
+  box-shadow: 0 0 10px rgba(248, 206, 114, 0.9), 0 0 20px rgba(229, 169, 71, 0.6);
+  border-radius: 2px;
+  animation: typewriterBlink 0.85s infinite;
+  pointer-events: none;
+}
+
+@keyframes typewriterBlink {
+  0%, 45% {
+    opacity: 1;
+  }
+  50%, 95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

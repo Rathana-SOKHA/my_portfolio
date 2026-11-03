@@ -1,3 +1,4 @@
+import TypewriterTitle from '../components/animations/TypewriterTitle';
 import React, { useState } from 'react';
 import '../styles/Contact.css';
 import ScrollReveal from '../components/animations/ScrollReveal';
@@ -85,9 +86,11 @@ export default function Contact() {
             <span className="tag-bracket">[ INITIATE_CONTACT ]</span>
           </div>
 
-          <h2 className="contact-main-title">
-            LET'S BUILD <span className="title-gold"> SOMETHING GREAT</span>
-          </h2>
+          <TypewriterTitle
+            className="contact-main-title"
+            text="LET'S BUILD "
+            goldText="SOMETHING GREAT"
+          />
         </ScrollReveal>
 
         {/* 2-Column Console Grid */}

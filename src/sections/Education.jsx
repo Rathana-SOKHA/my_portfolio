@@ -1,3 +1,4 @@
+import TypewriterTitle from '../components/animations/TypewriterTitle';
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, useReducedMotion } from 'motion/react';
 import '../styles/Education.css';
@@ -62,9 +63,11 @@ export default function Education() {
             <span className="tag-bracket">[ LEARNING_MILESTONES ]</span>
           </div>
 
-          <h2 className="education-main-title">
-            MY <span className="title-gold">EDUCATION JOURNEY</span>
-          </h2>
+          <TypewriterTitle
+            className="education-main-title"
+            text="MY "
+            goldText="EDUCATION JOURNEY"
+          />
         </ScrollReveal>
 
         {/* Cyber Timeline */}

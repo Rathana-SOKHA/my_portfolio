@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import "../styles/Skills.css";
 import ScrollReveal from "../components/animations/ScrollReveal";
+import TypewriterTitle from "../components/animations/TypewriterTitle";
 
 // ─── Inline SVG data URIs for real brand logos ──────────────────────
 const cssLogo = `data:image/svg+xml,${encodeURIComponent(
@@ -156,9 +157,11 @@ export default function Skills() {
             <span className="tag-bracket">[ CAPABILITIES ]</span>
           </div>
 
-          <h2 className="skills-main-title">
-            SKILLS & <span className="title-gold">EXPERTISE</span>
-          </h2>
+          <TypewriterTitle
+            className="skills-main-title"
+            text="SKILLS & "
+            goldText="EXPERTISE"
+          />
         </ScrollReveal>
 
         {/* Cyber Filter Navigation */}
