@@ -83,25 +83,30 @@
 
 /* Main Section Title */
 .contact-main-title {
-  font-family: 'Montserrat', 'Poppins', sans-serif;
-  font-size: clamp(1.8rem, 3.2vw, 3.1rem);
+  font-family: 'Montserrat', 'Poppins', -apple-system, sans-serif;
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.18;
   color: #ffffff;
   margin: 0 0 55px;
   max-width: 950px;
+  text-shadow:
+    0 1px 0 #cbd5e1,
+    0 2px 0 #94a3b8,
+    0 3px 0 #64748b,
+    0 6px 18px rgba(0, 0, 0, 0.85);
 }
 
 .contact-main-title .title-gold,
 .contact-main-title .title-orange {
   background: linear-gradient(135deg, #f8ce72 0%, #ffdf8d 40%, #e5a947 75%, #d49a3d 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 20px rgba(229, 169, 71, 0.45));
+  filter: drop-shadow(0 0 24px rgba(229, 169, 71, 0.55));
   display: inline-block;
-  color: #e5a947;
-  text-shadow: 0 0 20px rgba(229, 169, 71, 0.4);
+  text-shadow: none;
 }
 
 /* ==========================================================================
