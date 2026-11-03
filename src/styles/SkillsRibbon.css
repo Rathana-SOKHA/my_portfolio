@@ -71,10 +71,6 @@
   will-change: transform;
 }
 
-.marquee-ribbon-main:hover .marquee-track {
-  animation-play-state: paused;
-}
-
 @keyframes marquee-scroll {
   from {
     transform: translateX(0);
