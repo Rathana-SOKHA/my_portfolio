@@ -45,6 +45,40 @@ export default function About() {
   const portraitRef = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
+  // Typewriter effect: types forward letter-by-letter, pauses, runs backward, and repeats
+  const fullTitle = "DETAIL ABOUT ME";
+  const [charCount, setCharCount] = useState(fullTitle.length);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (!isDeleting) {
+      if (charCount < fullTitle.length) {
+        timer = setTimeout(() => {
+          setCharCount((prev) => prev + 1);
+        }, 110);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200);
+      }
+    } else {
+      if (charCount > 0) {
+        timer = setTimeout(() => {
+          setCharCount((prev) => prev - 1);
+        }, 55);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+        }, 500);
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [charCount, isDeleting, fullTitle.length]);
+
+  const activeCursorIndex =
+    charCount === 0 ? -1 : charCount === 7 ? 5 : charCount === 13 ? 11 : charCount - 1;
+
   useEffect(() => {
     const el = portraitRef.current;
     if (!el) return;
@@ -93,8 +127,38 @@ export default function About() {
             </span>
           </div>
 
-          <h2 className="about-main-title">
-            DETAIL <span className="title-gold">ABOUT ME</span>
+          <h2 className="about-main-title" aria-label="DETAIL ABOUT ME">
+            <span className="title-word">
+              {"DETAIL".split("").map((char, i) => {
+                const isVis = i < charCount;
+                const hasCur = activeCursorIndex === i;
+                const atStart = charCount === 0 && i === 0;
+                return (
+                  <span
+                    key={i}
+                    className={`type-char ${isVis ? "char-visible" : "char-hidden"} ${hasCur ? "has-cursor" : ""} ${atStart ? "cursor-at-start" : ""}`}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
+            </span>
+            {" "}
+            <span className="title-gold title-word">
+              {"ABOUT ME".split("").map((char, i) => {
+                const globalIndex = 7 + i; // 6 for "DETAIL" + 1 for space
+                const isVis = globalIndex < charCount;
+                const hasCur = activeCursorIndex === globalIndex;
+                return (
+                  <span
+                    key={i}
+                    className={`type-char ${isVis ? "char-visible" : "char-hidden"} ${hasCur ? "has-cursor" : ""}`}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                );
+              })}
+            </span>
           </h2>
           <p className="about-lead-subtitle">
             Passionate software engineer bridging clean architectural design with high-performance web solutions.
