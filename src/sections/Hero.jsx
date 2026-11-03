@@ -422,7 +422,13 @@ export default function HeroSection({ isActive = true }) {
               <span className="hero-fullstack-tagline">Building digital solutions that make an impact.</span>
             </span>
             <span className="title-spacer">&nbsp;</span>
-            <span className="title-part part-developer">DEVELOPER</span>
+            <span className="title-part-group part-developer-group">
+              <span className="title-part part-developer">DEVELOPER</span>
+              <span className="hero-developer-status">
+                <span className="developer-pulse-dot" aria-hidden="true" />
+                <span className="developer-status-text">AVAILABLE FOR PROJECTS.</span>
+              </span>
+            </span>
           </h1>
         </div>
 
