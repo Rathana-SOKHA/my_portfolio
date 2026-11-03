@@ -3,6 +3,7 @@ import "../styles/HeroSection.css";
 import profileCutout from "../assets/profile-cutout.png";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
+import SkillsRibbon from "../components/ui/SkillsRibbon";
 
 export default function HeroSection({ isActive = true }) {
   const cvFilePath = "/CV & CL Rathana SOKHA.pdf";
@@ -216,8 +217,8 @@ export default function HeroSection({ isActive = true }) {
 
       // 1. Draw Background Warm Spotlight behind the Halo
       const spotGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseRadius * 1.8);
-      spotGrad.addColorStop(0, "rgba(225, 140, 40, 0.22)");
-      spotGrad.addColorStop(0.4, "rgba(190, 105, 25, 0.12)");
+      spotGrad.addColorStop(0, "rgba(235, 175, 75, 0.22)");
+      spotGrad.addColorStop(0.4, "rgba(195, 135, 45, 0.12)");
       spotGrad.addColorStop(1, "rgba(10, 12, 16, 0)");
       ctx.fillStyle = spotGrad;
       ctx.fillRect(0, 0, width, height);
@@ -264,9 +265,9 @@ export default function HeroSection({ isActive = true }) {
             const pulseY = p1.y + (p2.y - p1.y) * frac;
 
             const pulseGrad = ctx.createRadialGradient(pulseX, pulseY, 0, pulseX, pulseY, 12);
-            pulseGrad.addColorStop(0, "rgba(255, 220, 140, 0.95)");
-            pulseGrad.addColorStop(0.35, "rgba(255, 150, 45, 0.65)");
-            pulseGrad.addColorStop(1, "rgba(255, 120, 25, 0)");
+            pulseGrad.addColorStop(0, "rgba(255, 235, 160, 0.95)");
+            pulseGrad.addColorStop(0.35, "rgba(240, 180, 80, 0.7)");
+            pulseGrad.addColorStop(1, "rgba(215, 145, 45, 0)");
             ctx.fillStyle = pulseGrad;
             ctx.beginPath();
             ctx.arc(pulseX, pulseY, 12, 0, Math.PI * 2);
@@ -296,8 +297,8 @@ export default function HeroSection({ isActive = true }) {
             ? 0.35 + Math.sin(sec * 3 + node.pulseOffset) * 0.25
             : 0.45;
           const nodeGlow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 16);
-          nodeGlow.addColorStop(0, `rgba(255, 175, 60, ${glowAlpha})`);
-          nodeGlow.addColorStop(1, "rgba(255, 140, 30, 0)");
+          nodeGlow.addColorStop(0, `rgba(245, 185, 80, ${glowAlpha})`);
+          nodeGlow.addColorStop(1, "rgba(215, 145, 45, 0)");
           ctx.fillStyle = nodeGlow;
           ctx.beginPath();
           ctx.arc(node.x, node.y, 16, 0, Math.PI * 2);
@@ -496,7 +497,7 @@ export default function HeroSection({ isActive = true }) {
                       aria-hidden="true"
                     >
                       <line x1="22" y1="2" x2="11" y2="13" />
-                      <polygon points="22 2 15 22 11 13 2 9 22 2" fill={activeSocial === "telegram" ? "rgba(245, 160, 48, 0.18)" : "none"} />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" fill={activeSocial === "telegram" ? "rgba(235, 175, 80, 0.2)" : "none"} />
                     </svg>
                     <span className="social-btn-label">Telegram</span>
                   </a>
@@ -606,6 +607,11 @@ export default function HeroSection({ isActive = true }) {
 
         {/* BOTTOM ROW HUD (Cleaned per request) */}
         <div className="hud-bottom-row" aria-hidden="true" />
+      </div>
+
+      {/* Hero Bottom Ticker Tape Ribbon (Visible on initial load) */}
+      <div className="hero-bottom-ribbon">
+        <SkillsRibbon />
       </div>
     </section>
   );

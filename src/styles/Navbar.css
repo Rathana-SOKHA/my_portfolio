@@ -66,12 +66,12 @@
 }
 
 .logo-accent {
-  color: #ff7a18;
+  color: #e5a947;
   font-family: 'Montserrat', 'Poppins', -apple-system, sans-serif;
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-shadow: 0 0 14px rgba(255, 122, 24, 0.65);
+  text-shadow: 0 0 14px rgba(229, 169, 71, 0.65);
 }
 
 /* ---------------- Center-Right: Unified Capsule Menu (Reference Image Match) ---------------- */
@@ -194,17 +194,17 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(215, 140, 70, 0.35) 15%,
-    #ff9d45 35%,
+    rgba(215, 155, 60, 0.35) 15%,
+    #e5a947 35%,
     #ffe4a0 50%,
-    #ff9d45 65%,
-    rgba(215, 140, 70, 0.35) 85%,
+    #e5a947 65%,
+    rgba(215, 155, 60, 0.35) 85%,
     transparent 100%
   );
   border-radius: 9999px;
   box-shadow: 
-    0 0 8px rgba(255, 157, 69, 0.85),
-    0 0 16px rgba(255, 140, 46, 0.5);
+    0 0 8px rgba(229, 169, 71, 0.85),
+    0 0 16px rgba(229, 169, 71, 0.5);
   pointer-events: none;
 }
 
@@ -219,7 +219,7 @@
   background: radial-gradient(
     ellipse,
     rgba(255, 235, 175, 0.95) 0%,
-    rgba(255, 160, 50, 0.75) 45%,
+    rgba(229, 169, 71, 0.75) 45%,
     transparent 75%
   );
   filter: blur(1px);

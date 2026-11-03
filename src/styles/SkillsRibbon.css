@@ -1,0 +1,160 @@
+/* ==========================================================================
+   SKILLS MARQUEE RIBBON (Tilted Cyber Ribbon)
+   Matches Reference: Double-Layered Angled Ribbon with Electric Brand Orange
+   ========================================================================== */
+
+.marquee-ribbon-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 64px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* Dark Accent Companion Underlayer (Peeking from behind at an offset angle) */
+.marquee-ribbon-shadow {
+  position: absolute;
+  left: -10vw;
+  width: 120vw;
+  min-width: 120vw;
+  height: 52px;
+  background: #080a0f;
+  border-top: 1.5px solid rgba(240, 180, 80, 0.45);
+  border-bottom: 1.5px solid rgba(240, 180, 80, 0.2);
+  transform: rotate(0.8deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Main Brand Golden Ribbon - Matches Halo Strands (No cutoffs) */
+.marquee-ribbon-main {
+  position: absolute;
+  left: -10vw;
+  width: 120vw;
+  min-width: 120vw;
+  height: 48px;
+  background: linear-gradient(
+    90deg,
+    #d29132 0%,
+    #e8a946 20%,
+    #f8ce72 40%,
+    #ffdf8d 50%,
+    #f8ce72 60%,
+    #e8a946 80%,
+    #d29132 100%
+  );
+  display: flex;
+  align-items: center;
+  transform: rotate(-1.2deg);
+  box-shadow: 
+    0 12px 35px rgba(232, 169, 70, 0.42),
+    0 4px 15px rgba(0, 0, 0, 0.7),
+    inset 0 1.5px 1.5px rgba(255, 248, 225, 0.75),
+    inset 0 -1.5px 1.5px rgba(110, 70, 15, 0.5);
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Infinite Marquee Track */
+.marquee-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: max-content;
+  animation: marquee-scroll 48s linear infinite;
+  will-change: transform;
+}
+
+.marquee-ribbon-main:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Marquee Item */
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 12px;
+  user-select: none;
+}
+
+/* Bold Deep Dark Text on Orange Ribbon */
+.marquee-text {
+  font-family: 'Montserrat', 'Poppins', -apple-system, sans-serif;
+  font-size: clamp(0.95rem, 1.25vw, 1.2rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #0b0d14;
+  text-transform: capitalize;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Sparkle / Star Icon */
+.marquee-sparkle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b0d14;
+  opacity: 0.92;
+  transition: transform 0.3s ease;
+}
+
+.marquee-sparkle svg {
+  display: block;
+}
+
+.marquee-item:hover .marquee-sparkle {
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .marquee-ribbon-wrapper {
+    height: 56px;
+    padding: 0;
+  }
+
+  .marquee-ribbon-main {
+    left: -15vw;
+    width: 130vw;
+    min-width: 130vw;
+    height: 42px;
+    transform: rotate(-1.2deg);
+  }
+
+  .marquee-ribbon-shadow {
+    left: -15vw;
+    width: 130vw;
+    min-width: 130vw;
+    height: 44px;
+    transform: rotate(0.8deg);
+  }
+
+  .marquee-text {
+    font-size: 0.88rem;
+  }
+
+  .marquee-sparkle svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .marquee-item {
+    gap: 16px;
+  }
+}

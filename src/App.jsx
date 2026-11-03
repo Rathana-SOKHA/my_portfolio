@@ -53,8 +53,6 @@ function App() {
         
         <main>
           <Hero isActive={!showIntro} />
-          
-          <SectionDivider label="02 // PROFILE_DOSSIER" />
           <About />
           
           <SectionDivider label="03 // TECH_ARSENAL" />
