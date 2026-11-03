@@ -15,6 +15,7 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: 'fab fa-github', label: 'GitHub', url: 'https://github.com/Rathana-SOKHA' },
+    { icon: 'fab fa-linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/rathana-sokha/' },
     { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_dev' },
     { icon: 'fab fa-facebook', label: 'Facebook', url: 'https://www.facebook.com/Rathanacoding' }
   ];

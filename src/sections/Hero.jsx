@@ -512,6 +512,32 @@ export default function HeroSection({ isActive = true }) {
                 </a>
 
                 <a
+                  href="https://www.linkedin.com/in/rathana-sokha/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`social-dock-btn ${activeSocial === "linkedin" ? "is-active is-squircle" : "is-circle"}`}
+                  title="LinkedIn - @rathana-sokha"
+                  aria-label="LinkedIn Profile"
+                  onMouseEnter={() => setActiveSocial("linkedin")}
+                  onClick={() => setActiveSocial("linkedin")}
+                >
+                  <svg
+                    className="dock-svg linkedin-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.85"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+
+                <a
                   href="https://www.facebook.com/Rathanacoding"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -538,29 +564,8 @@ export default function HeroSection({ isActive = true }) {
             </div>
           </div>
 
-          {/* Top Right: Metallic status badge & dot matrix */}
-          <div className="hud-top-right">
-            <div className="hud-status-badge">
-              <span className="badge-bracket top-left" />
-              <span className="badge-bracket top-right" />
-              <span className="badge-bracket bottom-left" />
-              <span className="badge-bracket bottom-right" />
-              <div className="status-content">
-                <span className="status-diamond">◇</span>
-                <span className="status-label">AVAILABLE FOR PROJECTS</span>
-              </div>
-            </div>
-
-            <div className="hud-dot-matrix" aria-hidden="true">
-              {[0, 1, 2].map((row) => (
-                <div className="dot-matrix-row" key={row}>
-                  {[0, 1, 2, 3].map((dot) => (
-                    <span className="matrix-dot" key={dot} />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Top Right: Status area (removed per request) */}
+          <div className="hud-top-right" aria-hidden="true" />
         </div>
 
         {/* BOTTOM ROW HUD */}

@@ -339,8 +339,12 @@
   top: 74px;
 }
 
+.social-dock-ambient-glow.glow-linkedin {
+  top: 140px;
+}
+
 .social-dock-ambient-glow.glow-facebook {
-  top: 138px;
+  top: 206px;
 }
 
 /* Vertical Elongated Capsule Pill */
@@ -351,7 +355,7 @@
   align-items: center;
   justify-content: space-between;
   width: 66px;
-  height: 220px;
+  height: 286px;
   padding: 10px 8px;
   box-sizing: border-box;
   background: linear-gradient(180deg, rgba(24, 27, 36, 0.78) 0%, rgba(13, 15, 22, 0.86) 100%);
