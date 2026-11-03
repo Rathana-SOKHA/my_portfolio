@@ -1,0 +1,43 @@
+/* ==========================================================================
+   CYBER BADGE - UI COMPONENT
+   Style replication matching the reference image badge
+   ========================================================================== */
+
+.cyber-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  background: rgba(16, 14, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(220, 155, 80, 0.7);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 16px rgba(245, 158, 40, 0.22),
+    inset 0 1px 1px rgba(255, 220, 150, 0.25),
+    0 4px 14px rgba(0, 0, 0, 0.65);
+  user-select: none;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.cyber-badge:hover {
+  border-color: rgba(245, 165, 60, 0.95);
+  box-shadow: 
+    0 0 24px rgba(245, 158, 40, 0.45),
+    inset 0 1px 1.5px rgba(255, 235, 180, 0.45),
+    0 6px 18px rgba(0, 0, 0, 0.7);
+  transform: translateY(-1px);
+}
+
+.cyber-badge-text {
+  font-family: 'Space Mono', 'Montserrat', -apple-system, sans-serif;
+  font-size: clamp(0.7rem, 0.76vw, 0.82rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #f3be82;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-shadow: 0 0 8px rgba(243, 190, 130, 0.35);
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/HeroSection.css";
 import profileCutout from "../assets/profile-cutout.png";
 import Button from "../components/ui/Button";
+import Badge from "../components/ui/Badge";
 
 export default function HeroSection({ isActive = true }) {
   const cvFilePath = "/CV & CL Rathana SOKHA.pdf";
@@ -413,9 +414,13 @@ export default function HeroSection({ isActive = true }) {
       {/* ================= CENTER STAGE: 3D TYPOGRAPHY + CUTOUT PORTRAIT ================= */}
       <div className="center-stage">
         {/* Bold 3D White Typography: FULL-STACK DEVELOPER */}
-        <div className="center-typography-wrapper" aria-hidden="true">
+        <div className="center-typography-wrapper">
           <h1 className="hero-giant-title">
-            <span className="title-part part-fullstack">FULL-STACK</span>
+            <span className="title-part-group part-fullstack-group">
+              <Badge className="hero-fullstack-badge">FULL-STACK DEVELOPMENT</Badge>
+              <span className="title-part part-fullstack">FULL-STACK</span>
+              <span className="hero-fullstack-tagline">Building digital solutions that make an impact.</span>
+            </span>
             <span className="title-spacer">&nbsp;</span>
             <span className="title-part part-developer">DEVELOPER</span>
           </h1>
@@ -449,7 +454,9 @@ export default function HeroSection({ isActive = true }) {
               </div>
               <span className="faint-cross">+</span>
             </div>
+          </div>
 
+          <div className="hud-top-right">
             {/* Cyber Floating Social Capsule Dock (Matching Reference Image) */}
             <div
               className="cyber-social-dock"
@@ -563,9 +570,6 @@ export default function HeroSection({ isActive = true }) {
               </div>
             </div>
           </div>
-
-          {/* Top Right: Status area (removed per request) */}
-          <div className="hud-top-right" aria-hidden="true" />
         </div>
 
         {/* BOTTOM ROW HUD */}
