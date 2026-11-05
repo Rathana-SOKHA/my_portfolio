@@ -155,29 +155,6 @@ export default function Education() {
           ))}
         </div>
 
-        {/* Section Footer HUD Readout */}
-        <ScrollReveal animation="fade-up" delay={150}>
-          <div className="education-footer-hud">
-            <div className="hud-readout-left">
-              <span className="readout-cross">+</span>
-              <span className="readout-text">
-                TRAJECTORY_STATUS: <span className="readout-gold">CONTINUOUS LEARNING ACTIVE</span>
-              </span>
-            </div>
-
-            <div className="hud-readout-center" aria-hidden="true">
-              <div className="crosshair-row">
-                <span>+</span><span>+</span><span>+</span>
-              </div>
-            </div>
-
-            <div className="hud-readout-right" aria-hidden="true">
-              <div className="hud-slashes">
-                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );
