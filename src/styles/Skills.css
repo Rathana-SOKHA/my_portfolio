@@ -364,65 +364,6 @@
 }
 
 /* ==========================================================================
-   SECTION FOOTER HUD READOUT
-   ========================================================================== */
-.skills-footer-hud {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 24px;
-  background: linear-gradient(145deg, rgba(20, 23, 33, 0.88) 0%, rgba(12, 14, 20, 0.94) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-}
-
-.hud-readout-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #94a3b8;
-}
-
-.readout-cross {
-  color: #e5a947;
-  font-size: 1rem;
-}
-
-.readout-green {
-  color: #00ff88;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
-}
-
-.hud-readout-center .crosshair-row {
-  display: flex;
-  gap: 8px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.25);
-  letter-spacing: 0.2em;
-}
-
-.hud-readout-right .hud-slashes {
-  display: flex;
-  gap: 3px;
-  font-family: 'Space Mono', monospace;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #e5a947;
-  letter-spacing: -0.1em;
-  opacity: 0.85;
-}
-
-.hud-readout-right .hud-slashes span {
-  display: inline-block;
-  transform: skewX(-15deg);
-}
-
-/* ==========================================================================
    RESPONSIVE DESIGN BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1200px) {
@@ -485,17 +426,6 @@
     gap: 10px;
   }
 
-  .skills-footer-hud {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-  }
-
-  .hud-readout-center,
-  .hud-readout-right {
-    display: none;
-  }
 }
 
 @media (max-width: 480px) {
@@ -581,13 +511,6 @@
 [data-theme="light"] .brand-logo-frame {
   background: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .skills-footer-hud {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #475569;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] .skills-bg-grid {

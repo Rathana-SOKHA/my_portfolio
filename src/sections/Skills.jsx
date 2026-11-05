@@ -281,29 +281,6 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Section Bottom Readout HUD */}
-        <ScrollReveal animation="fade-up" delay={200}>
-          <div className="skills-footer-hud">
-            <div className="hud-readout-left">
-              <span className="readout-cross">+</span>
-              <span className="readout-text">
-                ARSENAL_STATUS: <span className="readout-green">● OPTIMIZED FOR PRODUCTION</span>
-              </span>
-            </div>
-
-            <div className="hud-readout-center" aria-hidden="true">
-              <div className="crosshair-row">
-                <span>+</span><span>+</span><span>+</span>
-              </div>
-            </div>
-
-            <div className="hud-readout-right" aria-hidden="true">
-              <div className="hud-slashes">
-                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );
