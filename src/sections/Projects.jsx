@@ -402,29 +402,6 @@ export default function Projects() {
           </ScrollReveal>
         )}
 
-        {/* Section Footer HUD Readout */}
-        <ScrollReveal animation="fade-up" delay={150}>
-          <div className="projects-footer-hud">
-            <div className="hud-readout-left">
-              <span className="readout-cross">+</span>
-              <span className="readout-text">
-                WORKSPACE_METRICS: <span className="readout-gold">{projects.length} PROJECTS CATALOGED</span>
-              </span>
-            </div>
-
-            <div className="hud-readout-center" aria-hidden="true">
-              <div className="crosshair-row">
-                <span>+</span><span>+</span><span>+</span>
-              </div>
-            </div>
-
-            <div className="hud-readout-right" aria-hidden="true">
-              <div className="hud-slashes">
-                <span>/</span><span>/</span><span>/</span><span>/</span><span>/</span><span>/</span>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
 
       {/* ===== High-Tech Repo Selection Modal with AnimatePresence ===== */}
