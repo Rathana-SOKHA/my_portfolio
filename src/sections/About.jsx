@@ -90,10 +90,12 @@ export default function About() {
       <div className="about-container">
         {/* Section Header Tag & Main Title */}
         <ScrollReveal animation="fade-up" delay={0}>
-          <div className="about-header-pill">
-            <span className="cyber-badge">
-              <span className="cyber-badge-text">// 02. PROFILE DOSSIER</span>
-            </span>
+          <div className="about-header-pill" aria-label="Profile dossier label">
+            <div className="about-header-badge">
+              <span className="about-header-plus">+</span>
+              <span className="about-header-text">// 02. PROFILE_DOSSIER</span>
+              <span className="about-header-plus">+</span>
+            </div>
           </div>
 
           <TypewriterTitle
