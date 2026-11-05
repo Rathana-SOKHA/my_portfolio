@@ -546,66 +546,6 @@
 }
 
 /* ==========================================================================
-   SECTION FOOTER HUD READOUT
-   ========================================================================== */
-.contact-footer-hud {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 24px;
-  background: rgba(10, 13, 20, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 4px;
-}
-
-.contact-footer-hud .hud-readout-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #94a3b8;
-}
-
-.contact-footer-hud .readout-cross {
-  color: #e5a947;
-  font-size: 1rem;
-}
-
-.contact-footer-hud .readout-gold,
-.contact-footer-hud .readout-orange {
-  color: #e5a947;
-  text-shadow: 0 0 10px rgba(229, 169, 71, 0.6);
-}
-
-.contact-footer-hud .hud-readout-center .crosshair-row {
-  display: flex;
-  gap: 8px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.25);
-  letter-spacing: 0.2em;
-}
-
-.contact-footer-hud .hud-readout-right .hud-slashes {
-  display: flex;
-  gap: 3px;
-  font-family: 'Space Mono', monospace;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #e5a947;
-  letter-spacing: -0.1em;
-  opacity: 0.75;
-}
-
-.contact-footer-hud .hud-slashes span {
-  display: inline-block;
-  transform: skewX(-15deg);
-}
-
-/* ==========================================================================
    RESPONSIVE DESIGN BREAKPOINTS
    ========================================================================== */
 
@@ -637,17 +577,6 @@
     gap: 14px;
   }
 
-  .contact-footer-hud {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-  }
-
-  .hud-readout-center,
-  .hud-readout-right {
-    display: none;
-  }
 }
 
 /* Small Mobile Screens (< 480px) */
@@ -740,12 +669,6 @@
   background: rgba(241, 245, 249, 0.8);
   border-color: rgba(0, 0, 0, 0.1);
   color: #0f172a;
-}
-
-[data-theme="light"] .contact-footer-hud {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #475569;
 }
 
 [data-theme="light"] .cyber-label {
