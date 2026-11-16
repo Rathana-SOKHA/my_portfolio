@@ -380,6 +380,12 @@
     padding: 90px 20px 70px;
   }
 
+  .skills-main-title {
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    line-height: 1.08;
+    margin-bottom: 36px;
+  }
+
   .skills-hud-grid {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -397,6 +403,10 @@
 
   .skills-main-title {
     margin-bottom: 30px;
+    font-size: clamp(1.6rem, 8vw, 2.7rem);
+    line-height: 1.05;
+    max-width: 100%;
+    letter-spacing: -0.04em;
   }
 
   .skills-filter-bar {
@@ -431,6 +441,12 @@
 @media (max-width: 480px) {
   .cyber-skills-section {
     padding: 60px 12px 40px;
+  }
+
+  .skills-main-title {
+    font-size: clamp(1.3rem, 10vw, 2.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.05em;
   }
 
   .skills-filter-bar {

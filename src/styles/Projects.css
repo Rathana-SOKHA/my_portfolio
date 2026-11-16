@@ -834,6 +834,12 @@
     padding: 90px 20px 70px;
   }
 
+  .projects-main-title {
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    line-height: 1.08;
+    margin-bottom: 42px;
+  }
+
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -859,6 +865,10 @@
 
   .projects-main-title {
     margin-bottom: 35px;
+    font-size: clamp(1.6rem, 8vw, 2.7rem);
+    line-height: 1.05;
+    max-width: 100%;
+    letter-spacing: -0.04em;
   }
 
   .projects-grid {
@@ -884,6 +894,12 @@
 @media (max-width: 480px) {
   .cyber-projects-section {
     padding: 60px 12px 40px;
+  }
+
+  .projects-main-title {
+    font-size: clamp(1.3rem, 10vw, 2.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.05em;
   }
 
   .project-image-viewport {

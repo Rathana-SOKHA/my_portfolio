@@ -562,6 +562,19 @@
   }
 }
 
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+  .cyber-contact-section {
+    padding: 90px 20px 70px;
+  }
+
+  .contact-main-title {
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    line-height: 1.08;
+    margin-bottom: 42px;
+  }
+}
+
 /* Mobile Phones (< 768px) */
 @media (max-width: 767px) {
   .cyber-contact-section {
@@ -570,6 +583,10 @@
 
   .contact-main-title {
     margin-bottom: 35px;
+    font-size: clamp(1.6rem, 8vw, 2.7rem);
+    line-height: 1.05;
+    max-width: 100%;
+    letter-spacing: -0.04em;
   }
 
   .contact-channels-panel,
@@ -588,6 +605,12 @@
 @media (max-width: 480px) {
   .cyber-contact-section {
     padding: 60px 12px 40px;
+  }
+
+  .contact-main-title {
+    font-size: clamp(1.3rem, 10vw, 2.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.05em;
   }
 
   .contact-channels-panel,
