@@ -188,7 +188,6 @@ export default function IntroScreen({ onComplete }) {
       <div className="intro-top-hud">
         <div className="intro-hud-left">
           <span className="orange-cross">+</span>
-          <span className="hud-label-text">TACTICAL_SYS_BOOT // v2.6</span>
         </div>
         <div className="intro-hud-right">
           <div className="intro-status-pill">
