@@ -84,10 +84,10 @@
 /* Main Section Title */
 .projects-main-title {
   font-family: 'Montserrat', 'Poppins', -apple-system, sans-serif;
-  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.8rem);
   font-weight: 900;
   letter-spacing: -0.01em;
-  line-height: 1.18;
+  line-height: 1.15;
   color: #ffffff;
   margin: 0 0 55px;
   max-width: 950px;
@@ -98,15 +98,19 @@
     0 6px 18px rgba(0, 0, 0, 0.85);
 }
 
+.projects-main-title .title-word:first-child,
 .projects-main-title .title-gold,
 .projects-main-title .title-orange {
-  background: linear-gradient(135deg, #f8ce72 0%, #ffdf8d 40%, #e5a947 75%, #d49a3d 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 24px rgba(229, 169, 71, 0.55));
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  background: none;
+  filter: none;
   display: inline-block;
-  text-shadow: none;
+  text-shadow:
+    0 1px 0 #cbd5e1,
+    0 2px 0 #94a3b8,
+    0 3px 0 #64748b,
+    0 6px 18px rgba(0, 0, 0, 0.85);
 }
 
 /* Interactive project filters and search */
