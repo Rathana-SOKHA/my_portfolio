@@ -256,9 +256,6 @@ export default function IntroScreen({ onComplete }) {
         <div className="hud-crosshairs">
           <span>+</span><span>+</span><span>+</span>
         </div>
-        <div className="intro-hud-credits">
-          <span>CLEAN CODE • SCALABLE SOLUTIONS • BETTER EXPERIENCES</span>
-        </div>
       </div>
     </div>
   );
