@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import "../styles/Skills.css";
 import ScrollReveal from "../components/animations/ScrollReveal";
 import TypewriterTitle from "../components/animations/TypewriterTitle";
 
@@ -159,22 +158,22 @@ export default function Skills() {
       : skillCategories.filter((c) => c.id === activeTab);
 
   return (
-    <section className="cyber-skills-section" id="skills">
+    <section className="cyber-skills-section [position:relative] [width:100%] [padding:110px_4%_100px] [background-color:#0b0d12] [background:radial-gradient(ellipse_at_50%_20%,_rgba(32,_36,_48,_0.65)_0%,_rgba(13,_15,_20,_0.95)_60%,_#08090c_100%)] [color:#ffffff] [overflow:hidden] [box-sizing:border-box] [font-family:Poppins,_sans-serif] [scroll-margin-top:80px] max-[1023px]:[padding:90px_20px_70px] max-[767px]:[padding:70px_16px_50px] max-[480px]:[padding:60px_12px_40px] [[data-theme='light']_&]:[background-color:#f8fafc] [[data-theme='light']_&]:[color:#0f172a]" id="skills">
       {/* Background Ambience & Grid */}
-      <div className="skills-bg-grid" aria-hidden="true" />
-      <div className="skills-ambient-glow" aria-hidden="true" />
+      <div className="skills-bg-grid [position:absolute] [inset:0] [background-image:linear-gradient(to_right,_rgba(255,_255,_255,_0.02)_1px,_transparent_1px),_linear-gradient(to_bottom,_rgba(255,_255,_255,_0.02)_1px,_transparent_1px)] [background-size:70px_70px] [background-position:center_top] [pointer-events:none] [z-index:0] [mask-image:radial-gradient(circle_at_50%_25%,_black_40%,_transparent_90%)] [-webkit-mask-image:radial-gradient(circle_at_50%_25%,_black_40%,_transparent_90%)] [[data-theme='light']_&]:[background-image:linear-gradient(to_right,_rgba(15,_23,_42,_0.03)_1px,_transparent_1px),_linear-gradient(to_bottom,_rgba(15,_23,_42,_0.03)_1px,_transparent_1px)]" aria-hidden="true" />
+      <div className="skills-ambient-glow [position:absolute] [top:25%] [left:5%] [width:500px] [height:500px] [background:radial-gradient(circle,_rgba(229,_169,_71,_0.08)_0%,_transparent_70%)] [border-radius:50%] [pointer-events:none] [z-index:0]" aria-hidden="true" />
 
-      <div className="skills-container">
+      <div className="skills-container [position:relative] [max-width:1400px] [margin:0_auto] [z-index:2]">
         {/* Section Header Tag & Title */}
         <ScrollReveal animation="fade-up" delay={0}>
-          <div className="skills-header-tag">
-            <span className="tag-cross">+</span>
-            <span className="tag-mono">// 03. TECHNICAL_ARSENAL</span>
-            <span className="tag-bracket">[ CAPABILITIES ]</span>
+          <div className="skills-header-tag [display:inline-flex] [align-items:center] [gap:10px] [margin-bottom:14px]">
+            <span className="tag-cross [.skills-header-tag_&]:[color:#e5a947] [.skills-header-tag_&]:[font-size:1.1rem] [.skills-header-tag_&]:[font-weight:700] [.skills-header-tag_&]:[text-shadow:0_0_10px_rgba(229,_169,_71,_0.6)]">+</span>
+            <span className="tag-mono [.skills-header-tag_&]:[font-family:Space_Mono,_monospace] [.skills-header-tag_&]:[font-size:clamp(0.72rem,_0.82vw,_0.86rem)] [.skills-header-tag_&]:[font-weight:700] [.skills-header-tag_&]:[letter-spacing:0.18em] [.skills-header-tag_&]:[color:#d4a76a] [.skills-header-tag_&]:[text-transform:uppercase]">// 03. TECHNICAL_ARSENAL</span>
+            <span className="tag-bracket [.skills-header-tag_&]:[font-family:Space_Mono,_monospace] [.skills-header-tag_&]:[font-size:0.72rem] [.skills-header-tag_&]:[color:#e5a947] [.skills-header-tag_&]:[letter-spacing:0.1em]">[ CAPABILITIES ]</span>
           </div>
 
           <TypewriterTitle
-            className="skills-main-title"
+            className="skills-main-title [font-family:Montserrat,_Poppins,_sans-serif] [font-size:clamp(2rem,_3.4vw,_3.4rem)] [font-weight:900] [letter-spacing:-0.01em] [line-height:1.18] [color:#ffffff] [margin:0_0_45px] [max-width:950px] [text-shadow:0_1px_0_#cbd5e1,_0_2px_0_#94a3b8,_0_3px_0_#64748b,_0_6px_18px_rgba(0,_0,_0,_0.85)] [&_.title-gold]:[background:linear-gradient(135deg,_#f8ce72_0%,_#ffdf8d_40%,_#e5a947_75%,_#d49a3d_100%)] [&_.title-gold]:[-webkit-background-clip:text] [&_.title-gold]:[-webkit-text-fill-color:transparent] [&_.title-gold]:[filter:drop-shadow(0_0_24px_rgba(229,_169,_71,_0.55))] [&_.title-gold]:[display:inline-block] max-[1023px]:[font-size:clamp(1.9rem,_4.5vw,_3rem)] max-[1023px]:[line-height:1.08] max-[1023px]:[margin-bottom:36px] max-[767px]:[margin-bottom:30px] max-[767px]:[font-size:clamp(1.6rem,_8vw,_2.7rem)] max-[767px]:[line-height:1.05] max-[767px]:[max-width:100%] max-[767px]:[letter-spacing:-0.04em] max-[480px]:[font-size:clamp(1.3rem,_10vw,_2.1rem)] max-[480px]:[line-height:1.08] max-[480px]:[letter-spacing:-0.05em] [[data-theme='light']_&]:[color:#0f172a]"
             text="SKILLS & "
             goldText="EXPERTISE"
           />
@@ -182,59 +181,59 @@ export default function Skills() {
 
         {/* Cyber Filter Navigation */}
         <ScrollReveal animation="fade-up" delay={100}>
-          <div className="skills-filter-bar" role="tablist" aria-label="Skill category filter">
+          <div className="skills-filter-bar [display:flex] [align-items:center] [gap:12px] [flex-wrap:wrap] [margin-bottom:45px] [padding-bottom:24px] [border-bottom:1px_dashed_rgba(255,_255,_255,_0.08)] max-[767px]:[gap:8px] max-[767px]:[margin-bottom:30px] max-[767px]:[padding-bottom:18px] max-[480px]:[gap:6px] max-[480px]:[margin-bottom:24px] max-[480px]:[padding-bottom:14px]" role="tablist" aria-label="Skill category filter">
             <button
               type="button"
-              className={`filter-btn ${activeTab === "all" ? "active" : ""}`}
+              className={`filter-btn  [display:inline-flex] [align-items:center] [gap:6px] [background:rgba(14,_17,_24,_0.75)] [border:1px_solid_rgba(255,_255,_255,_0.1)] [border-radius:9999px] [padding:8px_18px] [color:#94a3b8] [font-family:Space_Mono,_monospace] [font-size:0.78rem] [font-weight:700] [letter-spacing:0.08em] [cursor:pointer] [transition:all_0.25s_cubic-bezier(0.16,_1,_0.3,_1)] [&:hover]:[background:rgba(229,_169,_71,_0.1)] [&:hover]:[border-color:rgba(229,_169,_71,_0.55)] [&:hover]:[color:#ffffff] max-[767px]:[padding:6px_12px] max-[767px]:[font-size:0.72rem] max-[480px]:[padding:6px_10px] max-[480px]:[font-size:0.68rem] [[data-theme='light']_&]:[background:rgba(255,_255,_255,_0.9)] [[data-theme='light']_&]:[border-color:rgba(0,_0,_0,_0.08)] [[data-theme='light']_&]:[color:#475569] ${activeTab === "all" ? "active [.filter-btn&]:[background:linear-gradient(135deg,_rgba(28,_32,_44,_0.95)_0%,_rgba(18,_20,_28,_0.95)_100%)] [.filter-btn&]:[border-color:#e5a947] [.filter-btn&]:[color:#f8ce72] [.filter-btn&]:[box-shadow:0_0_16px_rgba(229,_169,_71,_0.35)] [[data-theme='light']_.filter-btn&]:[background:#ffffff] [[data-theme='light']_.filter-btn&]:[border-color:#e5a947] [[data-theme='light']_.filter-btn&]:[color:#e5a947]" : ""}`}
               onClick={() => setActiveTab("all")}
               aria-selected={activeTab === "all"}
               role="tab"
             >
-              <span className="btn-bracket">[</span>
+              <span className="btn-bracket [.filter-btn_&]:[color:rgba(255,_255,_255,_0.3)] [.filter-btn_&]:[transition:color_0.25s_ease] [.filter-btn:hover_&]:[color:#e5a947] [.filter-btn.active_&]:[color:#e5a947]">[</span>
               <span className="btn-name">ALL_MODULES</span>
-              <span className="btn-bracket">]</span>
+              <span className="btn-bracket [.filter-btn_&]:[color:rgba(255,_255,_255,_0.3)] [.filter-btn_&]:[transition:color_0.25s_ease] [.filter-btn:hover_&]:[color:#e5a947] [.filter-btn.active_&]:[color:#e5a947]">]</span>
             </button>
 
             {skillCategories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
-                className={`filter-btn ${activeTab === cat.id ? "active" : ""}`}
+                className={`filter-btn  [display:inline-flex] [align-items:center] [gap:6px] [background:rgba(14,_17,_24,_0.75)] [border:1px_solid_rgba(255,_255,_255,_0.1)] [border-radius:9999px] [padding:8px_18px] [color:#94a3b8] [font-family:Space_Mono,_monospace] [font-size:0.78rem] [font-weight:700] [letter-spacing:0.08em] [cursor:pointer] [transition:all_0.25s_cubic-bezier(0.16,_1,_0.3,_1)] [&:hover]:[background:rgba(229,_169,_71,_0.1)] [&:hover]:[border-color:rgba(229,_169,_71,_0.55)] [&:hover]:[color:#ffffff] max-[767px]:[padding:6px_12px] max-[767px]:[font-size:0.72rem] max-[480px]:[padding:6px_10px] max-[480px]:[font-size:0.68rem] [[data-theme='light']_&]:[background:rgba(255,_255,_255,_0.9)] [[data-theme='light']_&]:[border-color:rgba(0,_0,_0,_0.08)] [[data-theme='light']_&]:[color:#475569] ${activeTab === cat.id ? "active [.filter-btn&]:[background:linear-gradient(135deg,_rgba(28,_32,_44,_0.95)_0%,_rgba(18,_20,_28,_0.95)_100%)] [.filter-btn&]:[border-color:#e5a947] [.filter-btn&]:[color:#f8ce72] [.filter-btn&]:[box-shadow:0_0_16px_rgba(229,_169,_71,_0.35)] [[data-theme='light']_.filter-btn&]:[background:#ffffff] [[data-theme='light']_.filter-btn&]:[border-color:#e5a947] [[data-theme='light']_.filter-btn&]:[color:#e5a947]" : ""}`}
                 onClick={() => setActiveTab(cat.id)}
                 aria-selected={activeTab === cat.id}
                 role="tab"
               >
-                <span className="btn-bracket">[</span>
-                <span className="cat-code">{cat.code} //</span>
+                <span className="btn-bracket [.filter-btn_&]:[color:rgba(255,_255,_255,_0.3)] [.filter-btn_&]:[transition:color_0.25s_ease] [.filter-btn:hover_&]:[color:#e5a947] [.filter-btn.active_&]:[color:#e5a947]">[</span>
+                <span className="cat-code [.filter-btn_&]:[color:#e5a947] [.filter-btn_&]:[opacity:0.85] [.filter-btn.active_&]:[opacity:1]">{cat.code} //</span>
                 <span className="btn-name">{cat.label.toUpperCase()}</span>
-                <span className="btn-bracket">]</span>
+                <span className="btn-bracket [.filter-btn_&]:[color:rgba(255,_255,_255,_0.3)] [.filter-btn_&]:[transition:color_0.25s_ease] [.filter-btn:hover_&]:[color:#e5a947] [.filter-btn.active_&]:[color:#e5a947]">]</span>
               </button>
             ))}
           </div>
         </ScrollReveal>
 
         {/* Multi-Column HUD Grid */}
-        <div className="skills-hud-grid">
+        <div className="skills-hud-grid [display:grid] [grid-template-columns:repeat(2,_1fr)] [gap:30px] [margin-bottom:60px] max-[1200px]:[gap:20px] max-[1023px]:[grid-template-columns:1fr] max-[1023px]:[gap:24px]">
           {filteredCategories.map((category) => (
-            <div key={category.id} className="skills-category-panel">
+            <div key={category.id} className="skills-category-panel [position:relative] [background:linear-gradient(145deg,_rgba(20,_23,_33,_0.88)_0%,_rgba(12,_14,_20,_0.94)_100%)] [backdrop-filter:blur(12px)] [-webkit-backdrop-filter:blur(12px)] [border:1px_solid_rgba(255,_255,_255,_0.08)] [border-radius:6px] [padding:24px] [box-shadow:0_15px_35px_rgba(0,_0,_0,_0.5)] [transition:all_0.3s_cubic-bezier(0.16,_1,_0.3,_1)] [&:hover]:[border-color:rgba(229,_169,_71,_0.45)] [&:hover]:[box-shadow:0_18px_45px_rgba(0,_0,_0,_0.7),_0_0_25px_rgba(229,_169,_71,_0.12)] max-[1200px]:[padding:20px_16px] max-[767px]:[padding:18px_14px] max-[480px]:[padding:16px_12px] [[data-theme='light']_&]:[background:rgba(255,_255,_255,_0.95)] [[data-theme='light']_&]:[border-color:rgba(0,_0,_0,_0.08)] [[data-theme='light']_&]:[box-shadow:0_15px_35px_rgba(0,_0,_0,_0.05)]">
               {/* Corner Brackets */}
-              <div className="corner-bracket corner-top-left" />
-              <div className="corner-bracket corner-top-right" />
-              <div className="corner-bracket corner-bottom-left" />
-              <div className="corner-bracket corner-bottom-right" />
+              <div className="corner-bracket corner-top-left [[data-theme='light']_.skills-category-panel_&]:[border-color:rgba(15,_23,_42,_0.25)]" />
+              <div className="corner-bracket corner-top-right [[data-theme='light']_.skills-category-panel_&]:[border-color:rgba(15,_23,_42,_0.25)]" />
+              <div className="corner-bracket corner-bottom-left [[data-theme='light']_.skills-category-panel_&]:[border-color:rgba(15,_23,_42,_0.25)]" />
+              <div className="corner-bracket corner-bottom-right [[data-theme='light']_.skills-category-panel_&]:[border-color:rgba(15,_23,_42,_0.25)]" />
 
               {/* Panel Header */}
-              <div className="panel-header-strip">
-                <div className="panel-title-group">
-                  <span className="panel-code">{category.code}</span>
-                  <span className="panel-dash">—</span>
-                  <h3 className="panel-title">{category.label}</h3>
+              <div className="panel-header-strip [display:flex] [align-items:center] [justify-content:space-between] [padding-bottom:14px] [border-bottom:1px_solid_rgba(255,_255,_255,_0.06)] [margin-bottom:20px] max-[767px]:[flex-direction:column] max-[767px]:[align-items:flex-start] max-[767px]:[gap:4px] max-[767px]:[margin-bottom:16px] [[data-theme='light']_&]:[border-bottom-color:rgba(15,_23,_42,_0.08)]">
+                <div className="panel-title-group [display:flex] [align-items:center] [gap:8px]">
+                  <span className="panel-code [font-family:Space_Mono,_monospace] [font-size:0.78rem] [font-weight:700] [color:#e5a947] [letter-spacing:0.14em]">{category.code}</span>
+                  <span className="panel-dash [color:rgba(255,_255,_255,_0.3)] [font-size:0.9rem]">—</span>
+                  <h3 className="panel-title [font-family:Montserrat,_Poppins,_sans-serif] [font-size:1.15rem] [font-weight:800] [color:#ffffff] [margin:0] [letter-spacing:-0.01em] [[data-theme='light']_&]:[color:#0f172a]">{category.label}</h3>
                 </div>
-                <span className="panel-tagline">{category.tagline}</span>
+                <span className="panel-tagline [font-family:Space_Mono,_monospace] [font-size:0.68rem] [font-weight:600] [letter-spacing:0.12em] [color:#94a3b8] [text-transform:uppercase] [[data-theme='light']_&]:[color:#64748b]">{category.tagline}</span>
               </div>
 
               {/* Skills Card Cluster */}
-              <div className="skills-card-cluster">
+              <div className="skills-card-cluster [display:grid] [grid-template-columns:repeat(2,_1fr)] [gap:14px] max-[1023px]:[grid-template-columns:repeat(2,_1fr)] max-[767px]:[grid-template-columns:1fr] max-[767px]:[gap:10px]">
                 {category.skills.map((skill, index) => {
                   const logoSrc =
                     typeof skill.icon === "string" && skill.icon.startsWith("data:")
@@ -249,31 +248,31 @@ export default function Skills() {
                       threshold={0.08}
                     >
                       <article
-                        className="cyber-skill-card"
+                        className="cyber-skill-card [position:relative] [background:rgba(14,_18,_26,_0.6)] [border:1px_solid_rgba(255,_255,_255,_0.06)] [border-radius:4px] [padding:12px_14px_10px] [display:flex] [flex-direction:column] [gap:10px] [transition:all_0.25s_ease] [&:hover]:[background:rgba(22,_28,_40,_0.75)] [&:hover]:[border-color:rgba(229,_169,_71,_0.55)] [&:hover]:[box-shadow:0_4px_16px_rgba(0,_0,_0,_0.4),_0_0_14px_rgba(229,_169,_71,_0.15)] max-[480px]:[padding:12px_14px] [[data-theme='light']_&]:[background:rgba(241,_245,_249,_0.8)] [[data-theme='light']_&]:[border-color:rgba(0,_0,_0,_0.06)]"
                         style={{
                           "--skill-color": skill.color,
                           "--skill-glow": skill.glow,
                           "--skill-width": `${skill.proficiency}%`,
                         }}
                       >
-                        <div className="card-top-row">
-                          <div className="skill-brand-group">
-                            <div className="brand-logo-frame">
+                        <div className="card-top-row [display:flex] [align-items:center] [justify-content:space-between] [gap:8px]">
+                          <div className="skill-brand-group [display:flex] [align-items:center] [gap:10px] [min-width:0]">
+                            <div className="brand-logo-frame [width:32px] [height:32px] [border-radius:6px] [background:rgba(255,_255,_255,_0.05)] [border:1px_solid_rgba(255,_255,_255,_0.1)] [display:flex] [align-items:center] [justify-content:center] [flex-shrink:0] [box-shadow:0_0_10px_var(--skill-glow)] [transition:background-color_0.2s_ease] [&_img]:[width:18px] [&_img]:[height:18px] [&_img]:[object-fit:contain] [&_img]:[filter:drop-shadow(0_0_4px_var(--skill-glow))] [[data-theme='light']_&]:[background:#ffffff] [[data-theme='light']_&]:[border-color:rgba(0,_0,_0,_0.08)]">
                               <img src={logoSrc} alt={`${skill.name} icon`} />
                             </div>
-                            <div className="skill-text-info">
-                              <span className="skill-display-name">{skill.name}</span>
-                              <span className="skill-tier-badge">{skill.level}</span>
+                            <div className="skill-text-info [display:flex] [flex-direction:column] [min-width:0]">
+                              <span className="skill-display-name [color:#ffffff] [font-size:0.85rem] [font-weight:700] [white-space:nowrap] [overflow:hidden] [text-overflow:ellipsis] [letter-spacing:-0.01em] max-[480px]:[font-size:0.82rem] [[data-theme='light']_&]:[color:#0f172a]">{skill.name}</span>
+                              <span className="skill-tier-badge [font-family:Space_Mono,_monospace] [font-size:0.62rem] [font-weight:600] [letter-spacing:0.08em] [color:#94a3b8] [text-transform:uppercase] [[data-theme='light']_&]:[color:#64748b]">{skill.level}</span>
                             </div>
                           </div>
 
-                          <span className="skill-pct-value">{skill.proficiency}%</span>
+                          <span className="skill-pct-value [font-family:Space_Mono,_monospace] [font-size:0.78rem] [font-weight:700] [color:var(--skill-color)] [letter-spacing:0.04em] [flex-shrink:0]">{skill.proficiency}%</span>
                         </div>
 
                         {/* Cyber Segmented Progress Track with scroll-driven fill */}
-                        <div className="cyber-progress-track">
+                        <div className="cyber-progress-track [position:relative] [width:100%] [height:4px] [background:rgba(255,_255,_255,_0.08)] [border-radius:2px] [overflow:hidden]">
                           <motion.div
-                            className="cyber-progress-fill"
+                            className="cyber-progress-fill [width:var(--skill-width)] [height:100%] [background:linear-gradient(90deg,_var(--skill-color),_#e5a947)] [border-radius:2px] [box-shadow:0_0_10px_var(--skill-glow)] [transition:width_1s_cubic-bezier(0.16,_1,_0.3,_1)]"
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true, amount: 0.2 }}

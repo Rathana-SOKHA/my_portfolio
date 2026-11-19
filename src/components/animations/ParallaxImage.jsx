@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "motion/react";
-import "../../styles/ParallaxImage.css";
 
 export default function ParallaxImage({
   alt,
@@ -27,18 +26,18 @@ export default function ParallaxImage({
 
   if (shouldReduceMotion) {
     return (
-      <div className="parallax-image" ref={containerRef}>
-        <img {...imageProps} alt={alt} className={className} />
+      <div className="absolute inset-0 h-full w-full overflow-hidden" ref={containerRef}>
+        <img {...imageProps} alt={alt} className={`block h-full w-full object-cover motion-reduce:!transform-none ${className}`} />
       </div>
     );
   }
 
   return (
-    <div className="parallax-image" ref={containerRef} style={{ overflow: "hidden" }}>
+    <div className="absolute inset-0 h-full w-full overflow-hidden" ref={containerRef}>
       <motion.img
         {...imageProps}
         alt={alt}
-        className={className}
+        className={`block h-full w-full object-cover motion-reduce:!transform-none ${className}`}
         style={{
           y,
           scale: 1.08,
