@@ -40,7 +40,7 @@ export default function Contact() {
 
   const socialLinks = [
     { icon: 'fab fa-github', label: 'GitHub', url: 'https://github.com/Rathana-SOKHA', code: 'GH_01' },
-    { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_dev', code: 'TG_02' },
+    { icon: 'fab fa-telegram', label: 'Telegram', url: 'https://t.me/rathana_sokha', code: 'TG_02' },
     { icon: 'fab fa-facebook', label: 'Facebook', url: 'https://www.facebook.com/Rathanacoding', code: 'FB_03' }
   ];
 
